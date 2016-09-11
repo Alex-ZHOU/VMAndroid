@@ -1,5 +1,12 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'android-apt'
+
+
+def permissions_dispatcher_version = "2.1.3"
+def mp_android_chart_version = "v3.0.0-beta1"
+def appcompat_v7_support_version = "24.2.0"
+
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
@@ -10,6 +17,18 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+
+
+
+        File file = project.rootProject.file('local.properties')
+        Properties properties = new Properties()
+        if (file.exists()) {
+            properties.load(file.newDataInputStream())
+        }
+        manifestPlaceholders = [
+                TENCENT_MAP_KEY: properties.getProperty("TencentMapKey")
+        ]
+
     }
     buildTypes {
         release {
@@ -22,5 +41,18 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile "com.android.support:appcompat-v7:${appcompat_v7_support_version}"
+
+    // 百度编译库
+    compile project(':ExternalLibrary')
+
+    /**
+     *  MPAndroidChart图表绘制库
+     */
+    compile "com.github.PhilJay:MPAndroidChart:${mp_android_chart_version}"
+    /**
+     * Android6.0 权限支持库PermissionsDispatcher
+     */
+    compile "com.github.hotchemi:permissionsdispatcher:${permissions_dispatcher_version}"
+    apt "com.github.hotchemi:permissionsdispatcher-processor:${permissions_dispatcher_version}"
 }

@@ -9,10 +9,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //Commit Test
-        //Commit Test2
-        //Commit Test3
-        //Commit Test4
+        new AudioRecordDemo().getNoiseLevel();
     }
 }
