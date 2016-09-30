@@ -1,23 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.alex.vmandroid.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"/>
+
+    <com.alex.view.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <com.alex.view.TabView
+            android:id="@+id/tabView1"
+            android:layout_width="60dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            app:title="@string/app_name"/>
+
+        <com.alex.view.TabView
+            android:id="@+id/tabView2"
+            android:layout_width="60dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            app:title="@string/app_name"/>
+
+        <com.alex.view.TabView
+            android:id="@+id/tabView3"
+            android:layout_width="60dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            app:title="@string/app_name"/>
+
+    </com.alex.view.TabLayout>
 
 
-    <com.tencent.tencentmap.mapsdk.map.MapView
-        android:id="@+id/map"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
-</RelativeLayout>
+</LinearLayout>

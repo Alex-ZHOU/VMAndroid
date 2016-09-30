@@ -1,1 +1,1 @@
-include ':app', ':ExternalLibrary'
+include ':app', ':ExternalLibrary', ':CustomViewLibrary'

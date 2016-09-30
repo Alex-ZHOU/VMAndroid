@@ -1,10 +1,10 @@
 <!--<manifest xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--package="com.alex.externallibrary">-->
+<!--package="com.alex.view">-->
 <!--<application-->
-<!--android:allowBackup="false"-->
+<!--android:allowBackup="true"-->
 <!--android:label="@string/app_name"-->
 <!--android:supportsRtl="true">-->
 <!--</application>-->
 <!--</manifest>-->
 
-<manifest package="com.alex.externallibrary"/>
+<manifest package="com.alex.view"/>
