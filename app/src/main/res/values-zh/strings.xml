@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright 2016 Alex_ZHOU
   ~
@@ -16,14 +15,13 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <!--导航图标选中时的颜色-->
-    <color name="colorTitleSelect">#6A1B9A</color>
-    <!--导航图标未选中时的颜色-->
-    <color name="colorTitleDefault">#BCBCBC</color>
-    <!-- 应用的主题的背景颜色-->
-    <color name="colorAppBackground">#EAEAEA</color>
-
+    <string name="app_name">Voice Monitor</string>
+    <string name="record">记录</string>
+    <string name="discover">发现</string>
+    <string name="me">我</string>
+    <string name="setting">设置</string>
+    <string name="head_portrait">头像</string>
+    <string name="history">历史</string>
+    <string name="analysis">分析</string>
+    <string name="gadget">小工具</string>
 </resources>

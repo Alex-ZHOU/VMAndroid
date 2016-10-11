@@ -3,14 +3,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
 
-def permissions_dispatcher_version = "2.1.3"
+//def permissions_dispatcher_version = "2.1.3"
+def easy_permissions_version = "0.2.0"
 def mp_android_chart_version = "v3.0.0-beta1"
 def appcompat_v7_support_version = "24.2.1"
 def gson_version = "2.6.2"
+def powerful_listview_version = "0.1.2-beta";
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
         applicationId "com.alex.vmandroid"
@@ -60,11 +62,20 @@ dependencies {
      *  MPAndroidChart图表绘制库
      */
     compile "com.github.PhilJay:MPAndroidChart:${mp_android_chart_version}"
+
     /**
      * Android6.0 权限支持库PermissionsDispatcher
      */
-    compile "com.github.hotchemi:permissionsdispatcher:${permissions_dispatcher_version}"
-    apt "com.github.hotchemi:permissionsdispatcher-processor:${permissions_dispatcher_version}"
+    //compile "com.github.hotchemi:permissionsdispatcher:${permissions_dispatcher_version}"
+    //apt "com.github.hotchemi:permissionsdispatcher-processor:${permissions_dispatcher_version}"
 
-    //compile 'com.alex.powerfullistview:PowerfulListiVew:0.1.0-beta1'
+    /**
+     * Android6.0 权限支持库easypermissions
+     */
+    compile "pub.devrel:easypermissions:${easy_permissions_version}"
+
+    /**
+     * PowerfulListView 自定义下拉刷新上啦加载库
+     */
+    compile "com.alex.powerfullistview:PowerfulListiVew:${powerful_listview_version}"
 }

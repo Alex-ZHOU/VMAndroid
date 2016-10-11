@@ -48,19 +48,16 @@
         <meta-data
             android:name="TencentMapSDK"
             android:value="${TENCENT_MAP_KEY}"/>
-
-
+        
         <activity
-            android:name=".activities.MainActivity"
-            android:theme="@style/MyTheme">
+            android:name=".main.MainActivity"
+            android:theme="@style/StartAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".TabViewActivity"/>
 
     </application>
 
