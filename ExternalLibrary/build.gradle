@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
         minSdkVersion 19
@@ -23,7 +23,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.1'
 
-    //腾讯地图相关的库
-    compile files('libs/TencentLocationSDK_v4.8.8.3.jar')
-    compile files('libs/TencentMapSDK_Raster_v1.2.4_4af1d6f.jar')
+    /**
+     * 高德地图
+     */
+    compile files('libs/AMap_3DMap_V4.1.1_20161019.jar')
+    compile files('libs/AMap_Location_V3.0.0_20160922.jar')
 }

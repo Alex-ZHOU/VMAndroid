@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.alex.vmandroid.entities.User;
-import com.alex.vmandroid.utils.EncapsulateParseJson;
+import com.alex.utils.EncapsulateParseJson;
 
 public class MainActivity extends AppCompatActivity {
 

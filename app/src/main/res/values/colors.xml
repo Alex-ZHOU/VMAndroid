@@ -19,6 +19,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--纯白色-->
+    <color name="colorWhile">#FFF</color>
+
+    <!--App主要颜色,紫色-->
+    <color name="colorAppMainColor">#6A1B9A</color>
+
     <!--导航图标选中时的颜色-->
     <color name="colorTitleSelect">#6A1B9A</color>
     <!--导航图标未选中时的颜色-->

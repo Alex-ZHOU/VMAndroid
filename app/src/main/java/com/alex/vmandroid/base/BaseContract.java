@@ -24,5 +24,5 @@ public class BaseContract {
     public interface BaseView<BasePresenter> {
         void setPresenter(BasePresenter presenter);
     }
-
+    
 }

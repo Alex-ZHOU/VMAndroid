@@ -22,12 +22,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarSize">100dp</item>
+        <item name="actionBarStyle">@style/myActionBarStyle</item>
     </style>
 
-    <!-- Show a view when the app start. -->
-    <style name="StartAppTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_theme_style</item>
-    </style>
 
     <!-- Voice Monitor Application's main theme. -->
     <style name="VMTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -35,12 +33,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <!--主页Fragment标题栏Style-->
     <style name="MainTitleBarStyle">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/main_title_bar_height</item>
+        <item name="android:layout_height">@dimen/main_action_bar_height</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@color/colorTitleSelect</item>
     </style>
@@ -48,7 +47,28 @@
     <style name="VerticalLine">
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/colorTitleSelect</item>
+        <item name="android:background">@color/colorAppMainColor</item>
+    </style>
+
+    <style name="HorizontalLine">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/colorAppMainColor</item>
+    </style>
+
+    <style name="myActionBarStyle" parent="android:Widget.ActionBar">
+        <item name="android:background">#D01839</item>
+        <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>
+    </style>
+
+    <style name="AcBar_titleStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <!-- Show a view when the app start. -->
+    <style name="StartAppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_theme_style</item>
     </style>
 
 

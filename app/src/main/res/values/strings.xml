@@ -24,4 +24,24 @@
     <string name="history">History</string>
     <string name="analysis">Analysis</string>
     <string name="gadget">Gadget</string>
+    <string name="no_data_can_be_displayed">No data can be displayed.</string>
+    <string name="immediate_experience">Immediate Experience</string>
+    <string name="login">Login</string>
+    <string name="back">Back</string>
+    <string name="account">Account</string>
+    <string name="password">Password</string>
+    <string name="the_total_records">The total records</string>
+    <string name="icon">icon</string>
+    <string name="minutes">minutes</string>
+    <string name="zero">0</string>
+    <string name="times">times</string>
+    <string name="average">Average</string>
+    <string name="db">db</string>
+    <string name="max_min">Max/Min</string>
+    <string name="offline_map">Offline Map</string>
+    <string name="map_setting">Map Setting</string>
+    <string name="cancel">Cancel</string>
+    <string name="move_to">Move To</string>
+    <string name="ask_for_permission">Ask for permission</string>
+    <string name="rationale_ask_again">This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.</string>
 </resources>

@@ -24,4 +24,24 @@
     <string name="history">历史</string>
     <string name="analysis">分析</string>
     <string name="gadget">小工具</string>
+    <string name="no_data_can_be_displayed">没有数据可以显示</string>
+    <string name="immediate_experience">立即体验</string>
+    <string name="login">登陆</string>
+    <string name="back">返回</string>
+    <string name="account">账号</string>
+    <string name="password">密码</string>
+    <string name="the_total_records">总记录</string>
+    <string name="icon">图标</string>
+    <string name="minutes">分钟</string>
+    <string name="zero">0</string>
+    <string name="times">次</string>
+    <string name="average">平均</string>
+    <string name="db">分贝</string>
+    <string name="max_min">最大/最小</string>
+    <string name="offline_map">离线地图</string>
+    <string name="map_setting">地图设置</string>
+    <string name="cancel">取消</string>
+    <string name="move_to">前往</string>
+    <string name="ask_for_permission">申请权限</string>
+    <string name="rationale_ask_again">这个程序可能无法正确工作没有请求的权限。打开应用程序设置屏幕修改应用程序的权限。</string>
 </resources>
