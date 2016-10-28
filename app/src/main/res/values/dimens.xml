@@ -2,8 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-
-
+    
     <!--主页标题栏的高度-->
     <dimen name="main_action_bar_height">56dp</dimen>
     <!--主页标题栏的文字的尺寸-->

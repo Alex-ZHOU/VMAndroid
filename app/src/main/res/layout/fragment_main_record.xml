@@ -46,6 +46,7 @@
 
             <!--总体预览-->
             <LinearLayout
+                android:id="@+id/main_record_total_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
@@ -207,26 +208,88 @@
                 android:orientation="vertical">
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="@string/db"/>
+
+                    <TextView
+                        android:id="@+id/main_record_real_db_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="@string/zero"
+                        android:textSize="70sp"/>
+                </LinearLayout>
+
+                <!--<com.amap.api.maps.TextureMapView-->
+                <!--android:id="@+id/map"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="200dp">-->
+                <!--</com.amap.api.maps.TextureMapView>-->
                 <com.amap.api.maps.MapView
                     android:id="@+id/map"
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
                 </com.amap.api.maps.MapView>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/loaction_colon"/>
+
+                    <TextView
+                        android:id="@+id/main_record_location_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/weather_colon"/>
+
+                    <TextView
+                        android:id="@+id/main_record_weather_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zero"/>
+
+                </LinearLayout>
+
+
                 <!--<com.alex.alexswitch.ISwitch-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center"/>-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"/>-->
 
 
             </LinearLayout>
 
-
         </LinearLayout>
 
-
     </ScrollView>
-
 
 </LinearLayout>

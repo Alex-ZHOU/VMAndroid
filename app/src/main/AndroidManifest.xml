@@ -81,6 +81,10 @@
             android:name=".display.history.HistoryActivity"
             android:theme="@style/AppTheme"/>
 
+
+        <service android:name="com.amap.api.location.APSService">
+        </service>
+
     </application>
 
 </manifest>

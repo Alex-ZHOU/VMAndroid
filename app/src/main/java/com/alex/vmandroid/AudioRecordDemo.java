@@ -1,3 +1,19 @@
+/*
+ * Copyright 2016 Alex_ZHOU
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.alex.vmandroid;
 
 import android.media.AudioFormat;
@@ -6,7 +22,8 @@ import android.media.MediaRecorder;
 import android.util.Log;
 
 /**
- * Created by greatpresident on 2014/8/5.
+ * @author greatpresident 2014/8/5
+ * @author AlexZHOU
  */
 public class AudioRecordDemo {
 
@@ -18,8 +35,11 @@ public class AudioRecordDemo {
     boolean isGetVoiceRun;
     Object mLock;
 
-    public AudioRecordDemo() {
+    Listener listener;
+
+    public AudioRecordDemo(Listener listener) {
         mLock = new Object();
+        this.listener = listener;
     }
 
     public void getNoiseLevel() {
@@ -52,6 +72,7 @@ public class AudioRecordDemo {
                     double mean = v / (double) r;
                     double volume = 10 * Math.log10(mean);
                     Log.d(TAG, "分贝值:" + volume);
+                    listener.back((int) volume);
                     // 大概一秒十次
                     synchronized (mLock) {
                         try {
@@ -67,4 +88,10 @@ public class AudioRecordDemo {
             }
         }).start();
     }
+
+    public interface Listener {
+        void back(double value);
+    }
+
+
 }

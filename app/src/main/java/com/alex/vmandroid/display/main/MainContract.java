@@ -15,6 +15,8 @@
  */
 package com.alex.vmandroid.display.main;
 
+import android.content.Context;
+
 import com.alex.vmandroid.base.BaseContract;
 
 public class MainContract {
@@ -24,6 +26,10 @@ public class MainContract {
         void initMainView(MainView mainView);
 
         void initRecordView(RecordView recordView);
+
+        void startRecord(Context context);
+
+        void searchWeatherRecord(Context context, String city);
 
         void initDiscoverView(DiscoverView discoverView);
 
@@ -47,6 +53,20 @@ public class MainContract {
          * 跳转到显示历史记录界面
          */
         void showHistoryActivity();
+
+        /**
+         * 设置天气显示
+         *
+         * @param str 天气信息
+         */
+        void setWeather(String str);
+
+        /**
+         * 更新实时的噪声数值
+         *
+         * @param d 实时噪声数值
+         */
+        void updateRealTimeNoise(double d);
 
     }
 
@@ -94,6 +114,8 @@ public class MainContract {
          * 登陆成功，跳转到主页界面
          */
         void showMainFragment();
+
+
     }
 
 

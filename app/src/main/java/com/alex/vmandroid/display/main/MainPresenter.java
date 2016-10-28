@@ -16,11 +16,21 @@
 
 package com.alex.vmandroid.display.main;
 
+import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 
+import com.alex.vmandroid.AudioRecordDemo;
 import com.alex.vmandroid.R;
+import com.amap.api.services.weather.LocalWeatherForecastResult;
+import com.amap.api.services.weather.LocalWeatherLive;
+import com.amap.api.services.weather.LocalWeatherLiveResult;
+import com.amap.api.services.weather.WeatherSearch;
+import com.amap.api.services.weather.WeatherSearchQuery;
 
-public class MainPresenter implements MainContract.MainPresenter {
+
+public class MainPresenter implements MainContract.MainPresenter, AudioRecordDemo.Listener,
+        WeatherSearch.OnWeatherSearchListener {
 
     private final String TAG = MainPresenter.class.getName();
     private MainContract.MainView mMainView;
@@ -64,6 +74,20 @@ public class MainPresenter implements MainContract.MainPresenter {
         mRecordView.setPresenter(this);
     }
 
+    @Override
+    public void startRecord(Context context) {
+        AudioRecordDemo recordDemo = new AudioRecordDemo(this);
+        recordDemo.getNoiseLevel();
+    }
+
+    @Override
+    public void searchWeatherRecord(Context context, String city) {
+        WeatherSearch weatherSearch = new WeatherSearch(context);
+        weatherSearch.setQuery(new WeatherSearchQuery(city, WeatherSearchQuery.WEATHER_TYPE_LIVE));
+        weatherSearch.setOnWeatherSearchListener(this);
+        weatherSearch.searchWeatherAsyn();
+    }
+
 
     @Override
     public void initDiscoverView(MainContract.DiscoverView discoverView) {
@@ -95,6 +119,12 @@ public class MainPresenter implements MainContract.MainPresenter {
     @Override
     public void onClick(int id) {
         switch (id) {
+            //region : RecordFragment 界面的点击事件
+            case R.id.main_record_total_ll:
+                mRecordView.showHistoryActivity();
+                break;
+            //endregion
+
             //region : MeFragment 界面的点击事件
             case R.id.main_me_history_ll:
                 mMeView.showHistoryActivity();
@@ -122,5 +152,35 @@ public class MainPresenter implements MainContract.MainPresenter {
                 mLoginView.showMainFragment();
                 break;
         }
+    }
+
+    /**
+     * 实况天气返回查询
+     */
+    @Override
+    public void onWeatherLiveSearched(LocalWeatherLiveResult localWeatherLiveResult, int i) {
+        LocalWeatherLive localWeatherLive = localWeatherLiveResult.getLiveResult();
+
+        mRecordView.setWeather(localWeatherLive.getWeather() + " " + localWeatherLive.getTemperature() + "°");
+    }
+
+    /**
+     * 预告天气查询返回
+     */
+    @Override
+    public void onWeatherForecastSearched(LocalWeatherForecastResult localWeatherForecastResult, int i) {
+
+    }
+    Handler handle = new Handler();
+    @Override
+    public void back(final double value) {
+
+        handle.post(new Runnable() {
+            @Override
+            public void run() {
+                mRecordView.updateRealTimeNoise(value);
+            }
+        });
+
     }
 }
