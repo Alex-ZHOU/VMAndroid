@@ -15,18 +15,39 @@
  */
 package com.alex.vmandroid.base;
 
-import android.support.annotation.NonNull;
+
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.MenuItem;
 
-import java.util.List;
 
-import pub.devrel.easypermissions.EasyPermissions;
-
-public class BaseActivity extends AppCompatActivity{
+public class BaseActivity extends AppCompatActivity {
 
     protected String Base_TAG = this.getClass().getName();
 
+    /**
+     * 获取标题栏,设置返回键显示以及标题栏名称修改
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            //actionBar.setTitle(ActivityName.getName(this.getClass().getSimpleName()));
+            actionBar.setTitle("hahahah");
+        }
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

@@ -13,18 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.vmandroid.display.map;
+package com.alex.vmandroid.display.weather;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseActivity;
 
-public class OfflineMapActivity extends BaseActivity {
+public class LocationWeatherActivity extends BaseActivity {
+
+    //private FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitvity_offline_map);
+        setContentView(R.layout.activity_location_weather);
+        String city = getIntent().getStringExtra("LocationCity");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.loaction_weather_frame_layout, LocationWeatherFragment.newInstance(city));
+        transaction.commit();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
 }

@@ -68,6 +68,11 @@ public class MainContract {
          */
         void updateRealTimeNoise(double d);
 
+        /**
+         * 显示详细当地天气信息
+         */
+        void showLocationWeatherActivity();
+
     }
 
     public interface DiscoverView extends BaseContract.BaseView<MainPresenter> {

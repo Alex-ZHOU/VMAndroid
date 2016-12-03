@@ -60,6 +60,11 @@ public class PermissionRequest {
     public static final int STORAGE_PERM_READ_EXTERNAL_STORAGE = 23;
     public static final int STORAGE_PERM_WRITE_EXTERNAL_STORAGE = 24;
 
+    /**
+     * 定位和麦克风申请权限
+     */
+    public static final int LOCATION_MICROPHONE_PERM = 25;
+
     public static void onPermissionsDenied(final Fragment fragment, int requestCode) {
         onPermissionsDenied(fragment.getActivity(), fragment.getContext(), requestCode);
 

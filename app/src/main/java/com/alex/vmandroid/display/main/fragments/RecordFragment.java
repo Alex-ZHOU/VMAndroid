@@ -16,18 +16,22 @@
 
 package com.alex.vmandroid.display.main.fragments;
 
+import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
 import com.alex.vmandroid.display.main.MainContract;
+import com.alex.vmandroid.display.weather.LocationWeatherActivity;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -35,6 +39,11 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
+import static com.alex.utils.PermissionRequest.LOCATION_MICROPHONE_PERM;
 
 /**
  * 记录界面显示的fragment
@@ -54,6 +63,8 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
     private TextView mWeatherView;
 
+    private String mCity;
+
     private AMapLocationClient mLocationClient;
     private OnLocationChangedListener mListener;
 
@@ -63,11 +74,22 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
         return new RecordFragment();
     }
 
+    @AfterPermissionGranted(LOCATION_MICROPHONE_PERM)
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.startRecord(getContext());
-        mapView.onResume();
+
+        String[] perms = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.RECORD_AUDIO};
+        if (EasyPermissions.hasPermissions(getContext(), perms)) {
+            mPresenter.startRecord(getContext());
+            mapView.onResume();
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, "",
+                    LOCATION_MICROPHONE_PERM, perms);
+        }
+
+
     }
 
     @Override
@@ -91,6 +113,10 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
         mCityTextView = (TextView) view.findViewById(R.id.main_record_location_tv);
 
         mWeatherView = (TextView) view.findViewById(R.id.main_record_weather_tv);
+
+        LinearLayout weather = (LinearLayout) view.findViewById(R.id.main_record_location_weather_ll);
+
+        weather.setOnClickListener(this);
 
         //mapView = (TextureMapView) view.findViewById(R.id.map);
 
@@ -156,7 +182,19 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
      */
     @Override
     public void updateRealTimeNoise(double d) {
+
         mRealTimeNoiseTextView.setText(String.valueOf(d));
+
+    }
+
+    /**
+     * 显示详细当地天气信息
+     */
+    @Override
+    public void showLocationWeatherActivity() {
+        Intent intent = new Intent(getActivity(), LocationWeatherActivity.class);
+        intent.putExtra("LocationCity", mCity);
+        startActivity(intent);
     }
 
 
@@ -190,6 +228,7 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
         mLocationClient = null;
     }
 
+
     /**
      * 定位监听回掉
      */
@@ -197,8 +236,8 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
     public void onLocationChanged(AMapLocation amapLocation) {
         if (mListener != null && amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
-
-                mCityTextView.setText(amapLocation.getCity());
+                mCity = amapLocation.getCity();
+                mCityTextView.setText(mCity);
 
                 mPresenter.searchWeatherRecord(getContext(), amapLocation.getCity());
 

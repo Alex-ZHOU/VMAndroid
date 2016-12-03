@@ -13,18 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.vmandroid.display.map;
+package com.alex.vmandroid.display.weather;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+public class LocationWeatherPresenter implements LocationWeatherContract.Presenter {
 
-import com.alex.vmandroid.R;
-import com.alex.vmandroid.base.BaseActivity;
-
-public class OfflineMapActivity extends BaseActivity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitvity_offline_map);
+    public void start() {
+
     }
 }

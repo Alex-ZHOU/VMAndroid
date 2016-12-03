@@ -33,4 +33,6 @@
     <!-- 应用的主题的背景颜色-->
     <color name="colorAppBackground">#EAEAEA</color>
 
+    <color name="colorItemClick">#F5F5F5</color>
+
 </resources>

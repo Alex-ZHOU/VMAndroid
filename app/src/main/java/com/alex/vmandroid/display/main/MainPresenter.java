@@ -123,6 +123,10 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
             case R.id.main_record_total_ll:
                 mRecordView.showHistoryActivity();
                 break;
+            case R.id.main_record_location_weather_ll:
+                Log.i(TAG, "onClick: main_record_location_weather_ll");
+                mRecordView.showLocationWeatherActivity();
+                break;
             //endregion
 
             //region : MeFragment 界面的点击事件
@@ -171,7 +175,9 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
     public void onWeatherForecastSearched(LocalWeatherForecastResult localWeatherForecastResult, int i) {
 
     }
+
     Handler handle = new Handler();
+
     @Override
     public void back(final double value) {
 

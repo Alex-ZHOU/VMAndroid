@@ -15,6 +15,7 @@
  */
 package com.alex.vmandroid.base;
 
+import android.Manifest;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -23,7 +24,11 @@ import com.alex.utils.PermissionRequest;
 
 import java.util.List;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+
+import static com.alex.utils.PermissionRequest.LOCATION_PERM_ACCESS_COARSE_LOCATION;
+import static com.alex.utils.PermissionRequest.MICROPHONE_PERM_RECORD_AUDIO;
 
 public class BaseFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
 
@@ -47,4 +52,5 @@ public class BaseFragment extends Fragment implements EasyPermissions.Permission
         Log.i(TAG, "onPermissionsDenied: perms.size():" + perms.size());
         PermissionRequest.onPermissionsDenied(this, requestCode);
     }
+    
 }

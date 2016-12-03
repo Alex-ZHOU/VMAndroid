@@ -28,6 +28,10 @@ import com.alex.utils.FragmentNavigator;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
 import com.alex.vmandroid.display.main.MainContract;
+import com.alex.vmandroid.entities.User;
+
+import rx.Observable;
+import rx.Subscriber;
 
 public class LoginFragment extends BaseFragment implements MainContract.LoginView, View.OnClickListener {
 
@@ -70,6 +74,37 @@ public class LoginFragment extends BaseFragment implements MainContract.LoginVie
         Button button = (Button) view.findViewById(R.id.main_login_login_btn);
 
         button.setOnClickListener(this);
+
+
+        // 观察者
+        Subscriber<User> observer = new Subscriber<User>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(User user) {
+
+            }
+        };
+
+        // 被观察者
+        Observable observable = Observable.create(new Observable.OnSubscribe<User>() {
+
+            @Override
+            public void call(Subscriber<? super User> subscriber) {
+                subscriber.onNext(new User());
+                subscriber.onCompleted();
+            }
+        });
+        // 定阅
+        observable.subscribe(observer);
 
 
         return view;
