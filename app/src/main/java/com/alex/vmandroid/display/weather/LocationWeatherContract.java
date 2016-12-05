@@ -21,9 +21,22 @@ public class LocationWeatherContract {
 
     interface Presenter extends BaseContract.BasePresenter {
 
+        /**
+         * 查询天气预报
+         */
+        void searchForecastsWeather();
+
+        /**
+         * 查询实时天气
+         */
+        void searchLiveWeather();
     }
 
     interface View extends BaseContract.BaseView<Presenter> {
+        void updateLiveTextView(String reportTime, String weather, String temperature, String wind, String humidity);
 
+        void updateForecastReportTextView(String reportTime);
+
+        void updateForecastTextView(String forecast);
     }
 }

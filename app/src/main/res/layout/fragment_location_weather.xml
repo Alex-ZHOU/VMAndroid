@@ -16,12 +16,12 @@
   -->
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#548ED4"
-              android:orientation="vertical"
-              android:padding="10dp">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#548ED4"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/city"
@@ -50,7 +50,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right"
+            android:gravity="end"
             android:text="@string/head_portrait"
             android:textColor="#FFFFFF"
             android:textSize="14sp"/>
@@ -126,7 +126,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right"
+            android:gravity="end"
             android:text="@string/head_portrait"
             android:textColor="#FFFFFF"
             android:textSize="14sp"/>

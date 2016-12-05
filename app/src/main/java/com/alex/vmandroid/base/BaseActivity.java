@@ -20,6 +20,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.alex.utils.ActivityName;
+
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -35,8 +37,7 @@ public class BaseActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            //actionBar.setTitle(ActivityName.getName(this.getClass().getSimpleName()));
-            actionBar.setTitle("hahahah");
+            actionBar.setTitle(ActivityName.getName(this.getClass().getName()));
         }
     }
 

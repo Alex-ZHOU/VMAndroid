@@ -46,4 +46,5 @@
     <string name="rationale_ask_again">This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.</string>
     <string name="loaction_colon">Location:</string>
     <string name="weather_colon">Weather:</string>
+    <string name="weather">Weather</string>
 </resources>

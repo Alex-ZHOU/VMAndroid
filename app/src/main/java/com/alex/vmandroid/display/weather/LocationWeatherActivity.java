@@ -25,17 +25,22 @@ import com.alex.vmandroid.base.BaseActivity;
 
 public class LocationWeatherActivity extends BaseActivity {
 
-    //private FragmentManager fragmentManager;
+    public static final String TAG = LocationWeatherActivity.class.getName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_weather);
+
         String city = getIntent().getStringExtra("LocationCity");
+
+        LocationWeatherFragment fragment = LocationWeatherFragment.newInstance(city);
+        new LocationWeatherPresenter(fragment, city, getApplicationContext());
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.loaction_weather_frame_layout, LocationWeatherFragment.newInstance(city));
+        transaction.replace(R.id.loaction_weather_frame_layout, fragment);
         transaction.commit();
+        
     }
 
     @Override

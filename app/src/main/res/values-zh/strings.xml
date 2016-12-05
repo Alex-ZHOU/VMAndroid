@@ -46,4 +46,5 @@
     <string name="rationale_ask_again">这个程序可能无法正确工作没有请求的权限。打开应用程序设置屏幕修改应用程序的权限。</string>
     <string name="loaction_colon">位置：</string>
     <string name="weather_colon">天气：</string>
+    <string name="weather">天气</string>
 </resources>
