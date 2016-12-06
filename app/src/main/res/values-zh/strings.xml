@@ -47,4 +47,6 @@
     <string name="loaction_colon">位置：</string>
     <string name="weather_colon">天气：</string>
     <string name="weather">天气</string>
+    <string name="live">实时</string>
+    <string name="forecast">预告</string>
 </resources>

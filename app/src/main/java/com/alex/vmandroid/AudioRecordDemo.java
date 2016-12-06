@@ -42,6 +42,11 @@ public class AudioRecordDemo {
         this.listener = listener;
     }
 
+
+    public void close() {
+        isGetVoiceRun = false;
+    }
+
     public void getNoiseLevel() {
         if (isGetVoiceRun) {
             Log.e(TAG, "还在录着呢");

@@ -54,6 +54,7 @@ public class MainFragment extends BaseFragment implements MainContract.MainView 
         mMainPresenter.start();
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

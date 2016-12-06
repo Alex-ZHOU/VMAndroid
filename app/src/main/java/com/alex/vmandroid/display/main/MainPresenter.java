@@ -74,10 +74,17 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
         mRecordView.setPresenter(this);
     }
 
+    private AudioRecordDemo recordDemo;
+
     @Override
     public void startRecord(Context context) {
-        AudioRecordDemo recordDemo = new AudioRecordDemo(this);
+        recordDemo = new AudioRecordDemo(this);
         recordDemo.getNoiseLevel();
+    }
+
+    @Override
+    public void closeRecord() {
+        recordDemo.close();
     }
 
     @Override

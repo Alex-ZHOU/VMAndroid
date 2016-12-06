@@ -47,4 +47,6 @@
     <string name="loaction_colon">Location:</string>
     <string name="weather_colon">Weather:</string>
     <string name="weather">Weather</string>
+    <string name="live">Live</string>
+    <string name="forecast">Forecast</string>
 </resources>

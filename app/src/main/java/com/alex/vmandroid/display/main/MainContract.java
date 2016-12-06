@@ -29,6 +29,8 @@ public class MainContract {
 
         void startRecord(Context context);
 
+        void closeRecord();
+
         void searchWeatherRecord(Context context, String city);
 
         void initDiscoverView(DiscoverView discoverView);
@@ -40,6 +42,7 @@ public class MainContract {
         void initLoginView(LoginView loginView);
 
         void onClick(int id);
+
 
     }
 

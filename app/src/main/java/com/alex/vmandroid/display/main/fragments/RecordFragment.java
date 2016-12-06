@@ -56,7 +56,6 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
     private TextView mRealTimeNoiseTextView;
 
-    //TextureMapView mapView;
     private MapView mapView;
 
     private TextView mCityTextView;
@@ -91,6 +90,13 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.closeRecord();
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
