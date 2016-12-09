@@ -7,6 +7,7 @@ def easy_permissions_version = "0.2.0"
 def mp_android_chart_version = "v3.0.0-beta1"
 def appcompat_v7_support_version = "24.2.1"
 def gson_version = "2.6.2"
+def okhttp_version = "3.4.1"
 def powerful_listview_version = "0.1.2-beta";
 
 android {
@@ -86,5 +87,13 @@ dependencies {
      */
     compile 'io.reactivex:rxjava:1.2.1'
 
+    /**
+     * 异步库RxAndroid
+     */
+    compile 'io.reactivex:rxandroid:1.2.1'
 
+    /**
+     * okhttp网络访问库
+     */
+    compile "com.squareup.okhttp3:okhttp:${okhttp_version}"
 }
