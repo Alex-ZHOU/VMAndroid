@@ -23,6 +23,8 @@ public class MainContract {
 
     public interface MainPresenter extends BaseContract.BasePresenter {
 
+        void setApplicationContext(Context context);
+
         void initMainView(MainView mainView);
 
         void initRecordView(RecordView recordView);
@@ -123,7 +125,19 @@ public class MainContract {
          */
         void showMainFragment();
 
+        /**
+         * 获取用户名
+         *
+         * @return 用户名
+         */
+        String getUsername();
 
+        /**
+         * 获取用户密码
+         *
+         * @return 用户密码
+         */
+        String getPassword();
     }
 
 

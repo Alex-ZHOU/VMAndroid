@@ -45,6 +45,8 @@ public class MainActivity extends BaseActivity implements UnLoginFragment.CallBa
 
         mMainPresenter = new MainPresenter();
 
+        mMainPresenter.setApplicationContext(getApplicationContext());
+
         fragmentManager = getSupportFragmentManager();
 
 
@@ -66,6 +68,7 @@ public class MainActivity extends BaseActivity implements UnLoginFragment.CallBa
         MainFragment fragment = MainFragment.newInstance();
 
         mMainPresenter.initMainView(fragment);
+
 
         FragmentNavigator.moveTo(fragmentManager, fragment, R.id.main_frame_layout, false);
 

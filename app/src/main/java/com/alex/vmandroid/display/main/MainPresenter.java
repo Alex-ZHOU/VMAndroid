@@ -20,13 +20,20 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import com.alex.businesses.LoginBiz;
 import com.alex.vmandroid.AudioRecordDemo;
 import com.alex.vmandroid.R;
+import com.alex.vmandroid.databases.UserInfo;
 import com.amap.api.services.weather.LocalWeatherForecastResult;
 import com.amap.api.services.weather.LocalWeatherLive;
 import com.amap.api.services.weather.LocalWeatherLiveResult;
 import com.amap.api.services.weather.WeatherSearch;
 import com.amap.api.services.weather.WeatherSearchQuery;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class MainPresenter implements MainContract.MainPresenter, AudioRecordDemo.Listener,
@@ -45,6 +52,9 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
 
     private MainContract.LoginView mLoginView;
 
+    private Context mContext;
+
+    Handler handle = new Handler();
 
     public MainPresenter() {
 
@@ -58,6 +68,11 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
     @Override
     public void start() {
         Log.d(TAG, "start");
+    }
+
+    @Override
+    public void setApplicationContext(Context context) {
+        mContext = context;
     }
 
     @Override
@@ -159,11 +174,70 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
             case R.id.main_unlogin_login_btn:
                 mUnLoginView.showLoginFragment();
                 break;
+
+
             case R.id.main_login_login_btn:
-                mLoginView.showMainFragment();
+                this.login();
                 break;
         }
     }
+
+    private void login() {
+
+        final String username = mLoginView.getUsername();
+
+        final String password = mLoginView.getPassword();
+
+
+        // 观察者
+        Subscriber observer = new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+                Log.i(TAG, "onCompleted");
+                UserInfo.putPassword(mContext, password);
+                UserInfo.putUserName(mContext, username);
+                mLoginView.showMainFragment();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.i(TAG, "onError");
+            }
+
+            @Override
+            public void onNext(String str) {
+                Log.i(TAG, "onNext");
+            }
+        };
+
+        Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+
+            @Override
+            public void call(final Subscriber<? super String> subscriber) {
+
+                LoginBiz.Listener listener = new LoginBiz.Listener() {
+                    @Override
+                    public void succeed() {
+                        subscriber.onCompleted();
+                    }
+
+                    @Override
+                    public void failed(String str) {
+                        subscriber.onNext(str);
+                    }
+                };
+
+                LoginBiz.login(username, password, listener);
+
+            }
+
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(observer);
+
+    }
+
 
     /**
      * 实况天气返回查询
@@ -180,10 +254,8 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
      */
     @Override
     public void onWeatherForecastSearched(LocalWeatherForecastResult localWeatherForecastResult, int i) {
-
     }
 
-    Handler handle = new Handler();
 
     @Override
     public void back(final double value) {
