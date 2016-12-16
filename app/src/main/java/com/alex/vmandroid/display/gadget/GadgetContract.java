@@ -13,30 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.utils;
+package com.alex.vmandroid.display.gadget;
 
-import com.alex.vmandroid.R;
-import com.alex.vmandroid.display.weather.location.LocationWeatherActivity;
+import com.alex.vmandroid.base.BaseContract;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-public class ActivityName {
+public class GadgetContract {
 
-    private static Map<String, Integer> mName;
+    interface Presenter extends BaseContract.BasePresenter {
 
-
-    private static void init() {
-        mName = new HashMap<>();
-        
-        mName.put(LocationWeatherActivity.TAG, R.string.weather);
 
     }
 
-    public static int getName(String simpleName) {
-        if (mName == null) {
-            init();
-        }
-        return mName.get(simpleName) == null ? R.string.app_name : mName.get(simpleName);
+    interface View extends BaseContract.BaseView<GadgetContract.Presenter> {
+
+        /**
+         * 设置PowerfulListView显示的数据
+         *
+         * @param data 需要显示的数据
+         */
+        void setListViewData(List<String> data);
+
+        /**
+         * 显示查询天气的界面
+         */
+        void showInquiryWeather();
     }
+
 }

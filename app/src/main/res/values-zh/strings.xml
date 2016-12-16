@@ -49,4 +49,6 @@
     <string name="weather">天气</string>
     <string name="live">实时</string>
     <string name="forecast">预告</string>
+    <string name="input_city_name">输入城市名</string>
+    <string name="inquiry">查询</string>
 </resources>

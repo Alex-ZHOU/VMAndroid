@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.alex.vmandroid.display.weather;
 
 import com.alex.vmandroid.base.BaseContract;
 
-public class LocationWeatherContract {
+public class WeatherContract {
 
     interface Presenter extends BaseContract.BasePresenter {
 

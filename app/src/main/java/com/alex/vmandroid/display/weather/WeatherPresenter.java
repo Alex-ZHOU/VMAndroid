@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.alex.vmandroid.display.weather;
 
 import android.content.Context;
@@ -28,10 +29,10 @@ import com.amap.api.services.weather.WeatherSearchQuery;
 
 import java.util.List;
 
-public class LocationWeatherPresenter implements LocationWeatherContract.Presenter,
+public class WeatherPresenter implements WeatherContract.Presenter,
         WeatherSearch.OnWeatherSearchListener {
 
-    private LocationWeatherContract.View mView;
+    private WeatherContract.View mView;
 
     private String mCity;
 
@@ -43,7 +44,7 @@ public class LocationWeatherPresenter implements LocationWeatherContract.Present
     private LocalWeatherForecast weatherforecast;
     private List<LocalDayWeatherForecast> forecastlist = null;
 
-    public LocationWeatherPresenter(@NonNull LocationWeatherContract.View view, String city, Context context) {
+    public WeatherPresenter(@NonNull WeatherContract.View view, String city, Context context) {
         mView = view;
         mCity = city;
         mContext = context;

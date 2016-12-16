@@ -25,13 +25,11 @@ import android.widget.TextView;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
 
+public class WeatherFragment extends BaseFragment implements WeatherContract.View {
 
-public class LocationWeatherFragment extends BaseFragment implements LocationWeatherContract.View {
+    private WeatherContract.Presenter mPresenter;
 
     private static String mCity;
-
-    private LocationWeatherContract.Presenter mPresenter;
-
     private TextView forecasttv;
     private TextView reporttime1;
     private TextView reporttime2;
@@ -40,15 +38,9 @@ public class LocationWeatherFragment extends BaseFragment implements LocationWea
     private TextView wind;
     private TextView humidity;
 
-
-    public static LocationWeatherFragment newInstance(String city) {
+    public static WeatherFragment newInstance(String city) {
         mCity = city;
-        return new LocationWeatherFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        return new WeatherFragment();
     }
 
     @Nullable
@@ -77,11 +69,6 @@ public class LocationWeatherFragment extends BaseFragment implements LocationWea
 
 
     @Override
-    public void setPresenter(LocationWeatherContract.Presenter presenter) {
-        mPresenter = presenter;
-    }
-
-    @Override
     public void updateLiveTextView(String reportTime, String weather, String temperature, String wind, String humidity) {
         reporttime1.setText(reportTime);
         this.weather.setText(weather);
@@ -98,5 +85,10 @@ public class LocationWeatherFragment extends BaseFragment implements LocationWea
     @Override
     public void updateForecastTextView(String forecast) {
         forecasttv.setText(forecast);
+    }
+
+    @Override
+    public void setPresenter(WeatherContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }

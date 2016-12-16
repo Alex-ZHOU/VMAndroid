@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.alex.vmandroid.display.gadget.GadgetActivity;
 import com.alex.vmandroid.display.history.HistoryActivity;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
@@ -161,6 +162,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
      */
     @Override
     public void showGadgetActivity() {
-
+        Intent intent = new Intent(getActivity(), GadgetActivity.class);
+        startActivity(intent);
     }
 }

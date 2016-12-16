@@ -71,7 +71,7 @@ public class LoginBiz {
 
                 try {
                     JSONObject json2 = new JSONObject(string);
-                    String str = (String) json2.get("success");
+                        String str = (String) json2.get("success");
                     if (str.equals("true")) {
                         listener.succeed();
                     } else {

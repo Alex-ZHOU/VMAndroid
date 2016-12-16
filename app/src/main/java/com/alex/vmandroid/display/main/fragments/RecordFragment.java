@@ -31,7 +31,7 @@ import android.widget.TextView;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
 import com.alex.vmandroid.display.main.MainContract;
-import com.alex.vmandroid.display.weather.LocationWeatherActivity;
+import com.alex.vmandroid.display.weather.location.LocationWeatherActivity;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
