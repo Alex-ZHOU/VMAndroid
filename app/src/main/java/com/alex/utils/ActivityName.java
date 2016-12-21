@@ -16,6 +16,8 @@
 package com.alex.utils;
 
 import com.alex.vmandroid.R;
+import com.alex.vmandroid.display.gadget.GadgetActivity;
+import com.alex.vmandroid.display.weather.inquiry.InquiryWeatherActivity;
 import com.alex.vmandroid.display.weather.location.LocationWeatherActivity;
 
 import java.util.HashMap;
@@ -28,8 +30,13 @@ public class ActivityName {
 
     private static void init() {
         mName = new HashMap<>();
-        
-        mName.put(LocationWeatherActivity.TAG, R.string.weather);
+
+        mName.put(GadgetActivity.TAG, R.string.gadget);
+
+        mName.put(LocationWeatherActivity.TAG, R.string.location_weather);
+
+        mName.put(InquiryWeatherActivity.TAG, R.string.inquire_weather);
+
 
     }
 

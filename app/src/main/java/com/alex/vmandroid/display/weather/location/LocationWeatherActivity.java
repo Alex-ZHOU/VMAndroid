@@ -23,6 +23,8 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseActivity;
+import com.alex.vmandroid.display.weather.WeatherFragment;
+import com.alex.vmandroid.display.weather.WeatherPresenter;
 
 public class LocationWeatherActivity extends BaseActivity {
 
@@ -35,13 +37,13 @@ public class LocationWeatherActivity extends BaseActivity {
 
         String city = getIntent().getStringExtra("LocationCity");
 
-        LocationWeatherFragment fragment = LocationWeatherFragment.newInstance(city);
-        new LocationWeatherPresenter(fragment, city, getApplicationContext());
+        WeatherFragment fragment = WeatherFragment.newInstance(city);
+        new WeatherPresenter(fragment, city, getApplicationContext());
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.loaction_weather_frame_layout, fragment);
         transaction.commit();
-        
+
     }
 
     @Override

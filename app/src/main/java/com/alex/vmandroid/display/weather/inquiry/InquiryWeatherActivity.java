@@ -24,23 +24,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseActivity;
 import com.alex.vmandroid.display.weather.WeatherFragment;
 import com.alex.vmandroid.display.weather.WeatherPresenter;
-import com.alex.vmandroid.display.weather.location.LocationWeatherFragment;
-import com.alex.vmandroid.display.weather.location.LocationWeatherPresenter;
 
 public class InquiryWeatherActivity extends BaseActivity implements View.OnClickListener, InquiryWeatherContract.View {
+
+    public static final String TAG = InquiryWeatherActivity.class.getName();
 
     private InquiryWeatherContract.Presenter mPresenter;
 
     private EditText mCityEditText;
-
-    private FrameLayout mWeatherShowFrameLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,8 +65,6 @@ public class InquiryWeatherActivity extends BaseActivity implements View.OnClick
     @Override
     public void initView() {
         mCityEditText = (EditText) findViewById(R.id.inquiry_weather_et);
-
-        mWeatherShowFrameLayout = (FrameLayout) findViewById(R.id.inquiry_weather_frame_layout);
 
         Button button = (Button) findViewById(R.id.inquiry_weather_btn);
 

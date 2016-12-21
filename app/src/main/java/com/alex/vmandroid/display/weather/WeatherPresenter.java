@@ -19,6 +19,7 @@ package com.alex.vmandroid.display.weather;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.alex.vmandroid.R;
 import com.amap.api.services.weather.LocalDayWeatherForecast;
 import com.amap.api.services.weather.LocalWeatherForecast;
 import com.amap.api.services.weather.LocalWeatherForecastResult;
@@ -38,11 +39,13 @@ public class WeatherPresenter implements WeatherContract.Presenter,
 
     private Context mContext;
 
-    private WeatherSearchQuery mquery;
-    private WeatherSearch mweathersearch;
-    private LocalWeatherLive weatherlive;
-    private LocalWeatherForecast weatherforecast;
-    private List<LocalDayWeatherForecast> forecastlist = null;
+    private WeatherSearchQuery mWeatherSearchQuery;
+
+    private WeatherSearch mWeatherSearch;
+
+    private LocalWeatherForecast mLocalWeatherForecast;
+
+    private List<LocalDayWeatherForecast> mForecastList = null;
 
     public WeatherPresenter(@NonNull WeatherContract.View view, String city, Context context) {
         mView = view;
@@ -53,6 +56,7 @@ public class WeatherPresenter implements WeatherContract.Presenter,
 
     @Override
     public void start() {
+        mView.showProgressDialog();
         this.searchForecastsWeather();
         this.searchLiveWeather();
     }
@@ -65,27 +69,20 @@ public class WeatherPresenter implements WeatherContract.Presenter,
         if (rCode == 1000) {
             if (weatherLiveResult != null && weatherLiveResult.getLiveResult() != null) {
 
-                weatherlive = weatherLiveResult.getLiveResult();
+                LocalWeatherLive weatherlive = weatherLiveResult.getLiveResult();
                 mView.updateLiveTextView(weatherlive.getReportTime() + "发布",
                         weatherlive.getWeather(),
                         weatherlive.getTemperature() + "°",
                         weatherlive.getWindDirection() + "风     " + weatherlive.getWindPower() + "级",
                         "湿度         " + weatherlive.getHumidity() + "%");
-//                reporttime1.setText(weatherlive.getReportTime() + "发布");
-//                weather.setText(weatherlive.getWeather());
-//                Temperature.setText(weatherlive.getTemperature() + "°");
-//                wind.setText(weatherlive.getWindDirection() + "风     " + weatherlive.getWindPower() + "级");
-//                humidity.setText("湿度         " + weatherlive.getHumidity() + "%");
+            } else {
+                mView.showToast(R.string.no_result);
             }
-//            else {
-//                // 无数据返回
-//                //ToastUtil.show(WeatherSearchActivity.this, R.string.no_result);
-//            }
+        } else {
+            // 数据出错
+            mView.showToast("Error:" + rCode);
         }
-//        else {
-//            // 数据出错
-//            //ToastUtil.showerror(WeatherSearchActivity.this, rCode);
-//        }
+        mView.closeProgressDialog();
     }
 
     /**
@@ -98,44 +95,44 @@ public class WeatherPresenter implements WeatherContract.Presenter,
             if (weatherForecastResult != null && weatherForecastResult.getForecastResult() != null
                     && weatherForecastResult.getForecastResult().getWeatherForecast() != null
                     && weatherForecastResult.getForecastResult().getWeatherForecast().size() > 0) {
-                weatherforecast = weatherForecastResult.getForecastResult();
-                forecastlist = weatherforecast.getWeatherForecast();
-                fillforecast();
+                mLocalWeatherForecast = weatherForecastResult.getForecastResult();
+                mForecastList = mLocalWeatherForecast.getWeatherForecast();
+                fillForecast();
 
+            } else {
+                //ToastUtil.show(WeatherSearchActivity.this, R.string.no_result);
+                mView.showToast(R.string.no_result);
             }
-//            else {
-//                //ToastUtil.show(WeatherSearchActivity.this, R.string.no_result);
-//            }
+        } else {
+            // 数据出错
+            mView.showToast("Error:" + rCode);
         }
-//        else {
-//            //ToastUtil.showerror(WeatherSearchActivity.this, rCode);
-//        }
+        mView.closeProgressDialog();
     }
 
     @Override
     public void searchForecastsWeather() {
-        mquery = new WeatherSearchQuery(mCity, WeatherSearchQuery.WEATHER_TYPE_FORECAST);//检索参数为城市和天气类型，实时天气为1、天气预报为2
-        mweathersearch = new WeatherSearch(mContext);
-        mweathersearch.setOnWeatherSearchListener(this);
-        mweathersearch.setQuery(mquery);
-        mweathersearch.searchWeatherAsyn(); //异步搜索
+        mWeatherSearchQuery = new WeatherSearchQuery(mCity, WeatherSearchQuery.WEATHER_TYPE_FORECAST);//检索参数为城市和天气类型，实时天气为1、天气预报为2
+        mWeatherSearch = new WeatherSearch(mContext);
+        mWeatherSearch.setOnWeatherSearchListener(this);
+        mWeatherSearch.setQuery(mWeatherSearchQuery);
+        mWeatherSearch.searchWeatherAsyn(); //异步搜索
     }
 
     @Override
     public void searchLiveWeather() {
-        mquery = new WeatherSearchQuery(mCity, WeatherSearchQuery.WEATHER_TYPE_LIVE);//检索参数为城市和天气类型，实时天气为1、天气预报为2
-        mweathersearch = new WeatherSearch(mContext);
-        mweathersearch.setOnWeatherSearchListener(this);
-        mweathersearch.setQuery(mquery);
-        mweathersearch.searchWeatherAsyn(); //异步搜索
+        mWeatherSearchQuery = new WeatherSearchQuery(mCity, WeatherSearchQuery.WEATHER_TYPE_LIVE);//检索参数为城市和天气类型，实时天气为1、天气预报为2
+        mWeatherSearch = new WeatherSearch(mContext);
+        mWeatherSearch.setOnWeatherSearchListener(this);
+        mWeatherSearch.setQuery(mWeatherSearchQuery);
+        mWeatherSearch.searchWeatherAsyn(); //异步搜索
     }
 
-    private void fillforecast() {
-        mView.updateForecastReportTextView(weatherforecast.getReportTime() + "发布");
-        //reporttime2.setText(weatherforecast.getReportTime() + "发布");
+    private void fillForecast() {
+        mView.updateForecastReportTextView(mLocalWeatherForecast.getReportTime() + "发布");
         String forecast = "";
-        for (int i = 0; i < forecastlist.size(); i++) {
-            LocalDayWeatherForecast localdayweatherforecast = forecastlist.get(i);
+        for (int i = 0; i < mForecastList.size(); i++) {
+            LocalDayWeatherForecast localdayweatherforecast = mForecastList.get(i);
             String week = null;
             switch (Integer.valueOf(localdayweatherforecast.getWeek())) {
                 case 1:
@@ -168,7 +165,6 @@ public class WeatherPresenter implements WeatherContract.Presenter,
             String date = localdayweatherforecast.getDate();
             forecast += date + "  " + week + "                       " + temp + "\n\n";
         }
-        //forecasttv.setText(forecast);
         mView.updateForecastTextView(forecast);
     }
 

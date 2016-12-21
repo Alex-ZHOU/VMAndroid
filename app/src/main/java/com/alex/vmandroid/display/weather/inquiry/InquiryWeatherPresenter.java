@@ -42,7 +42,7 @@ public class InquiryWeatherPresenter implements InquiryWeatherContract.Presenter
     public void onClick(int id, String city) {
         if (id == R.id.inquiry_weather_btn) {
             if (city == null) {
-                mView.showToast(R.string.analysis);
+                mView.showToast(R.string.input_is_empty);
             } else {
                 mView.initAndShowWeatherFrameLayout(city);
             }

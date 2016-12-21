@@ -46,9 +46,13 @@
     <string name="rationale_ask_again">这个程序可能无法正确工作没有请求的权限。打开应用程序设置屏幕修改应用程序的权限。</string>
     <string name="loaction_colon">位置：</string>
     <string name="weather_colon">天气：</string>
-    <string name="weather">天气</string>
+    <string name="location_weather">当前天气</string>
     <string name="live">实时</string>
     <string name="forecast">预告</string>
     <string name="input_city_name">输入城市名</string>
     <string name="inquiry">查询</string>
+    <string name="input_is_empty">输入为空</string>
+    <string name="no_result">查无数据</string>
+    <string name="loading">正在加载…</string>
+    <string name="inquire_weather">查询天气</string>
 </resources>

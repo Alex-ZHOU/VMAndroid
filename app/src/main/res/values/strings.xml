@@ -46,9 +46,13 @@
     <string name="rationale_ask_again">This app may not work correctly without the requested permissions. Open the app settings screen to modify app permissions.</string>
     <string name="loaction_colon">Location:</string>
     <string name="weather_colon">Weather:</string>
-    <string name="weather">Weather</string>
+    <string name="location_weather">Location Weather</string>
     <string name="live">Live</string>
     <string name="forecast">Forecast</string>
     <string name="input_city_name">Input city name</string>
     <string name="inquiry">Inquiry</string>
+    <string name="input_is_empty">Input is empty</string>
+    <string name="no_result">No Result</string>
+    <string name="loading">Loading…</string>
+    <string name="inquire_weather">Inquire Weather</string>
 </resources>

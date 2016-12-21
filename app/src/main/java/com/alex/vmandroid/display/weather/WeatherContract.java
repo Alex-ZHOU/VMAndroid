@@ -16,6 +16,8 @@
 
 package com.alex.vmandroid.display.weather;
 
+import android.support.annotation.StringRes;
+
 import com.alex.vmandroid.base.BaseContract;
 
 public class WeatherContract {
@@ -39,5 +41,13 @@ public class WeatherContract {
         void updateForecastReportTextView(String reportTime);
 
         void updateForecastTextView(String forecast);
+
+        void showProgressDialog();
+
+        void closeProgressDialog();
+
+        void showToast(@StringRes int resId);
+
+        void showToast(String str);
     }
 }

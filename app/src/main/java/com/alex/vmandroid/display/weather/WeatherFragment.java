@@ -15,12 +15,15 @@
  */
 package com.alex.vmandroid.display.weather;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
@@ -28,6 +31,9 @@ import com.alex.vmandroid.base.BaseFragment;
 public class WeatherFragment extends BaseFragment implements WeatherContract.View {
 
     private WeatherContract.Presenter mPresenter;
+
+
+    private ProgressDialog mProgressDialog;
 
     private static String mCity;
     private TextView forecasttv;
@@ -46,7 +52,7 @@ public class WeatherFragment extends BaseFragment implements WeatherContract.Vie
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_location_weather, container, false);
+        View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
         TextView city = (TextView) view.findViewById(R.id.city);
         city.setText(mCity);
@@ -67,6 +73,32 @@ public class WeatherFragment extends BaseFragment implements WeatherContract.Vie
         mPresenter.start();
     }
 
+    @Override
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setMessage(getResources().getString(R.string.loading));
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        mProgressDialog.show();
+    }
+
+    @Override
+    public void closeProgressDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showToast(@StringRes int resId) {
+        Toast.makeText(getContext(), resId, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showToast(String str) {
+        Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void updateLiveTextView(String reportTime, String weather, String temperature, String wind, String humidity) {

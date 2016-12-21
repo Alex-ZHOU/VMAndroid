@@ -34,7 +34,7 @@ import java.util.List;
 public class GadgetActivity extends BaseActivity implements GadgetContract.View,
         AdapterView.OnItemClickListener {
 
-    private final String TAG = Base_TAG;
+    public static final String TAG = GadgetActivity.class.getName();
 
     private GadgetContract.Presenter mPresenter;
 
