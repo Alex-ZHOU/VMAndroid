@@ -1,4 +1,7 @@
 # VMAndroid
+
+[![License][apache2_0_shields]][apache2_0]
+
 Voice Monitor in Android
 
 # LICENSE
