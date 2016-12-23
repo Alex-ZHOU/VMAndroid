@@ -28,7 +28,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.view;
+package com.alex.view.tab;
 
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;

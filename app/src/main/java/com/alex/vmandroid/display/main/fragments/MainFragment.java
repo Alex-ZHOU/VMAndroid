@@ -26,7 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alex.view.TabLayout;
+import com.alex.view.tab.TabLayout;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
 import com.alex.vmandroid.display.main.MainContract;

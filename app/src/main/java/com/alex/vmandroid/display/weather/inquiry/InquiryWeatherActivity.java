@@ -31,6 +31,9 @@ import com.alex.vmandroid.base.BaseActivity;
 import com.alex.vmandroid.display.weather.WeatherFragment;
 import com.alex.vmandroid.display.weather.WeatherPresenter;
 
+/**
+ * 天气查询Activity
+ */
 public class InquiryWeatherActivity extends BaseActivity implements View.OnClickListener, InquiryWeatherContract.View {
 
     public static final String TAG = InquiryWeatherActivity.class.getName();
@@ -44,8 +47,6 @@ public class InquiryWeatherActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inquiry_weather);
         new InquiryWeatherPresenter(this);
-
-
     }
 
     @Override

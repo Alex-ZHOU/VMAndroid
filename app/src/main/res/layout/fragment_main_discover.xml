@@ -15,22 +15,20 @@
   ~ limitations under the License.
   -->
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         style="@style/MainTitleBarStyle">
-
     </LinearLayout>
-    
-    <TextView
-        android:id="@+id/two_text"
+
+    <FrameLayout
+        android:id="@+id/main_loop_advertisement_frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:gravity="center"/>
+        android:layout_height="match_parent"/>
 
 
-</RelativeLayout>
+</LinearLayout>

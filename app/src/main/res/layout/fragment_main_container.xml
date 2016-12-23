@@ -39,14 +39,14 @@
             android:layout_height="1dp"
             android:background="@color/colorTitleSelect"/>
 
-        <com.alex.view.TabLayout
+        <com.alex.view.tab.TabLayout
             android:id="@+id/main_tabLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
-            <com.alex.view.TabView
+            <com.alex.view.tab.TabView
                 android:id="@+id/main_tabView_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 app:selectedTitleColor="@color/colorTitleSelect"
                 app:title="@string/record"/>
 
-            <com.alex.view.TabView
+            <com.alex.view.tab.TabView
                 android:id="@+id/main_tabView_discover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                 app:selectedTitleColor="@color/colorTitleSelect"
                 app:title="@string/discover"/>
 
-            <com.alex.view.TabView
+            <com.alex.view.tab.TabView
                 android:id="@+id/main_tabView_me"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 android:paddingBottom="4dp"
                 app:title="@string/me"/>
 
-        </com.alex.view.TabLayout>
+        </com.alex.view.tab.TabLayout>
 
     </LinearLayout>
 

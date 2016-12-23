@@ -28,7 +28,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.view;
+package com.alex.view.tab;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -41,6 +41,8 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+
+import com.alex.view.R;
 
 public class TabView extends View {
 

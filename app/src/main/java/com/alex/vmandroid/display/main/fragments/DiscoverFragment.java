@@ -18,6 +18,8 @@ package com.alex.vmandroid.display.main.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import android.view.ViewGroup;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
 import com.alex.vmandroid.display.main.MainContract;
+import com.alex.vmandroid.display.main.fragments.fragments.LoopAdvertisementFragment;
 
 public class DiscoverFragment extends BaseFragment implements MainContract.DiscoverView {
     public final String TAG = Base_TAG;
@@ -52,6 +55,15 @@ public class DiscoverFragment extends BaseFragment implements MainContract.Disco
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         Log.i(TAG, "onCreateView: DiscoverFragment");
+
+
+        LoopAdvertisementFragment fragment = new LoopAdvertisementFragment();
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.main_loop_advertisement_frame_layout, fragment);
+        transaction.commit();
+        
 
         return inflater.inflate(R.layout.fragment_main_discover, container, false);
     }

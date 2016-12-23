@@ -26,4 +26,25 @@
         <attr name="selectedTitleColor" format="color"/>
     </declare-styleable>
 
+
+    <!--// FIXME 改名-->
+    <declare-styleable name="IndicatorView">
+        <!--IndicatorView相关-->
+        <!--普通指示器图片-->
+        <attr name="normalDrawable" format="reference"/>
+        <!--选中指示器图片-->
+        <attr name="selectDrawable" format="reference"/>
+        <!--指示器间隔-->
+        <attr name="indicatorInterval" format="dimension"/>
+        <!--普通指示器颜色-->
+        <attr name="normalColor" format="color"/>
+        <!--选中指示器颜色-->
+        <attr name="selectColor" format="color"/>
+        <!--圆点弧度-->
+        <attr name="indicatorRadius" format="integer"/>
+        <!--是否是循环-->
+        <attr name="isCirculate" format="boolean"/>
+    </declare-styleable>
+
+
 </resources>
