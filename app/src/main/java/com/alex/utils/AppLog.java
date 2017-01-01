@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alex_ZHOU
+ * Copyright 2016-2017 Alex_ZHOU
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,83 @@
  */
 package com.alex.utils;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 public final class AppLog {
 
+    private static final String TAG = AppLog.class.getName();
 
-    public static boolean ifLog = true;
+    private static boolean LOG_DEBUG = true;
 
-    public static void setIfLog(boolean ifLog) {
-        AppLog.ifLog = ifLog;
+    private static boolean LOG_INFO = true;
+
+    private static boolean LOG_WARN = true;
+
+    private static boolean LOG_ERROR = true;
+
+    public static void debug(String tag, @NonNull String str) {
+        if (AppLog.LOG_DEBUG) {
+            if (tag != null) {
+                Log.d(tag, str);
+            } else {
+                debug(str);
+            }
+        }
     }
 
-    public static void i(String tag, String str) {
-        if (ifLog)
-            Log.i(tag, str);
+    public static void debug(@NonNull String str) {
+        if (AppLog.LOG_DEBUG) {
+            Log.d(TAG, str);
+        }
     }
+
+    public static void info(String tag, @NonNull String str) {
+        if (AppLog.LOG_INFO) {
+            if (tag != null) {
+                Log.i(tag, str);
+            } else {
+                info(str);
+            }
+        }
+    }
+
+    public static void info(@NonNull String str) {
+        if (AppLog.LOG_INFO) {
+            Log.i(TAG, str);
+        }
+    }
+
+    public static void warn(String tag, @NonNull String str) {
+        if (AppLog.LOG_WARN) {
+            if (tag != null) {
+                Log.w(tag, str);
+            } else {
+                warn(str);
+            }
+        }
+    }
+
+    public static void warn(@NonNull String str) {
+        if (AppLog.LOG_WARN) {
+            Log.w(TAG, str);
+        }
+    }
+
+    public static void error(String tag, @NonNull String str) {
+        if (AppLog.LOG_ERROR) {
+            if (tag != null) {
+                Log.e(tag, str);
+            } else {
+                error(str);
+            }
+        }
+    }
+
+    public static void error(@NonNull String str) {
+        if (AppLog.LOG_ERROR) {
+            Log.e(TAG, str);
+        }
+    }
+
 }

@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ import android.widget.TextView;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
 import com.alex.vmandroid.display.main.MainContract;
+import com.alex.vmandroid.display.voice.db.RecordDBActivity;
 import com.alex.vmandroid.display.weather.location.LocationWeatherActivity;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -111,20 +113,20 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
         View view = inflater.inflate(R.layout.fragment_main_record, container, false);
 
+        // 标题栏记录按钮
+        ImageView recordBeginImageView = (ImageView) view.findViewById(R.id.main_record_title_bar_record_begin_iv);
+        recordBeginImageView.setOnClickListener(this);
+
         mRealTimeNoiseTextView = (TextView) view.findViewById(R.id.main_record_real_db_tv);
 
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
 
+        // 天气模块
         mCityTextView = (TextView) view.findViewById(R.id.main_record_location_tv);
-
         mWeatherView = (TextView) view.findViewById(R.id.main_record_weather_tv);
-
         LinearLayout weather = (LinearLayout) view.findViewById(R.id.main_record_location_weather_ll);
-
         weather.setOnClickListener(this);
-
-        //mapView = (TextureMapView) view.findViewById(R.id.map);
 
 
         // FIXME: 26/10/2016 mvp
@@ -165,6 +167,16 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
     @Override
     public void setPresenter(MainContract.MainPresenter mainPresenter) {
         mPresenter = mainPresenter;
+    }
+
+    /**
+     * 跳转到记录噪声分贝界面
+     */
+    @Override
+    public void showRecordDBActivity() {
+        Log.i(TAG, "showRecordDBActivity");
+        Intent intent = new Intent(getActivity(), RecordDBActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -259,7 +271,7 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
     @Override
     public void onClick(View view) {
-        mPresenter.onClick(view.getId());
+        mPresenter.onClick(view.getId(), MainContract.RECORD_TAG);
     }
 
 
@@ -268,7 +280,6 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
         mAMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_ROTATE);
         mAMap.showBuildings(true);
-
     }
 
 }

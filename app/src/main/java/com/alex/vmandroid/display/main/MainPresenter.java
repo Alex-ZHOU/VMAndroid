@@ -21,7 +21,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.alex.businesses.LoginBiz;
-import com.alex.vmandroid.AudioRecordDemo;
+import com.alex.vmandroid.display.voice.AudioRecordDemo;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.databases.UserInfo;
 import com.amap.api.services.weather.LocalWeatherForecastResult;
@@ -40,6 +40,8 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
         WeatherSearch.OnWeatherSearchListener {
 
     private final String TAG = MainPresenter.class.getName();
+
+
     private MainContract.MainView mMainView;
 
     private MainContract.RecordView mRecordView;
@@ -54,7 +56,7 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
 
     private Context mContext;
 
-    Handler handle = new Handler();
+    private Handler handle = new Handler();
 
     public MainPresenter() {
 
@@ -137,20 +139,36 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
         mLoginView.setPresenter(this);
     }
 
-
     @Override
-    public void onClick(int id) {
-        switch (id) {
+    public void onClick(int id, int tag) {
+
+        switch (tag) {
             //region : RecordFragment 界面的点击事件
-            case R.id.main_record_total_ll:
-                mRecordView.showHistoryActivity();
-                break;
-            case R.id.main_record_location_weather_ll:
-                Log.i(TAG, "onClick: main_record_location_weather_ll");
-                mRecordView.showLocationWeatherActivity();
+            case MainContract.RECORD_TAG:
+                switch (id) {
+                    case R.id.main_record_title_bar_record_begin_iv:
+                        mRecordView.showRecordDBActivity();
+                        break;
+
+                    case R.id.main_record_total_ll:
+                        mRecordView.showHistoryActivity();
+                        break;
+
+                    case R.id.main_record_location_weather_ll:
+                        Log.i(TAG, "onClick: main_record_location_weather_ll");
+                        mRecordView.showLocationWeatherActivity();
+                        break;
+                }
                 break;
             //endregion
 
+            case MainContract.DISCOVER_TAG:
+                break;
+            case MainContract.ME_TAG:
+                break;
+        }
+
+        switch (id) {
             //region : MeFragment 界面的点击事件
             case R.id.main_me_history_ll:
                 mMeView.showHistoryActivity();

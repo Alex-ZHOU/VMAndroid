@@ -3,7 +3,11 @@
           package="com.alex.vmandroid">
 
 
-    <!--麦克风申请权限-->
+    <!--
+      ~ 麦克风申请权限
+      ~ 用处：录音、噪声获取
+      ~ 是否需要向用户申请权限：是
+    -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
 
@@ -23,6 +27,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 
     <application
+        android:name=".VMApplication"
         android:allowBackup="false"
         android:icon="@drawable/vm_android_app_icon"
         android:label="@string/app_name"
@@ -45,6 +50,9 @@
         </activity>
 
         <activity
+            android:name=".display.voice.db.RecordDBActivity"/>
+
+        <activity
             android:name=".display.weather.location.LocationWeatherActivity"
             android:theme="@style/AppTheme"/>
 
@@ -56,8 +64,11 @@
             android:name=".display.gadget.GadgetActivity"/>
         <activity
             android:name=".display.weather.inquiry.InquiryWeatherActivity"/>
+        <activity
+            android:name=".display.voice.tape.SoundRecordingActivity"/>
 
-        <service android:name="com.amap.api.location.APSService">
+        <service
+            android:name="com.amap.api.location.APSService">
         </service>
 
     </application>

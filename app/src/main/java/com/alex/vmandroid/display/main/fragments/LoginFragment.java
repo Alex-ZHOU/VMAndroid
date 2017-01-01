@@ -92,7 +92,7 @@ public class LoginFragment extends BaseFragment implements MainContract.LoginVie
 
     @Override
     public void onClick(View view) {
-        mPresenter.onClick(view.getId());
+        mPresenter.onClick(view.getId(),-1);
     }
 
     /**

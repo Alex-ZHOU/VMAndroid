@@ -106,7 +106,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
 
     @Override
     public void onClick(View view) {
-        mPresenter.onClick(view.getId());
+        mPresenter.onClick(view.getId(), MainContract.ME_TAG);
     }
 
     @Override

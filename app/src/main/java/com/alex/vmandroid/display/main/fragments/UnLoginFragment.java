@@ -73,7 +73,7 @@ public class UnLoginFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        mPresenter.onClick(view.getId());
+        mPresenter.onClick(view.getId(), -1);
     }
 
     @Override

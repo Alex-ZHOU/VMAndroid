@@ -21,6 +21,12 @@ import com.alex.vmandroid.base.BaseContract;
 
 public class MainContract {
 
+    public static final int RECORD_TAG = 1;
+
+    public static final int DISCOVER_TAG = 2;
+
+    public static final int ME_TAG = 3;
+
     public interface MainPresenter extends BaseContract.BasePresenter {
 
         void setApplicationContext(Context context);
@@ -43,7 +49,7 @@ public class MainContract {
 
         void initLoginView(LoginView loginView);
 
-        void onClick(int id);
+        void onClick(int id, int tag);
 
 
     }
@@ -53,6 +59,12 @@ public class MainContract {
     }
 
     public interface RecordView extends BaseContract.BaseView<MainPresenter> {
+
+
+        /**
+         * 跳转到记录噪声分贝界面
+         */
+        void showRecordDBActivity();
 
         /**
          * 跳转到显示历史记录界面
