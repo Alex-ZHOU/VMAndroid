@@ -17,13 +17,16 @@
 package com.alex.vmandroid.display.main;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.util.Log;
 
 import com.alex.businesses.LoginBiz;
+import com.alex.utils.ServiceCheck;
 import com.alex.vmandroid.display.voice.AudioRecordDemo;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.databases.UserInfo;
+import com.alex.vmandroid.receivers.RecordDBReceiver;
 import com.amap.api.services.weather.LocalWeatherForecastResult;
 import com.amap.api.services.weather.LocalWeatherLive;
 import com.amap.api.services.weather.LocalWeatherLiveResult;
@@ -34,6 +37,8 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.alex.vmandroid.services.RecordDBService.RecordDBServiceName;
 
 
 public class MainPresenter implements MainContract.MainPresenter, AudioRecordDemo.Listener,
@@ -96,7 +101,11 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
     @Override
     public void startRecord(Context context) {
         recordDemo = new AudioRecordDemo(this);
-        recordDemo.getNoiseLevel();
+        if (ServiceCheck.isServiceWork(mContext, RecordDBServiceName)) {
+            Log.i(TAG, "startRecord: service is running");
+        } else {
+            recordDemo.getNoiseLevel();
+        }
     }
 
     @Override

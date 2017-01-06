@@ -36,5 +36,22 @@ public class RecordDBContract {
          * @param str 需要显示的文本
          */
         void setButtonText(int str);
+
+        /**
+         * 设置显示分贝的view显示的内容
+         *
+         * @param dbOrId 分贝数或者资源id
+         */
+        void setDBTextView(int dbOrId);
+
+        /**
+         * 启动记录服务
+         */
+        void startService();
+
+        /**
+         * 关闭记录服务
+         */
+        void stopService();
     }
 }

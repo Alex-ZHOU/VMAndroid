@@ -17,7 +17,10 @@
 package com.alex.vmandroid.display.main.fragments;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -34,6 +37,7 @@ import com.alex.vmandroid.base.BaseFragment;
 import com.alex.vmandroid.display.main.MainContract;
 import com.alex.vmandroid.display.voice.db.RecordDBActivity;
 import com.alex.vmandroid.display.weather.location.LocationWeatherActivity;
+import com.alex.vmandroid.receivers.RecordDBReceiver;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -99,10 +103,16 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
         mPresenter.closeRecord();
     }
 
+    private MessageReceiver receiver;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        receiver = new MessageReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(RecordDBReceiver.ACTION);
+        getActivity().registerReceiver(receiver, intentFilter);
     }
 
     @Nullable
@@ -161,7 +171,10 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
     @Override
     public void onDestroy() {
         super.onDestroy();
+
         mapView.onDestroy();
+
+        getActivity().unregisterReceiver(receiver);
     }
 
     @Override
@@ -280,6 +293,19 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
         mAMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_ROTATE);
         mAMap.showBuildings(true);
+    }
+
+
+    class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i(TAG, "onReceive: ");
+            if (intent.getAction().equals(RecordDBReceiver.ACTION)) {
+                int db = intent.getIntExtra(RecordDBReceiver.RECORD_DB_RECEIVER_TAG, -1);
+                updateRealTimeNoise(db);
+            }
+        }
     }
 
 }

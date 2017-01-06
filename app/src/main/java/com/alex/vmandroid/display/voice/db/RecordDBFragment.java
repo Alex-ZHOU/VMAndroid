@@ -15,6 +15,7 @@
  */
 package com.alex.vmandroid.display.voice.db;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
+import com.alex.vmandroid.services.RecordDBService;
 
 public class RecordDBFragment extends BaseFragment implements View.OnClickListener, RecordDBContract.View {
 
@@ -98,5 +100,39 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void setButtonText(int str) {
         mBtn.setText(str);
+    }
+
+    /**
+     * 设置显示分贝的view显示的内容
+     *
+     * @param dbOrId 分贝数或者资源id
+     */
+    @Override
+    public void setDBTextView(int dbOrId) {
+        if (dbOrId < 120) {
+            mDBTextView.setText(String.valueOf(dbOrId));
+        } else {
+            mDBTextView.setText(dbOrId);
+        }
+    }
+
+    /**
+     * 启动记录服务
+     */
+    @Override
+    public void startService() {
+        Intent intent = new Intent(getContext(), RecordDBService.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(RecordDBService.RecordDBServiceName);
+        getContext().startService(intent);
+    }
+
+    /**
+     * 关闭记录服务
+     */
+    @Override
+    public void stopService() {
+        Intent intent = new Intent(getContext(), RecordDBService.class);
+        getContext().stopService(intent);
     }
 }

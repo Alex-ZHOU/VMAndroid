@@ -15,6 +15,7 @@
  */
 package com.alex.vmandroid.display.voice.db;
 
+import android.os.Handler;
 import android.util.Log;
 
 import com.alex.vmandroid.R;
@@ -29,6 +30,7 @@ public class RecordDBPresenter implements RecordDBContract.Presenter, RecordDBTo
     private RecordDBTool mRecordDBTool;
 
     private boolean isRecording = false;
+
 
     public RecordDBPresenter(RecordDBContract.View view) {
         mView = view;
@@ -51,16 +53,19 @@ public class RecordDBPresenter implements RecordDBContract.Presenter, RecordDBTo
             case R.id.record_db_fragment_switch_btn:
                 Log.i(TAG, "onClick: ");
                 if (mRecordDBTool == null) {
-                    mRecordDBTool = new RecordDBTool(this);
+                    //mRecordDBTool = new RecordDBTool(this);
                 }
                 if (isRecording) {
-                    mRecordDBTool.close();
+                    //mRecordDBTool.close();
                     isRecording = false;
                     mView.setButtonText(R.string.start);
+                    mView.setDBTextView(R.string.double_minus);
+                    mView.stopService();
                 } else {
-                    mRecordDBTool.start();
+                    //mRecordDBTool.start();
                     isRecording = true;
                     mView.setButtonText(R.string.stop);
+                    mView.startService();
                 }
                 break;
             default:
@@ -68,8 +73,16 @@ public class RecordDBPresenter implements RecordDBContract.Presenter, RecordDBTo
         }
     }
 
+    private Handler handle = new Handler();
+
     @Override
-    public void onDB(int db) {
+    public void onDB(final int db) {
+        handle.post(new Runnable() {
+            @Override
+            public void run() {
+                mView.setDBTextView(db);
+            }
+        });
 
     }
 }
