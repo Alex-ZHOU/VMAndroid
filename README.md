@@ -1,11 +1,14 @@
 # VMAndroid
+
+[![License][apache2_0_shields]][apache2_0]
+
 Voice Monitor in Android
 
 # LICENSE
 
-##Worker_ZHOU
+##Alex_ZHOU
 
-   Copyright 2016 Alex_ZHOU
+   Copyright 2016-2017 Alex_ZHOU
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -22,7 +25,7 @@ Voice Monitor in Android
    
 ##Worker_ZHOU
 
-   Copyright 2016 Worker_ZHOU
+   Copyright 2016-2017 Worker_ZHOU
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
