@@ -15,8 +15,12 @@
  */
 package com.alex.vmandroid.display.voice.db;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +31,7 @@ import android.widget.TextView;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
+import com.alex.vmandroid.receivers.RecordDBReceiver;
 import com.alex.vmandroid.services.RecordDBService;
 
 public class RecordDBFragment extends BaseFragment implements View.OnClickListener, RecordDBContract.View {
@@ -47,12 +52,23 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
 
     private ListView mListView;
 
+    private MessageReceiver mReceiver;
+
     public RecordDBFragment() {
         new RecordDBPresenter(this);
     }
 
     public static RecordDBFragment newInstance() {
         return new RecordDBFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mReceiver = new RecordDBFragment.MessageReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(RecordDBReceiver.ACTION);
+        getActivity().registerReceiver(mReceiver, intentFilter);
     }
 
     @Nullable
@@ -64,7 +80,7 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
 
         mDurationTimeView = (TextView) view.findViewById(R.id.record_db_fragment_duration_tv);
 
-        mAverageTextView = (TextView) view.findViewById(R.id.main_record_average_tv);
+        mAverageTextView = (TextView) view.findViewById(R.id.record_db_fragment_average_tv);
 
         mMaxTextView = (TextView) view.findViewById(R.id.record_db_fragment_max_tv);
 
@@ -80,6 +96,12 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
     public void onResume() {
         super.onResume();
         mPresenter.start();
+    }
+
+    @Override
+    public void onDestroy() {
+        getActivity().unregisterReceiver(mReceiver);
+        super.onDestroy();
     }
 
     @Override
@@ -117,6 +139,36 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
     }
 
     /**
+     * 设置记录的时长
+     *
+     * @param time 时长
+     */
+    @Override
+    public void setDurationTimeView(String time) {
+        mDurationTimeView.setText(time);
+    }
+
+    /**
+     * 设置显示平均值
+     *
+     * @param average 平均值
+     */
+    @Override
+    public void setAverageTextView(@NonNull String average) {
+        mAverageTextView.setText(average);
+    }
+
+    /**
+     * 设置显示最大值
+     *
+     * @param max 最大值
+     */
+    @Override
+    public void setMaxTextView(@NonNull String max) {
+        mMaxTextView.setText(max);
+    }
+
+    /**
      * 启动记录服务
      */
     @Override
@@ -134,5 +186,40 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
     public void stopService() {
         Intent intent = new Intent(getContext(), RecordDBService.class);
         getContext().stopService(intent);
+    }
+
+    private class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(RecordDBReceiver.ACTION)) {
+                if (intent.getExtras().containsKey(RecordDBReceiver.RECORD_DB_RECEIVER_DB)) {
+                    int db = intent.getIntExtra(RecordDBReceiver.RECORD_DB_RECEIVER_DB, -1);
+                    mPresenter.getDB(db);
+                }
+                if (intent.getExtras().containsKey(RecordDBReceiver.RECORD_DB_RECEIVER_TIME)) {
+                    String time = intent.getStringExtra(RecordDBReceiver.RECORD_DB_RECEIVER_TIME);
+                    mPresenter.getTime(time);
+                }
+                if (intent.getExtras().containsKey(RecordDBReceiver.RECORD_DB_RECEIVER_MAX_DB)) {
+                    int max = intent.getIntExtra(RecordDBReceiver.RECORD_DB_RECEIVER_MAX_DB, -1);
+                    mPresenter.getMaxDB(max);
+                }
+                if (intent.getExtras().containsKey(RecordDBReceiver.RECORD_DB_RECEIVER_AVERAGE_DB)) {
+                    int average = intent.getIntExtra(RecordDBReceiver.RECORD_DB_RECEIVER_AVERAGE_DB, -1);
+                    mPresenter.getAverageDB(average);
+                }
+            }
+        }
+    }
+
+    /**
+     * 获取上下文内容
+     *
+     * @return 上下文
+     */
+    @Override
+    public Context getViewContext() {
+        return getContext();
     }
 }

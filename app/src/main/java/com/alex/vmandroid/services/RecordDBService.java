@@ -25,6 +25,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 import com.alex.utils.AppLog;
+import com.alex.utils.TimeMeter;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.display.voice.RecordDBTool;
 import com.alex.vmandroid.display.voice.db.RecordDBActivity;
@@ -35,17 +36,57 @@ import com.alex.vmandroid.receivers.RecordDBReceiver;
  */
 public class RecordDBService extends Service {
 
-    private static final String TAG = RecordDBService.class.getSimpleName();
+    private static final String TAG = RecordDBService.class.getName();
 
     public static final String RecordDBServiceName = "com.alex.vmandroid.services.RecordDBService";
 
     public static final String RecordDBServiceAction = "com.alex.vmandroid.services.RecordDBServiceAction";
 
-    public static final String RecordDBServiceTAG = "RecordDBServiceTAG";
+    public static final String RECORD_DB_SERVICE_DB = "RECORD_DB_SERVICE_DB";
 
-    private RecordDBTool mRecordDBTool;
+    public static final String RECORD_DB_SERVICE_TIME = "RECORD_DB_SERVICE_TIME";
+
+    public static final String RECORD_DB_SERVICE_MAX_DB = "RECORD_DB_SERVICE_MAX_DB";
+
+    public static final String RECORD_DB_SERVICE_AVERAGE_DB = "RECORD_DB_SERVICE_AVERAGE_DB";
 
     private RecordDBReceiver mReceiver;
+
+    private long mTotalDB = 0L;
+
+    private long mRecordDBTimes = 0;
+
+    private int mMaxDB = 0;
+
+    private RecordDBTool mRecordDBTool = new RecordDBTool(new RecordDBTool.Listener() {
+        @Override
+        public void onDB(int db) {
+            AppLog.debug(TAG, "The db is " + db + ".");
+            Intent intent = new Intent(RecordDBService.RecordDBServiceAction);
+            intent.putExtra(RecordDBService.RECORD_DB_SERVICE_DB, db);
+            sendBroadcast(intent);
+
+            mRecordDBTimes++;
+            mTotalDB += db;
+            mMaxDB = mMaxDB > db ? mMaxDB : db;
+            int averageDB = (int) (mTotalDB / mRecordDBTimes);
+            intent = new Intent(RecordDBService.RecordDBServiceAction);
+            intent.putExtra(RecordDBService.RECORD_DB_SERVICE_MAX_DB, mMaxDB);
+            intent.putExtra(RecordDBService.RECORD_DB_SERVICE_AVERAGE_DB, averageDB);
+            sendBroadcast(intent);
+            
+        }
+    });
+
+    private TimeMeter mTimeMeter = new TimeMeter(new TimeMeter.CallBack() {
+        @Override
+        public void getTime(String time) {
+            AppLog.debug(TAG, "The time is " + time + ".");
+            Intent intent = new Intent(RecordDBService.RecordDBServiceAction);
+            intent.putExtra(RecordDBService.RECORD_DB_SERVICE_TIME, time);
+            sendBroadcast(intent);
+        }
+    });
 
     @Override
     public void onCreate() {
@@ -91,7 +132,6 @@ public class RecordDBService extends Service {
         registerReceiver(mReceiver, intentFilter);
         int notifyId = 1001;
         startForeground(notifyId, mNotification);
-
     }
 
 
@@ -105,16 +145,8 @@ public class RecordDBService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mRecordDBTool = new RecordDBTool(new RecordDBTool.Listener() {
-            @Override
-            public void onDB(int db) {
-                Intent intent1 = new Intent(RecordDBService.RecordDBServiceAction);
-                intent1.putExtra(RecordDBService.RecordDBServiceTAG, db);
-                sendBroadcast(intent1);
-            }
-        });
         mRecordDBTool.start();
-
+        mTimeMeter.start();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -123,7 +155,7 @@ public class RecordDBService extends Service {
         AppLog.debug("RecordDBService onDestroy() is called.");
 
         mRecordDBTool.close();
-
+        mTimeMeter.close();
         unregisterReceiver(mReceiver);
 
         super.onDestroy();

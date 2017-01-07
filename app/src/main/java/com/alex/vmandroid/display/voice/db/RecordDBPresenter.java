@@ -15,19 +15,18 @@
  */
 package com.alex.vmandroid.display.voice.db;
 
-import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.alex.utils.ServiceCheck;
 import com.alex.vmandroid.R;
-import com.alex.vmandroid.display.voice.RecordDBTool;
+import com.alex.vmandroid.services.RecordDBService;
 
-public class RecordDBPresenter implements RecordDBContract.Presenter, RecordDBTool.Listener {
+public class RecordDBPresenter implements RecordDBContract.Presenter {
 
     private final String TAG = RecordDBPresenter.class.getName();
 
     private RecordDBContract.View mView;
-
-    private RecordDBTool mRecordDBTool;
 
     private boolean isRecording = false;
 
@@ -35,11 +34,17 @@ public class RecordDBPresenter implements RecordDBContract.Presenter, RecordDBTo
     public RecordDBPresenter(RecordDBContract.View view) {
         mView = view;
         mView.setPresenter(this);
+
     }
 
     @Override
     public void start() {
-
+        isRecording = ServiceCheck.isServiceWork(mView.getViewContext(), RecordDBService.RecordDBServiceName);
+        if (isRecording) {
+            mView.setButtonText(R.string.stop);
+        } else {
+            mView.setDBTextView(R.string.double_minus);
+        }
     }
 
     /**
@@ -52,17 +57,12 @@ public class RecordDBPresenter implements RecordDBContract.Presenter, RecordDBTo
         switch (id) {
             case R.id.record_db_fragment_switch_btn:
                 Log.i(TAG, "onClick: ");
-                if (mRecordDBTool == null) {
-                    //mRecordDBTool = new RecordDBTool(this);
-                }
                 if (isRecording) {
-                    //mRecordDBTool.close();
                     isRecording = false;
                     mView.setButtonText(R.string.start);
                     mView.setDBTextView(R.string.double_minus);
                     mView.stopService();
                 } else {
-                    //mRecordDBTool.start();
                     isRecording = true;
                     mView.setButtonText(R.string.stop);
                     mView.startService();
@@ -73,16 +73,44 @@ public class RecordDBPresenter implements RecordDBContract.Presenter, RecordDBTo
         }
     }
 
-    private Handler handle = new Handler();
-
+    /**
+     * 获取当前的分贝数
+     *
+     * @param db 分贝数
+     */
     @Override
-    public void onDB(final int db) {
-        handle.post(new Runnable() {
-            @Override
-            public void run() {
-                mView.setDBTextView(db);
-            }
-        });
-
+    public void getDB(int db) {
+        mView.setDBTextView(db);
     }
+
+    /**
+     * 获取记录的时长
+     *
+     * @param time 时长
+     */
+    @Override
+    public void getTime(@NonNull String time) {
+        mView.setDurationTimeView(time);
+    }
+
+    /**
+     * 获取分贝平均数
+     *
+     * @param average 平均数
+     */
+    @Override
+    public void getAverageDB(int average) {
+        mView.setAverageTextView(String.valueOf(average));
+    }
+
+    /**
+     * 获取最大数值
+     *
+     * @param max 最大值
+     */
+    @Override
+    public void getMaxDB(int max) {
+        mView.setMaxTextView(String.valueOf(max));
+    }
+
 }

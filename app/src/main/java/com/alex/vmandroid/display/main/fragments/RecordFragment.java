@@ -75,6 +75,8 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
     private AMap mAMap;
 
+    private MessageReceiver mReceiver;
+
     public static RecordFragment newInstance() {
         return new RecordFragment();
     }
@@ -103,16 +105,15 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
         mPresenter.closeRecord();
     }
 
-    private MessageReceiver receiver;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        receiver = new MessageReceiver();
+        mReceiver = new MessageReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(RecordDBReceiver.ACTION);
-        getActivity().registerReceiver(receiver, intentFilter);
+        getActivity().registerReceiver(mReceiver, intentFilter);
     }
 
     @Nullable
@@ -160,7 +161,6 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
-
     }
 
     @Override
@@ -170,11 +170,9 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-
         mapView.onDestroy();
-
-        getActivity().unregisterReceiver(receiver);
+        getActivity().unregisterReceiver(mReceiver);
+        super.onDestroy();
     }
 
     @Override
@@ -296,14 +294,15 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
     }
 
 
-    class MessageReceiver extends BroadcastReceiver {
+    private class MessageReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.i(TAG, "onReceive: ");
             if (intent.getAction().equals(RecordDBReceiver.ACTION)) {
-                int db = intent.getIntExtra(RecordDBReceiver.RECORD_DB_RECEIVER_TAG, -1);
-                updateRealTimeNoise(db);
+                if (intent.getExtras().containsKey(RecordDBReceiver.RECORD_DB_RECEIVER_DB)) {
+                    int db = intent.getIntExtra(RecordDBReceiver.RECORD_DB_RECEIVER_DB, -1);
+                    updateRealTimeNoise(db);
+                }
             }
         }
     }

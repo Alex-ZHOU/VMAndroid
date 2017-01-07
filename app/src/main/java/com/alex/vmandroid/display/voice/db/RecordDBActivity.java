@@ -39,6 +39,14 @@ public class RecordDBActivity extends BaseActivity implements LocationSource, AM
 
     private OnLocationChangedListener mListener;
 
+    private MapView mMapView;
+
+    @Override
+    protected void onDestroy() {
+        mMapView.onDestroy();
+        super.onDestroy();
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +54,10 @@ public class RecordDBActivity extends BaseActivity implements LocationSource, AM
 
         setContentView(R.layout.activity_voice_db_record_db);
 
-        MapView mapView = (MapView) findViewById(R.id.record_db_map_view);
-        mapView.onCreate(savedInstanceState);// 此方法必须重写
+        mMapView = (MapView) findViewById(R.id.record_db_map_view);
+        mMapView.onCreate(savedInstanceState);// 此方法必须重写
 
-        AMap mAMap = mapView.getMap();
+        AMap mAMap = mMapView.getMap();
         mAMap.setLocationSource(this);// 设置定位监听
         mAMap.setOnMapLoadedListener(this);
         //mAMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示

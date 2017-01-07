@@ -15,6 +15,9 @@
  */
 package com.alex.vmandroid.display.voice.db;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+
 import com.alex.vmandroid.base.BaseContract;
 
 public class RecordDBContract {
@@ -27,9 +30,45 @@ public class RecordDBContract {
          * @param id 被点击的view的id号
          */
         void onClick(int id);
+
+        /**
+         * 获取当前的分贝数
+         *
+         * @param db 分贝数
+         */
+        void getDB(int db);
+
+        /**
+         * 获取记录的时长
+         *
+         * @param time 时长
+         */
+        void getTime(@NonNull String time);
+
+        /**
+         * 获取分贝平均数
+         *
+         * @param average 平均数
+         */
+        void getAverageDB(int average);
+
+        /**
+         * 获取最大数值
+         *
+         * @param max 最大值
+         */
+        void getMaxDB(int max);
+
     }
 
     interface View extends BaseContract.BaseView<RecordDBContract.Presenter> {
+        /**
+         * 获取上下文内容
+         *
+         * @return 上下文
+         */
+        Context getViewContext();
+
         /**
          * 设置被点击按钮的文本
          *
@@ -45,6 +84,27 @@ public class RecordDBContract {
         void setDBTextView(int dbOrId);
 
         /**
+         * 设置记录的时长
+         *
+         * @param time 时长
+         */
+        void setDurationTimeView(String time);
+
+        /**
+         * 设置显示平均值
+         *
+         * @param average 平均值
+         */
+        void setAverageTextView(@NonNull String average);
+
+        /**
+         * 设置显示最大值
+         *
+         * @param max 最大值
+         */
+        void setMaxTextView(@NonNull String max);
+
+        /**
          * 启动记录服务
          */
         void startService();
@@ -53,5 +113,7 @@ public class RecordDBContract {
          * 关闭记录服务
          */
         void stopService();
+
+
     }
 }

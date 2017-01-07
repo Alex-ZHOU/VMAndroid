@@ -28,7 +28,13 @@ public class RecordDBReceiver extends BroadcastReceiver {
 
     public static final String ACTION = "com.alex.vmandroid.receivers.RecordDBReceiver";
 
-    public static final String RECORD_DB_RECEIVER_TAG = "RECORD_DB_RECEIVER_TAG";
+    public static final String RECORD_DB_RECEIVER_DB = "RECORD_DB_RECEIVER_DB";
+
+    public static final String RECORD_DB_RECEIVER_TIME = "RECORD_DB_RECEIVER_TIME";
+
+    public static final String RECORD_DB_RECEIVER_MAX_DB = "RECORD_DB_RECEIVER_MAX_DB";
+
+    public static final String RECORD_DB_RECEIVER_AVERAGE_DB = "RECORD_DB_RECEIVER_AVERAGE_DB";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -43,11 +49,34 @@ public class RecordDBReceiver extends BroadcastReceiver {
     private void sendMsgToView(Context context, @NonNull Bundle bundle) {
         AppLog.info("Called sendMsgToView.");
 
-        int db = bundle.getInt(RecordDBService.RecordDBServiceTAG, -1);
 
-        Intent mIntent = new Intent(RecordDBReceiver.ACTION);
-        mIntent.putExtra(RecordDBReceiver.RECORD_DB_RECEIVER_TAG, db);
+        if (bundle.containsKey(RecordDBService.RECORD_DB_SERVICE_DB)) {
+            int db = bundle.getInt(RecordDBService.RECORD_DB_SERVICE_DB, -1);
+            Intent intent = new Intent(RecordDBReceiver.ACTION);
+            intent.putExtra(RecordDBReceiver.RECORD_DB_RECEIVER_DB, db);
+            context.sendBroadcast(intent);
+        }
 
-        context.sendBroadcast(mIntent);
+        if (bundle.containsKey(RecordDBService.RECORD_DB_SERVICE_TIME)) {
+            String time = bundle.getString(RecordDBService.RECORD_DB_SERVICE_TIME);
+            Intent intent = new Intent(RecordDBReceiver.ACTION);
+            intent.putExtra(RecordDBReceiver.RECORD_DB_RECEIVER_TIME, time);
+            context.sendBroadcast(intent);
+        }
+
+        if (bundle.containsKey(RecordDBService.RECORD_DB_SERVICE_MAX_DB)) {
+            int maxDb = bundle.getInt(RecordDBService.RECORD_DB_SERVICE_MAX_DB);
+            Intent intent = new Intent(RecordDBReceiver.ACTION);
+            intent.putExtra(RecordDBReceiver.RECORD_DB_RECEIVER_MAX_DB, maxDb);
+            context.sendBroadcast(intent);
+        }
+
+        if (bundle.containsKey(RecordDBService.RECORD_DB_SERVICE_AVERAGE_DB)) {
+            int averageDb = bundle.getInt(RecordDBService.RECORD_DB_SERVICE_AVERAGE_DB);
+            Intent mIntent = new Intent(RecordDBReceiver.ACTION);
+            mIntent.putExtra(RecordDBReceiver.RECORD_DB_RECEIVER_AVERAGE_DB, averageDb);
+            context.sendBroadcast(mIntent);
+        }
+
     }
 }
