@@ -17,16 +17,16 @@
 package com.alex.vmandroid.display.main;
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.os.Handler;
 import android.util.Log;
 
 import com.alex.businesses.LoginBiz;
+import com.alex.utils.AppLog;
 import com.alex.utils.ServiceCheck;
 import com.alex.vmandroid.display.voice.AudioRecordDemo;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.databases.UserInfo;
-import com.alex.vmandroid.receivers.RecordDBReceiver;
+import com.alex.vmandroid.entities.Login;
 import com.amap.api.services.weather.LocalWeatherForecastResult;
 import com.amap.api.services.weather.LocalWeatherLive;
 import com.amap.api.services.weather.LocalWeatherLiveResult;
@@ -217,40 +217,53 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
 
 
         // 观察者
-        Subscriber observer = new Subscriber<String>() {
+        Subscriber observer = new Subscriber<Integer>() {
             @Override
             public void onCompleted() {
-                Log.i(TAG, "onCompleted");
-                UserInfo.putPassword(mContext, password);
-                UserInfo.putUserName(mContext, username);
+                mLoginView.showToast(mContext.getResources().getString(R.string.login_success));
                 mLoginView.showMainFragment();
+
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.i(TAG, "onError");
+                AppLog.error("Login error");
+                mLoginView.showToast(mContext.getResources().getString(R.string.unknown_error));
             }
 
             @Override
-            public void onNext(String str) {
+            public void onNext(Integer str) {
+                switch (str){
+                    case LoginBiz.PASSWORD_WRONG:
+                        mLoginView.showToast(mContext.getResources().getString(R.string.login_password_wrong));
+                        break;
+                    case LoginBiz.ACCOUNT_NO_EXITED:
+                        mLoginView.showToast(mContext.getResources().getString(R.string.login_account_no_exit));
+                        break;
+                    case LoginBiz.UNKNOWN_WRONG:
+                        mLoginView.showToast(mContext.getResources().getString(R.string.unknown_error));
+                        break;
+                }
                 Log.i(TAG, "onNext");
             }
         };
 
-        Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+        Observable observable = Observable.create(new Observable.OnSubscribe<Integer>() {
 
             @Override
-            public void call(final Subscriber<? super String> subscriber) {
+            public void call(final Subscriber<? super Integer> subscriber) {
 
                 LoginBiz.Listener listener = new LoginBiz.Listener() {
                     @Override
-                    public void succeed() {
+                    public void succeed(Login.User user) {
+                        UserInfo.putUsrId(mContext, user.getUserId());
+                        UserInfo.putUserName(mContext, user.getUserName());
                         subscriber.onCompleted();
                     }
 
                     @Override
-                    public void failed(String str) {
-                        subscriber.onNext(str);
+                    public void failed(int i) {
+                        subscriber.onNext(i);
                     }
                 };
 

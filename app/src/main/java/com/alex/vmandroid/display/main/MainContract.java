@@ -60,7 +60,6 @@ public class MainContract {
 
     public interface RecordView extends BaseContract.BaseView<MainPresenter> {
 
-
         /**
          * 跳转到记录噪声分贝界面
          */
@@ -131,6 +130,12 @@ public class MainContract {
     }
 
     public interface LoginView extends BaseContract.BaseView<MainPresenter> {
+
+        /**
+         * 显示toast 提示
+         * @param str 显示的提示信息
+         */
+        void showToast(String str);
 
         /**
          * 登陆成功，跳转到主页界面

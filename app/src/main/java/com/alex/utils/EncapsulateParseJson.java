@@ -26,10 +26,9 @@ import com.google.gson.JsonSyntaxException;
  */
 
 public final class EncapsulateParseJson {
-    // region: build tools
+    
     private static Gson mGson = new Gson();
 
-    // endregion
     public static <T> T parse(Class<T> classOfT, String json) {
         T t;
         try {

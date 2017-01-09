@@ -61,4 +61,8 @@
     <string name="max_db">Max_DB</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
+    <string name="login_success">LOGIN SUCCESS</string>
+    <string name="login_password_wrong">PASSWORD WRONG</string>
+    <string name="login_account_no_exit">ACCOUNT NO EXIT</string>
+    <string name="unknown_error">UNKNOWN ERROR</string>
 </resources>

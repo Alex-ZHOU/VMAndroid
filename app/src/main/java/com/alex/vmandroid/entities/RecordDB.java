@@ -23,17 +23,17 @@ public class RecordDB {
     /**
      * 音量
      */
-    private float db;
+    private int db;
 
     /**
      * 经度
      */
-    private float longitude;
+    private double longitude;
 
     /**
      * 纬度
      */
-    private float latitude;
+    private double latitude;
 
     /**
      * The time when record this data.
@@ -41,7 +41,8 @@ public class RecordDB {
     private String time;
 
     /**
-     * User ID
+     * Login ID
+     * 用户id
      */
     private String userId;
 
@@ -55,27 +56,27 @@ public class RecordDB {
         this.times = times;
     }
 
-    public float getDb() {
+    public int getDb() {
         return db;
     }
 
-    public void setDb(float db) {
+    public void setDb(int db) {
         this.db = db;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 

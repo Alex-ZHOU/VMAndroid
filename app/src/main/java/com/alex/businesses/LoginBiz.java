@@ -18,10 +18,10 @@ package com.alex.businesses;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.alex.utils.AppLog;
+import com.alex.utils.EncapsulateParseJson;
 import com.alex.utils.URLs;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.alex.vmandroid.entities.Login;
 
 import java.io.IOException;
 
@@ -39,6 +39,21 @@ import okhttp3.Response;
 public class LoginBiz {
 
     public static final String TAG = LoginBiz.class.getName();
+
+    /**
+     * 密码错误
+     */
+    public static final int PASSWORD_WRONG = 1;
+
+    /**
+     * 账号不存在
+     */
+    public static final int ACCOUNT_NO_EXITED = 2;
+
+    /**
+     * 发生未知错误
+     */
+    public static final int UNKNOWN_WRONG = 3;
 
 
     public static void login(@NonNull final String username, @NonNull final String password,
@@ -59,7 +74,7 @@ public class LoginBiz {
         client.newCall(requestPost).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                listener.failed(e.toString());
+                listener.failed(UNKNOWN_WRONG);
             }
 
             @Override
@@ -68,19 +83,26 @@ public class LoginBiz {
                 final String string = response.body().string();
                 Log.i(TAG, "onResponse: " + string);
 
+                Login login = EncapsulateParseJson.parse(Login.class, string);
 
-                try {
-                    JSONObject json2 = new JSONObject(string);
-                        String str = (String) json2.get("success");
-                    if (str.equals("true")) {
-                        listener.succeed();
-                    } else {
-                        listener.failed(str);
+                if (login != null) {
+                    switch (login.getReturn()) {
+                        case "success":
+                            listener.succeed(login.getUser());
+                            break;
+                        case "password":
+                            AppLog.info(TAG, "密码错误");
+                            listener.failed(PASSWORD_WRONG);
+                            break;
+                        case "account":
+                            AppLog.info(TAG, "账号不存在");
+                            listener.failed(ACCOUNT_NO_EXITED);
+                            break;
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    listener.failed(e.toString());
+                } else {
+                    AppLog.error(TAG, string);
                 }
+
             }
         });
     }
@@ -92,13 +114,13 @@ public class LoginBiz {
         /**
          * 成功回掉函数
          */
-        void succeed();
+        void succeed(Login.User user);
 
         /**
          * 登陆失败回掉函数
          *
-         * @param str 失败的原因以及说明
+         * @param i 失败的原因
          */
-        void failed(String str);
+        void failed(int i);
     }
 }

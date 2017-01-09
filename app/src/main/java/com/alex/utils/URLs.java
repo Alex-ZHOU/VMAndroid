@@ -18,13 +18,19 @@ package com.alex.utils;
 public class URLs {
 
     // My location server address.
-    private static final String LOCATION_SERVER = "http://192.168.1.109:8080/VMServer/";
+    private static final String LOCATION_SERVER = "http://192.168.0.144:8080/VMServer/";
 
 
     // Using address.
     private static final String SERVER_ADDRESS = LOCATION_SERVER;
 
+    /**
+     * 登陆访问的地址
+     */
+    public static final String URL_LOGIN = SERVER_ADDRESS + "Android_Login";
 
-    // 登陆访问的地址
-    public static final String URL_LOGIN = SERVER_ADDRESS + "Login";
+    /**
+     * 上传噪声记录的地址
+     */
+    public static final String URL_RECORD_DB = SERVER_ADDRESS + "Android_RecordDB";
 }
