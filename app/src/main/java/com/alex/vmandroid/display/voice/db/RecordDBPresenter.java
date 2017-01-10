@@ -61,7 +61,8 @@ public class RecordDBPresenter implements RecordDBContract.Presenter {
                     isRecording = false;
                     mView.setButtonText(R.string.start);
                     mView.setDBTextView(R.string.double_minus);
-                    mView.stopService();
+                    mView.uploadAndStopService();
+                    mView.showProgressDialog();
                 } else {
                     isRecording = true;
                     mView.setButtonText(R.string.stop);
@@ -111,6 +112,21 @@ public class RecordDBPresenter implements RecordDBContract.Presenter {
     @Override
     public void getMaxDB(int max) {
         mView.setMaxTextView(String.valueOf(max));
+    }
+
+    /**
+     * 是否上传成功
+     *
+     * @param b 成功为true
+     */
+    @Override
+    public void isUploadSucceed(boolean b) {
+        mView.closeProgressDialog();
+        if (b) {
+            mView.showToast(R.string.upload_succeed);
+        } else {
+            mView.showToast(R.string.upload_failed);
+        }
     }
 
 }

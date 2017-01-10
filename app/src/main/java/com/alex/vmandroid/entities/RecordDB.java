@@ -41,20 +41,9 @@ public class RecordDB {
     private String time;
 
     /**
-     * Login ID
-     * 用户id
+     * 计时器
      */
-    private String userId;
-
-    /**
-     * 次数
-     */
-    private int times;
-
-
-    public void setTimes(int times) {
-        this.times = times;
-    }
+    private String timekeeper;
 
     public int getDb() {
         return db;
@@ -88,15 +77,12 @@ public class RecordDB {
         this.time = time;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getTimekeeper() {
+        return timekeeper;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setTimekeeper(String timekeeper) {
+        this.timekeeper = timekeeper;
     }
 
-    public int getTimes() {
-        return times;
-    }
 }

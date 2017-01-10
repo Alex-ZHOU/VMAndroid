@@ -18,14 +18,15 @@ package com.alex.vmandroid.services;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
-import com.alex.businesses.UploadRecordDB;
+import com.alex.businesses.UploadRecordDBBiz;
 import com.alex.utils.AppLog;
 import com.alex.utils.TimeMeter;
 import com.alex.vmandroid.R;
@@ -64,10 +65,14 @@ public class RecordDBService extends Service implements AMapLocationListener {
 
     public static final String RECORD_DB_SERVICE_AVERAGE_DB = "RECORD_DB_SERVICE_AVERAGE_DB";
 
+    public static final String RECORD_DB_SERVICE_UPLOAD_SUCCEED = "RECORD_DB_SERVICE_UPLOAD_SUCCEED";
+
     /**
      * 广播声明
      */
     private RecordDBReceiver mReceiver;
+
+    private MessageReceiver mReceiver2;
 
     /**
      * 总值，用于求平均数
@@ -128,33 +133,11 @@ public class RecordDBService extends Service implements AMapLocationListener {
             recordDB.setDb(db);
             recordDB.setLatitude(mLatitude);
             recordDB.setLongitude(mLongitude);
-            recordDB.setTimes((int) mRecordDBTimes);
             recordDB.setTime(time);
+            recordDB.setTimekeeper(mTimeMeter.getTime());
             mRecordDBList.add(recordDB);
-            if (mRecordDBList.size() % 10 == 0) {
-                Log.i(TAG, "onDB: ");
-                uploadRecordInfo(mRecordDBList);
-                mRecordDBList.clear();
-            }
         }
 
-        private void uploadRecordInfo(List<RecordDB> recordDBList) {
-
-            Log.i(TAG, "uploadRecordInfo: ");
-
-            //TODO
-            UploadRecordDB.commit(recordDBList, 1, 1, new UploadRecordDB.Listener() {
-                @Override
-                public void succeed() {
-                    Log.i(TAG, "succeed: ");
-                }
-
-                @Override
-                public void failure() {
-                    Log.i(TAG, "failure: ");
-                }
-            });
-        }
 
     });
 
@@ -215,6 +198,10 @@ public class RecordDBService extends Service implements AMapLocationListener {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(RecordDBService.RecordDBServiceAction);
         registerReceiver(mReceiver, intentFilter);
+        mReceiver2 = new MessageReceiver();
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(RecordDBReceiver.ACTION);
+        registerReceiver(mReceiver2, intentFilter);
         //endregion
 
         //region 定位配置
@@ -259,15 +246,43 @@ public class RecordDBService extends Service implements AMapLocationListener {
     public void onDestroy() {
         AppLog.debug("RecordDBService onDestroy() is called.");
 
-        mRecordDBTool.close();
-        mTimeMeter.close();
-        mLocationClient.stopLocation();
-        mLocationClient.onDestroy();
         unregisterReceiver(mReceiver);
+        unregisterReceiver(mReceiver2);
 
         super.onDestroy();
     }
 
+    private void uploadRecordInfo(List<RecordDB> recordDBList) {
+
+        mRecordDBTool.close();
+
+        mTimeMeter.close();
+
+        mLocationClient.stopLocation();
+
+        mLocationClient.onDestroy();
+
+
+        UploadRecordDBBiz.commit(recordDBList, 1, 1, new UploadRecordDBBiz.Listener() {
+            @Override
+            public void succeed() {
+                Intent intent = new Intent(RecordDBService.RecordDBServiceAction);
+                intent.putExtra(RecordDBService.RECORD_DB_SERVICE_UPLOAD_SUCCEED, true);
+                sendBroadcast(intent);
+
+                Intent intent2 = new Intent(getApplicationContext(), RecordDBService.class);
+                stopService(intent2);
+            }
+
+            @Override
+            public void failure() {
+                Intent intent = new Intent(RecordDBService.RecordDBServiceAction);
+                intent.putExtra(RecordDBService.RECORD_DB_SERVICE_UPLOAD_SUCCEED, false);
+                sendBroadcast(intent);
+                // TODO 写入缓存
+            }
+        });
+    }
 
     @Override
     public void onLocationChanged(AMapLocation amapLocation) {
@@ -286,4 +301,21 @@ public class RecordDBService extends Service implements AMapLocationListener {
             }
         }
     }
+
+    private class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(RecordDBReceiver.ACTION)) {
+                if (intent.getExtras().containsKey(RecordDBReceiver.RECORD_DB_UPLOAD_DATA)) {
+                    boolean b = intent.getBooleanExtra(RecordDBReceiver.RECORD_DB_UPLOAD_DATA, false);
+                    if (b) {
+                        uploadRecordInfo(mRecordDBList);
+                    }
+                }
+            }
+        }
+    }
+
+
 }

@@ -36,19 +36,20 @@ public class RecordDBReceiver extends BroadcastReceiver {
 
     public static final String RECORD_DB_RECEIVER_AVERAGE_DB = "RECORD_DB_RECEIVER_AVERAGE_DB";
 
+    public static final String RECORD_DB_RECEIVER_UPLOAD_SUCCEED = "RECORD_DB_RECEIVER_UPLOAD_SUCCEED";
+
+    public static final String RECORD_DB_UPLOAD_DATA = "RECORD_DB_UPLOAD_DATA";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        AppLog.info("Called onReceive.");
 
         if (intent.getAction().equals(RecordDBService.RecordDBServiceAction)) {
-            sendMsgToView(context, bundle);
+            send(context, bundle);
         }
     }
 
-    private void sendMsgToView(Context context, @NonNull Bundle bundle) {
-        AppLog.info("Called sendMsgToView.");
-
+    private void send(Context context, @NonNull Bundle bundle) {
 
         if (bundle.containsKey(RecordDBService.RECORD_DB_SERVICE_DB)) {
             int db = bundle.getInt(RecordDBService.RECORD_DB_SERVICE_DB, -1);
@@ -75,6 +76,22 @@ public class RecordDBReceiver extends BroadcastReceiver {
             int averageDb = bundle.getInt(RecordDBService.RECORD_DB_SERVICE_AVERAGE_DB);
             Intent mIntent = new Intent(RecordDBReceiver.ACTION);
             mIntent.putExtra(RecordDBReceiver.RECORD_DB_RECEIVER_AVERAGE_DB, averageDb);
+            context.sendBroadcast(mIntent);
+        }
+
+        if (bundle.containsKey(RecordDBService.RECORD_DB_SERVICE_UPLOAD_SUCCEED)) {
+            boolean isSucceed = bundle.getBoolean(RecordDBService.RECORD_DB_SERVICE_UPLOAD_SUCCEED);
+            Intent mIntent = new Intent(RecordDBReceiver.ACTION);
+            mIntent.putExtra(RecordDBReceiver.RECORD_DB_RECEIVER_UPLOAD_SUCCEED, isSucceed);
+            context.sendBroadcast(mIntent);
+        }
+
+
+        if (bundle.containsKey(RecordDBReceiver.RECORD_DB_UPLOAD_DATA)) {
+            AppLog.info("Called RECORD_DB_UPLOAD_DATA.");
+            boolean b = bundle.getBoolean(RecordDBReceiver.RECORD_DB_UPLOAD_DATA);
+            Intent mIntent = new Intent(RecordDBReceiver.ACTION);
+            mIntent.putExtra(RecordDBReceiver.RECORD_DB_UPLOAD_DATA, b);
             context.sendBroadcast(mIntent);
         }
 

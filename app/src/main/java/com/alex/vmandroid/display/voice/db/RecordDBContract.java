@@ -59,6 +59,12 @@ public class RecordDBContract {
          */
         void getMaxDB(int max);
 
+        /**
+         * 是否上传成功
+         * @param b 成功为true
+         */
+        void isUploadSucceed(boolean b);
+
     }
 
     interface View extends BaseContract.BaseView<RecordDBContract.Presenter> {
@@ -112,8 +118,12 @@ public class RecordDBContract {
         /**
          * 关闭记录服务
          */
-        void stopService();
+        void uploadAndStopService();
 
+        void showProgressDialog();
 
+        void closeProgressDialog();
+
+        void showToast(int i);
     }
 }

@@ -54,6 +54,7 @@
     <string name="input_is_empty">输入为空</string>
     <string name="no_result">查无数据</string>
     <string name="loading">正在加载…</string>
+    <string name="uploading">正在上传…</string>
     <string name="inquire_weather">查询天气</string>
     <string name="double_minus">--</string>
     <string name="initial_time">00:00:00</string>
@@ -65,4 +66,6 @@
     <string name="login_password_wrong">密码错误</string>
     <string name="login_account_no_exit">用户名不存在</string>
     <string name="unknown_error">发生未知错误</string>
+    <string name="upload_failed">上传失败</string>
+    <string name="upload_succeed">上传成功</string>
 </resources>

@@ -53,6 +53,10 @@ public class TimeMeter implements Runnable {
         mThread = null;
     }
 
+    public String getTime() {
+        return (mHour >= 10 ? mHour : "0" + mHour) + ":" + (mMinter >= 10 ? mMinter : "0" + mMinter) + ":" + (mSecond >= 10 ? mSecond : "0" + mSecond);
+    }
+
     @Override
     public void run() {
         while (isTimeRecord) {
@@ -76,6 +80,7 @@ public class TimeMeter implements Runnable {
             }
         }
     }
+
 
     public interface CallBack {
         void getTime(String time);

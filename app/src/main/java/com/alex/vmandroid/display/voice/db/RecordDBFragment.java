@@ -15,6 +15,7 @@
  */
 package com.alex.vmandroid.display.voice.db;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
@@ -53,6 +55,8 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
     private ListView mListView;
 
     private MessageReceiver mReceiver;
+
+    private ProgressDialog mProgressDialog;
 
     public RecordDBFragment() {
         new RecordDBPresenter(this);
@@ -183,9 +187,42 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
      * 关闭记录服务
      */
     @Override
-    public void stopService() {
-        Intent intent = new Intent(getContext(), RecordDBService.class);
-        getContext().stopService(intent);
+    public void uploadAndStopService() {
+        Intent intent = new Intent(RecordDBService.RecordDBServiceAction);
+        intent.putExtra(RecordDBReceiver.RECORD_DB_UPLOAD_DATA, true);
+        getActivity().sendBroadcast(intent);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setMessage(getResources().getString(R.string.uploading));
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        mProgressDialog.show();
+    }
+
+    @Override
+    public void closeProgressDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showToast(int i) {
+        Toast.makeText(getActivity(), i, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 获取上下文内容
+     *
+     * @return 上下文
+     */
+    @Override
+    public Context getViewContext() {
+        return getContext();
     }
 
     private class MessageReceiver extends BroadcastReceiver {
@@ -209,17 +246,11 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
                     int average = intent.getIntExtra(RecordDBReceiver.RECORD_DB_RECEIVER_AVERAGE_DB, -1);
                     mPresenter.getAverageDB(average);
                 }
+                if (intent.getExtras().containsKey(RecordDBReceiver.RECORD_DB_RECEIVER_UPLOAD_SUCCEED)) {
+                    //boolean isSucceed = intent.getBooleanExtra(RecordDBReceiver.RECORD_DB_RECEIVER_UPLOAD_SUCCEED, false);
+                    mPresenter.isUploadSucceed(intent.getBooleanExtra(RecordDBReceiver.RECORD_DB_RECEIVER_UPLOAD_SUCCEED, false));
+                }
             }
         }
-    }
-
-    /**
-     * 获取上下文内容
-     *
-     * @return 上下文
-     */
-    @Override
-    public Context getViewContext() {
-        return getContext();
     }
 }

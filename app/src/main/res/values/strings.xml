@@ -54,6 +54,7 @@
     <string name="input_is_empty">Input is empty</string>
     <string name="no_result">No Result</string>
     <string name="loading">Loading…</string>
+    <string name="uploading">Uploading…</string>
     <string name="inquire_weather">Inquire Weather</string>
     <string name="double_minus">--</string>
     <string name="initial_time">00:00:00</string>
@@ -65,4 +66,6 @@
     <string name="login_password_wrong">PASSWORD WRONG</string>
     <string name="login_account_no_exit">ACCOUNT NO EXIT</string>
     <string name="unknown_error">UNKNOWN ERROR</string>
+    <string name="upload_succeed">UPLOAD SUCCEED</string>
+    <string name="upload_failed">UPLOAD FAILED</string>
 </resources>

@@ -17,7 +17,6 @@ package com.alex.businesses;
 
 import android.support.annotation.NonNull;
 
-import com.alex.utils.AppLog;
 import com.alex.utils.EncapsulateParseJson;
 import com.alex.utils.URLs;
 import com.alex.vmandroid.entities.RecordDB;
@@ -36,15 +35,15 @@ import okhttp3.Response;
 /**
  * 记录噪声量并上传
  */
-public class UploadRecordDB {
+public class UploadRecordDBBiz {
 
-    public static final String TAG = UploadRecordDB.class.getName();
+    public static final String TAG = UploadRecordDBBiz.class.getName();
 
     public static void commit(List<RecordDB> recordDBList, int usrId, int times, @NonNull final Listener listener) {
 
         UploadData uploadData = new UploadData();
         uploadData.setRecordList(recordDBList);
-        uploadData.setUserID(usrId);
+        uploadData.setUserId(usrId);
         uploadData.setTimes(times);
 
         String json = EncapsulateParseJson.encapsulate(uploadData);
@@ -66,7 +65,19 @@ public class UploadRecordDB {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                listener.succeed();
+                // 获取返回的json数据
+                final String json = response.body().string();
+
+                Return back = EncapsulateParseJson.parse(Return.class, json);
+
+                if (back != null) {
+                    if (back.isSucceed()) {
+                        listener.succeed();
+                    } else {
+                        listener.failure();
+                    }
+                }
+
             }
         });
     }
@@ -77,26 +88,39 @@ public class UploadRecordDB {
         void failure();
     }
 
-    private static class UploadData {
-        private int userID;
 
-        private int times;
-        
-        private List<RecordDB> recordList;
+    private static class Return {
+        private boolean isSucceed;
 
-        public int getUserID() {
-            return userID;
+        private boolean isSucceed() {
+            return isSucceed;
         }
 
-        private void setUserID(int userID) {
-            this.userID = userID;
+        public void setSucceed(boolean succeed) {
+            isSucceed = succeed;
+        }
+    }
+
+    private static class UploadData {
+        private int userId;
+
+        private int times;
+
+        private List<RecordDB> recordList;
+
+        public int getUserId() {
+            return userId;
+        }
+
+        private void setUserId(int userId) {
+            this.userId = userId;
         }
 
         public int getTimes() {
             return times;
         }
 
-        public void setTimes(int times) {
+        private void setTimes(int times) {
             this.times = times;
         }
 
