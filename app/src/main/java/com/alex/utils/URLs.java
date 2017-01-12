@@ -33,4 +33,9 @@ public class URLs {
      * 上传噪声记录的地址
      */
     public static final String URL_RECORD_DB = SERVER_ADDRESS + "Android_RecordDB";
+
+    /**
+     * 获取基础信息的地址
+     */
+    public static final String URL_GET_BASE_INFO = SERVER_ADDRESS + "Android_GetBaseInfo";
 }

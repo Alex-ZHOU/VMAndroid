@@ -58,7 +58,7 @@ public class Login {
         /**
          * 用户id号
          */
-        private int userId;
+        private int UserId;
 
         public String getUserName() {
             return UserName;
@@ -77,11 +77,11 @@ public class Login {
         }
 
         public int getUserId() {
-            return userId;
+            return UserId;
         }
 
         public void setUserId(int userId) {
-            this.userId = userId;
+            this.UserId = userId;
         }
 
     }

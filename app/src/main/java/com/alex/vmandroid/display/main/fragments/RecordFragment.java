@@ -60,6 +60,14 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
 
     private MainContract.MainPresenter mPresenter;
 
+    private TextView mRecordMinterTextView;
+
+    private TextView mRecordTimesTextView;
+
+    private TextView mAverageDbTextView;
+
+    private TextView mMaxMinTextView;
+
     private TextView mRealTimeNoiseTextView;
 
     private MapView mapView;
@@ -127,6 +135,14 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
         // 标题栏记录按钮
         ImageView recordBeginImageView = (ImageView) view.findViewById(R.id.main_record_title_bar_record_begin_iv);
         recordBeginImageView.setOnClickListener(this);
+
+        mRecordMinterTextView = (TextView) view.findViewById(R.id.main_record_minutes_tv);
+
+        mRecordTimesTextView = (TextView) view.findViewById(R.id.main_record_record_times_tv);
+
+        mAverageDbTextView = (TextView) view.findViewById(R.id.main_record_average_tv);
+
+        mMaxMinTextView = (TextView) view.findViewById(R.id.main_record_max_min_tv);
 
         mRealTimeNoiseTextView = (TextView) view.findViewById(R.id.main_record_real_db_tv);
 
@@ -196,7 +212,48 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
     @Override
     public void showHistoryActivity() {
         Log.i(TAG, "showHistoryActivity");
+        // FIXME: 10/01/2017
         mAMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_ROTATE);
+    }
+
+    /**
+     * 设置记录的总分钟数
+     *
+     * @param str 分钟数
+     */
+    @Override
+    public void setRecordMinter(String str) {
+        mRecordMinterTextView.setText(str);
+    }
+
+    /**
+     * 设置记录的次数
+     *
+     * @param str 记录的次数
+     */
+    @Override
+    public void setRecordTimes(String str) {
+        mRecordTimesTextView.setText(str);
+    }
+
+    /**
+     * 设置平均数
+     *
+     * @param str 平均数
+     */
+    @Override
+    public void setAverageDb(String str) {
+        mAverageDbTextView.setText(str);
+    }
+
+    /**
+     * 设置最大最小值
+     *
+     * @param str 最大最小值
+     */
+    @Override
+    public void setMaxMin(String str) {
+        mMaxMinTextView.setText(str);
     }
 
     @Override
@@ -210,10 +267,8 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
      * @param d 实时噪声数值
      */
     @Override
-    public void updateRealTimeNoise(double d) {
-
+    public void updateRealTimeNoise(int d) {
         mRealTimeNoiseTextView.setText(String.valueOf(d));
-
     }
 
     /**

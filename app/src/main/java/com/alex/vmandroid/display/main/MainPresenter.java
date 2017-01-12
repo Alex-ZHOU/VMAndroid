@@ -20,12 +20,14 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import com.alex.businesses.GetBaseInfoBiz;
 import com.alex.businesses.LoginBiz;
 import com.alex.utils.AppLog;
 import com.alex.utils.ServiceCheck;
 import com.alex.vmandroid.display.voice.AudioRecordDemo;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.databases.UserInfo;
+import com.alex.vmandroid.entities.BaseInfo;
 import com.alex.vmandroid.entities.Login;
 import com.amap.api.services.weather.LocalWeatherForecastResult;
 import com.amap.api.services.weather.LocalWeatherLive;
@@ -74,7 +76,7 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
 
     @Override
     public void start() {
-        Log.d(TAG, "start");
+        AppLog.debug(TAG, "start");
     }
 
     @Override
@@ -84,7 +86,7 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
 
     @Override
     public void initMainView(MainContract.MainView mainView) {
-        Log.d(TAG, "initMainView");
+        AppLog.debug(TAG, "initMainView");
         mMainView = mainView;
         mMainView.setPresenter(this);
     }
@@ -100,9 +102,36 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
 
     @Override
     public void startRecord(Context context) {
+        new GetBaseInfoBiz().get(new GetBaseInfoBiz.Listener() {
+            @Override
+            public void succeed(final BaseInfo baseInfo) {
+                UserInfo.putString(mContext,"Nickname",baseInfo.getNickname());
+                UserInfo.putUserName(mContext,baseInfo.getUsername());
+                UserInfo.putInt(mContext,"AverageDb",baseInfo.getAverageDb());
+                UserInfo.putInt(mContext,"MaxDb",baseInfo.getMaxDb());
+                UserInfo.putInt(mContext,"MinDb",baseInfo.getMinDb());
+                UserInfo.putInt(mContext,"RecordTimes",baseInfo.getRecordTimes());
+                UserInfo.putInt(mContext,"RecordMinter",(int)baseInfo.getRecordMinter());
+                handle.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRecordView.setRecordMinter(String.valueOf((int)baseInfo.getRecordMinter()));
+                        mRecordView.setRecordTimes(String.valueOf(baseInfo.getRecordTimes()));
+                        mRecordView.setAverageDb(String.valueOf(baseInfo.getAverageDb()));
+                        mRecordView.setMaxMin(baseInfo.getMaxDb()+"/"+baseInfo.getMinDb());
+                    }
+                });
+
+            }
+
+            @Override
+            public void failed() {
+
+            }
+        }, UserInfo.getUsrId(mContext));
         recordDemo = new AudioRecordDemo(this);
         if (ServiceCheck.isServiceWork(mContext, RecordDBServiceName)) {
-            Log.i(TAG, "startRecord: service is running");
+            AppLog.info(TAG, "startRecord: service is running");
         } else {
             recordDemo.getNoiseLevel();
         }
@@ -294,6 +323,7 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
      */
     @Override
     public void onWeatherForecastSearched(LocalWeatherForecastResult localWeatherForecastResult, int i) {
+
     }
 
 
@@ -303,7 +333,7 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
         handle.post(new Runnable() {
             @Override
             public void run() {
-                mRecordView.updateRealTimeNoise(value);
+                mRecordView.updateRealTimeNoise((int)value);
             }
         });
 

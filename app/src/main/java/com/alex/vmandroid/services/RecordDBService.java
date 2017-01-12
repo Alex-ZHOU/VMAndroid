@@ -30,6 +30,7 @@ import com.alex.businesses.UploadRecordDBBiz;
 import com.alex.utils.AppLog;
 import com.alex.utils.TimeMeter;
 import com.alex.vmandroid.R;
+import com.alex.vmandroid.databases.UserInfo;
 import com.alex.vmandroid.display.voice.RecordDBTool;
 import com.alex.vmandroid.display.voice.db.RecordDBActivity;
 import com.alex.vmandroid.entities.RecordDB;
@@ -117,7 +118,7 @@ public class RecordDBService extends Service implements AMapLocationListener {
             intent.putExtra(RecordDBService.RECORD_DB_SERVICE_DB, db);
             sendBroadcast(intent);
 
-            DateFormat df = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
             String time = df.format(new Date());
             mRecordDBTimes++;
             mTotalDB += db;
@@ -263,7 +264,7 @@ public class RecordDBService extends Service implements AMapLocationListener {
         mLocationClient.onDestroy();
 
 
-        UploadRecordDBBiz.commit(recordDBList, 1, 1, new UploadRecordDBBiz.Listener() {
+        UploadRecordDBBiz.commit(recordDBList, UserInfo.getUsrId(getApplicationContext()), UserInfo.getInt(this,"RecordTimes"), new UploadRecordDBBiz.Listener() {
             @Override
             public void succeed() {
                 Intent intent = new Intent(RecordDBService.RecordDBServiceAction);

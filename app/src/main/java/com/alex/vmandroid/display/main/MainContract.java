@@ -71,6 +71,34 @@ public class MainContract {
         void showHistoryActivity();
 
         /**
+         * 设置记录的总分钟数
+         *
+         * @param str 分钟数
+         */
+        void setRecordMinter(String str);
+
+        /**
+         * 设置记录的次数
+         *
+         * @param str 记录的次数
+         */
+        void setRecordTimes(String str);
+
+        /**
+         * 设置平均数
+         *
+         * @param str 平均数
+         */
+        void setAverageDb(String str);
+
+        /**
+         * 设置最大最小值
+         *
+         * @param str 最大最小值
+         */
+        void setMaxMin(String str);
+
+        /**
          * 设置天气显示
          *
          * @param str 天气信息
@@ -82,7 +110,7 @@ public class MainContract {
          *
          * @param d 实时噪声数值
          */
-        void updateRealTimeNoise(double d);
+        void updateRealTimeNoise(int d);
 
         /**
          * 显示详细当地天气信息

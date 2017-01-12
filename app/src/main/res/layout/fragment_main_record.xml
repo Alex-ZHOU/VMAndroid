@@ -72,7 +72,8 @@
                 android:id="@+id/main_record_total_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="@drawable/item_click_selector"
+                android:clickable="true"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin">
@@ -81,8 +82,7 @@
                 <RelativeLayout
 
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/item_click_selector">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="100dp"

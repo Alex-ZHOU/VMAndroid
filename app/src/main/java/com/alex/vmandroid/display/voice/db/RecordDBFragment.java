@@ -38,8 +38,6 @@ import com.alex.vmandroid.services.RecordDBService;
 
 public class RecordDBFragment extends BaseFragment implements View.OnClickListener, RecordDBContract.View {
 
-    private final String TAG = Base_TAG;
-
     private RecordDBContract.Presenter mPresenter;
 
     private TextView mDBTextView;
