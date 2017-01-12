@@ -154,12 +154,12 @@
         android:layout_marginStart="@dimen/activity_margin"
         android:layout_weight="2">
 
-        <ListView
-            android:id="@+id/record_db_fragment_info_lv"
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/record_db_fragment_info_lc"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </ListView>
+        </com.github.mikephil.charting.charts.LineChart>
 
     </LinearLayout>
 

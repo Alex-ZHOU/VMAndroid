@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.vmandroid.display.history;
+package com.alex.vmandroid.display.exhibition.history;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.alex.style.formatter.XAxisValueFormatter;
 import com.alex.vmandroid.R;
+import com.alex.vmandroid.base.BaseActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HistoryActivity extends AppCompatActivity implements OnChartValueSelectedListener {
+public class HistoryActivity extends BaseActivity implements OnChartValueSelectedListener {
 
     private BarChart barchart;
 
@@ -100,7 +100,7 @@ public class HistoryActivity extends AppCompatActivity implements OnChartValueSe
 
 
         barchart.animateY(1000);//动画
-        barchart.setDescription("");// 取消描述
+        //barchart.setDescription("");// 取消描述
         barchart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_CENTER);//设置注解的位置在左上方
         barchart.getAxisLeft().setAxisMinValue(0.0f);//设置Y轴显示最小值，不然0下面会有空隙
         barchart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);//设置X轴的位置

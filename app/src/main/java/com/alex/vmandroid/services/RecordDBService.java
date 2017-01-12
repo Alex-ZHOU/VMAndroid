@@ -277,10 +277,14 @@ public class RecordDBService extends Service implements AMapLocationListener {
 
             @Override
             public void failure() {
+                // TODO 写入缓存
+
                 Intent intent = new Intent(RecordDBService.RecordDBServiceAction);
                 intent.putExtra(RecordDBService.RECORD_DB_SERVICE_UPLOAD_SUCCEED, false);
                 sendBroadcast(intent);
-                // TODO 写入缓存
+                // 上传失败后完成写入缓冲也需要把服务关掉
+                Intent intent2 = new Intent(getApplicationContext(), RecordDBService.class);
+                stopService(intent2);
             }
         });
     }

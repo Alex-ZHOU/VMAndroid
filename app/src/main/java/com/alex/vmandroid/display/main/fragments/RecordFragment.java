@@ -32,8 +32,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.alex.utils.AppLog;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
+import com.alex.vmandroid.display.exhibition.history.HistoryActivity;
 import com.alex.vmandroid.display.main.MainContract;
 import com.alex.vmandroid.display.voice.db.RecordDBActivity;
 import com.alex.vmandroid.display.weather.location.LocationWeatherActivity;
@@ -201,7 +203,7 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
      */
     @Override
     public void showRecordDBActivity() {
-        Log.i(TAG, "showRecordDBActivity");
+        AppLog.info(TAG, "showRecordDBActivity");
         Intent intent = new Intent(getActivity(), RecordDBActivity.class);
         startActivity(intent);
     }
@@ -211,9 +213,10 @@ public class RecordFragment extends BaseFragment implements MainContract.RecordV
      */
     @Override
     public void showHistoryActivity() {
-        Log.i(TAG, "showHistoryActivity");
-        // FIXME: 10/01/2017
-        mAMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_ROTATE);
+        AppLog.info(TAG, "showHistoryActivity");
+        Intent intent = new Intent(getActivity(), HistoryActivity.class);
+        startActivity(intent);
+        //mAMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_ROTATE);
     }
 
     /**

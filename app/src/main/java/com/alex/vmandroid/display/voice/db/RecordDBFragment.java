@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,16 +28,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
+import com.alex.vmandroid.databases.UserInfo;
 import com.alex.vmandroid.receivers.RecordDBReceiver;
 import com.alex.vmandroid.services.RecordDBService;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
-public class RecordDBFragment extends BaseFragment implements View.OnClickListener, RecordDBContract.View {
+public class RecordDBFragment extends BaseFragment implements View.OnClickListener, RecordDBContract.View,OnChartValueSelectedListener {
 
     private RecordDBContract.Presenter mPresenter;
 
@@ -50,7 +62,7 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
 
     private Button mBtn;
 
-    private ListView mListView;
+    private LineChart mLineChart;
 
     private MessageReceiver mReceiver;
 
@@ -89,8 +101,63 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
         mBtn = (Button) view.findViewById(R.id.record_db_fragment_switch_btn);
         mBtn.setOnClickListener(this);
 
-        mListView = (ListView) view.findViewById(R.id.record_db_fragment_info_lv);
+        mLineChart = (LineChart) view.findViewById(R.id.record_db_fragment_info_lc);
+        mLineChart.setOnChartValueSelectedListener(this);
+        // 设置表描述为不可见
+        mLineChart.getDescription().setEnabled(false);
+        // 设置表描述可见，颜色值以及显示的文本
+        // mLineChart.getDescription().setEnabled(true);
+        // mLineChart.getDescription().setText(getString(R.string.db));
+        // mLineChart.getDescription().setTextColor(Color.WHITE);
+        // enable touch gestures
+        mLineChart.setTouchEnabled(true);
+        // enable scaling and dragging
+        mLineChart.setDragEnabled(true);
+        mLineChart.setScaleEnabled(true);
+        mLineChart.setDrawGridBackground(false);
+        // if disabled, scaling can be done on x- and y-axis separately
+        mLineChart.setPinchZoom(true);
+        // set an alternative background color
+        mLineChart.setBackgroundColor(Color.parseColor("#6A1B9A") );
+        LineData data = new LineData();
+        data.setValueTextColor(Color.WHITE);
 
+        // add empty data
+        mLineChart.setData(data);
+
+        // get the legend (only possible after setting data)
+        Legend l = mLineChart.getLegend();
+
+        // modify the legend ...
+        l.setForm(Legend.LegendForm.LINE);
+        //l.setTypeface(mTfLight);
+        l.setTextColor(Color.WHITE);
+
+        // 获得图表的x轴
+        XAxis xAxis = mLineChart.getXAxis();
+        // 设置x轴的文本颜色为白色
+        xAxis.setTextColor(Color.WHITE);
+        // 不设置纵向的网格线，即与x轴垂直的线
+        xAxis.setDrawGridLines(false);
+        // 避免图表剪辑的边缘是屏幕
+        xAxis.setAvoidFirstLastClipping(true);
+        // 设置x轴可见
+        xAxis.setEnabled(true);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        YAxis leftYAxis = mLineChart.getAxisLeft();
+        leftYAxis.setTextColor(Color.WHITE);
+        leftYAxis.setAxisMaximum(100f);
+        leftYAxis.setAxisMinimum(0f);
+        leftYAxis.setDrawGridLines(true);
+        // 获取右y轴并将其设置为可见
+        YAxis rightYAxis  = mLineChart.getAxisRight();
+        rightYAxis.setEnabled(true);
+        rightYAxis.setDrawGridLines(false);
+        // 设置与背景颜色相同使文本不可见
+        rightYAxis.setTextColor(Color.parseColor("#6A1B9A"));
+
+        addEntry(UserInfo.getInt(getContext(),"AverageDb"));
         return view;
     }
 
@@ -135,6 +202,7 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
     public void setDBTextView(int dbOrId) {
         if (dbOrId < 120) {
             mDBTextView.setText(String.valueOf(dbOrId));
+            addEntry(dbOrId);
         } else {
             mDBTextView.setText(dbOrId);
         }
@@ -222,6 +290,73 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
     public Context getViewContext() {
         return getContext();
     }
+
+    /**
+     * Called when a value has been selected inside the chart.
+     *
+     * @param e The selected Entry
+     * @param h The corresponding highlight object that contains information
+     */
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+
+    }
+
+    /**
+     * Called when nothing has been selected or an "un-select" has been made.
+     */
+    @Override
+    public void onNothingSelected() {
+
+    }
+
+    private void addEntry(int db) {
+
+        LineData data = mLineChart.getData();
+
+        if (data != null) {
+
+            ILineDataSet set = data.getDataSetByIndex(0);
+            // set.addEntry(...); // can be called as well
+
+            if (set == null) {
+                set = createSet();
+                data.addDataSet(set);
+            }
+
+            data.addEntry(new Entry(set.getEntryCount(), db), 0);
+            data.notifyDataChanged();
+
+            // let the chart know it's data has changed
+            mLineChart.notifyDataSetChanged();
+
+            // limit the number of visible entries
+            mLineChart.setVisibleXRangeMaximum(60);
+            //mLineChart.setVisibleYRange(30, AxisDependency.LEFT);
+
+            // move to the latest entry
+            mLineChart.moveViewToX(data.getEntryCount());
+
+        }
+    }
+
+    private LineDataSet createSet() {
+
+        LineDataSet set = new LineDataSet(null, getString(R.string.app_name));
+        set.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set.setColor(ColorTemplate.getHoloBlue());
+        set.setCircleColor(Color.WHITE);
+        set.setLineWidth(1f);
+        set.setCircleRadius(1.5f);
+        set.setFillAlpha(65);
+        set.setFillColor(ColorTemplate.getHoloBlue());
+        set.setHighLightColor(Color.rgb(244, 117, 117));
+        set.setValueTextColor(Color.WHITE);
+        set.setValueTextSize(9f);
+        set.setDrawValues(false);
+        return set;
+    }
+
 
     private class MessageReceiver extends BroadcastReceiver {
 

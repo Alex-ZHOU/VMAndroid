@@ -18,9 +18,9 @@ package com.alex.style.formatter;
 import android.util.Log;
 
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.formatter.AxisValueFormatter;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-public class XAxisValueFormatter implements AxisValueFormatter {
+public class XAxisValueFormatter implements IAxisValueFormatter {
 
     private final String TAG = XAxisValueFormatter.class.getName();
 
@@ -62,13 +62,13 @@ public class XAxisValueFormatter implements AxisValueFormatter {
         return year + "年" + month + "月";
     }
 
-    /**
-     * Returns the number of decimal digits this formatter uses or -1, if unspecified.
-     *
-     * @return 0
-     */
-    @Override
-    public int getDecimalDigits() {
-        return 0;
-    }
+//    /**
+//     * Returns the number of decimal digits this formatter uses or -1, if unspecified.
+//     *
+//     * @return 0
+//     */
+//    @Override
+//    public int getDecimalDigits() {
+//        return 0;
+//    }
 }

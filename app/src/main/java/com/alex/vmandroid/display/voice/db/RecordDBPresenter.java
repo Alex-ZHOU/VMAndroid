@@ -21,6 +21,9 @@ import android.util.Log;
 import com.alex.utils.ServiceCheck;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.services.RecordDBService;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 public class RecordDBPresenter implements RecordDBContract.Presenter {
 
@@ -113,6 +116,9 @@ public class RecordDBPresenter implements RecordDBContract.Presenter {
     public void getMaxDB(int max) {
         mView.setMaxTextView(String.valueOf(max));
     }
+
+
+
 
     /**
      * 是否上传成功
