@@ -15,7 +15,27 @@
  */
 package com.alex.vmandroid.display.exhibition.analysis;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
+import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseActivity;
 
-public class AnalysisActivity extends BaseActivity {
+public class AnalysisActivity extends BaseActivity{
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_analysis);
+
+        AnalysisFragment fragment = AnalysisFragment.newInstance();
+
+        new AnalysisPresenter(fragment, getApplicationContext());
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.analysis_frame_layout, fragment);
+        transaction.commit();
+    }
 }

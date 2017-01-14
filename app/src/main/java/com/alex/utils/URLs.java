@@ -38,4 +38,6 @@ public class URLs {
      * 获取基础信息的地址
      */
     public static final String URL_GET_BASE_INFO = SERVER_ADDRESS + "Android_GetBaseInfo";
+
+    public static final String URL_Analysis = SERVER_ADDRESS + "Android_Analysis";
 }

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2017 Alex_ZHOU
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#606582">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/analysis_fragment_total_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/the_total_records"
+                    android:textColor="@color/colorWhile"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/icon"
+                    android:src="@drawable/forward_arrow_gray"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/analysis_fragment_minutes_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:text="@string/zero"
+                    android:textColor="@color/colorWhile"
+                    android:textSize="70sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/analysis_fragment_minutes_tv"
+                    android:layout_toEndOf="@id/analysis_fragment_minutes_tv"
+                    android:text="@string/minutes"
+                    android:textColor="@color/colorWhile"/>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/analysis_fragment_record_times"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/record"
+                        android:textColor="@color/colorWhile"/>
+
+                    <TextView
+                        android:id="@+id/analysis_fragment_record_times_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/analysis_fragment_record_times"
+                        android:text="@string/zero"
+                        android:textColor="@color/colorWhile"
+                        android:textSize="33sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/analysis_fragment_record_times_tv"
+                        android:layout_toEndOf="@id/analysis_fragment_record_times_tv"
+                        android:text="@string/times"
+                        android:textColor="@color/colorWhile"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+
+                    <TextView
+                        android:id="@+id/analysis_fragment_average"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/average"
+                        android:textColor="@color/colorWhile"/>
+
+                    <TextView
+                        android:id="@+id/analysis_fragment_average_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/analysis_fragment_average"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/zero"
+                        android:textColor="@color/colorWhile"
+                        android:textSize="33sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/analysis_fragment_average_tv"
+                        android:layout_toEndOf="@id/analysis_fragment_average_tv"
+                        android:text="@string/db"
+                        android:textColor="@color/colorWhile"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/analysis_fragment_max_min"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/max_min"
+                        android:textColor="@color/colorWhile"/>
+
+                    <TextView
+                        android:id="@+id/analysis_fragment_max_min_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/analysis_fragment_max_min"
+                        android:layout_centerHorizontal="true"
+                        android:layout_toStartOf="@+id/analysis_fragment_max_min_unit"
+                        android:text="@string/zero"
+                        android:textColor="@color/colorWhile"
+                        android:textSize="33sp"/>
+
+                    <TextView
+                        android:id="@id/analysis_fragment_max_min_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/analysis_fragment_max_min_tv"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/db"
+                        android:textColor="@color/colorWhile"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/analysis_fragment_rc"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"/>
+
+        <LinearLayout
+            android:id="@+id/analysis_fragment_analysis_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:id="@+id/analysis_fragment_20_times_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhile"/>
+
+            <TextView
+                android:id="@+id/analysis_fragment_40_times_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhile"/>
+
+            <TextView
+                android:id="@+id/analysis_fragment_60_times_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhile"/>
+
+            <TextView
+                android:id="@+id/analysis_fragment_70_times_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhile"/>
+
+            <TextView
+                android:id="@+id/analysis_fragment_90_times_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhile"/>
+
+            <TextView
+                android:id="@+id/analysis_fragment_100_times_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhile"/>
+
+            <TextView
+                android:id="@+id/analysis_fragment_120_times_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhile"/>
+
+            <TextView
+                android:id="@+id/analysis_fragment_120_up_times_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhile"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -90,6 +90,9 @@
             android:theme="@style/AppTheme"/>
 
         <activity
+            android:name=".display.exhibition.analysis.AnalysisActivity"/>
+
+        <activity
             android:name=".display.exhibition.history.HistoryActivity"/>
 
 

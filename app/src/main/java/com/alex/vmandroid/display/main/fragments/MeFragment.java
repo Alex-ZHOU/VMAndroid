@@ -16,7 +16,6 @@
 
 package com.alex.vmandroid.display.main.fragments;
 
-import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.alex.vmandroid.display.exhibition.analysis.AnalysisActivity;
 import com.alex.vmandroid.display.gadget.GadgetActivity;
 import com.alex.vmandroid.display.exhibition.history.HistoryActivity;
 import com.alex.vmandroid.R;
@@ -38,7 +38,6 @@ import com.alex.vmandroid.display.map.MapSettingActivity;
 import com.alex.vmandroid.display.map.OfflineMapActivity;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
-import pub.devrel.easypermissions.EasyPermissions;
 
 import static com.alex.utils.PermissionRequest.MICROPHONE_PERM_RECORD_AUDIO;
 
@@ -130,12 +129,14 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
     @AfterPermissionGranted(MICROPHONE_PERM_RECORD_AUDIO)
     @Override
     public void showAnalysisActivity() {
-        if (EasyPermissions.hasPermissions(getContext(), Manifest.permission.RECORD_AUDIO)) {
-            Log.i(TAG, "microphonePermission");
-        } else {
-            EasyPermissions.requestPermissions(this, "",
-                    MICROPHONE_PERM_RECORD_AUDIO, Manifest.permission.RECORD_AUDIO);
-        }
+//        if (EasyPermissions.hasPermissions(getContext(), Manifest.permission.RECORD_AUDIO)) {
+//            Log.i(TAG, "microphonePermission");
+//        } else {
+//            EasyPermissions.requestPermissions(this, "",
+//                    MICROPHONE_PERM_RECORD_AUDIO, Manifest.permission.RECORD_AUDIO);
+//        }
+        Intent intent = new Intent(getActivity(), AnalysisActivity.class);
+        startActivity(intent);
     }
 
     /**
