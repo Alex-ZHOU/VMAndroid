@@ -25,6 +25,8 @@ import com.alex.vmandroid.base.BaseActivity;
 
 public class AnalysisActivity extends BaseActivity{
 
+    public static final String TAG = AnalysisActivity.class.getName();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,5 +39,10 @@ public class AnalysisActivity extends BaseActivity{
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.analysis_frame_layout, fragment);
         transaction.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

@@ -96,4 +96,6 @@ dependencies {
      * okhttp网络访问库
      */
     compile "com.squareup.okhttp3:okhttp:${okhttp_version}"
+
+    compile 'com.squareup.okio:okio:1.11.0'
 }

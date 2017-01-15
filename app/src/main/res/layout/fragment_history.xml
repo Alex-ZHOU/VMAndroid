@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2016 Alex_ZHOU
+  ~ Copyright 2017 Alex_ZHOU
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -21,33 +21,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        style="@style/MainTitleBarStyle">
+    <!--<com.github.mikephil.charting.charts.BarChart-->
+        <!--android:id="@+id/history_fragment_bc"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="300dp"/>-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/discover"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/main_title_bar_title_size"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/main_loop_advertisement_frame_layout"
+    <ListView
+        android:id="@+id/history_fragment_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-
 </LinearLayout>

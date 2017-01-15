@@ -29,6 +29,7 @@ import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
 import com.alex.vmandroid.display.main.MainContract;
 import com.alex.vmandroid.display.main.fragments.fragments.LoopAdvertisementFragment;
+import com.alex.vmandroid.display.main.fragments.fragments.LoopAdvertisementPresenter;
 
 public class DiscoverFragment extends BaseFragment implements MainContract.DiscoverView {
     public final String TAG = Base_TAG;
@@ -60,6 +61,7 @@ public class DiscoverFragment extends BaseFragment implements MainContract.Disco
         LoopAdvertisementFragment fragment = new LoopAdvertisementFragment();
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        new LoopAdvertisementPresenter(fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.main_loop_advertisement_frame_layout, fragment);
         transaction.commit();

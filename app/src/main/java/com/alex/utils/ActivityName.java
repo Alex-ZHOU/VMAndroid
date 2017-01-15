@@ -16,6 +16,8 @@
 package com.alex.utils;
 
 import com.alex.vmandroid.R;
+import com.alex.vmandroid.display.exhibition.analysis.AnalysisActivity;
+import com.alex.vmandroid.display.exhibition.history.HistoryActivity;
 import com.alex.vmandroid.display.gadget.GadgetActivity;
 import com.alex.vmandroid.display.weather.inquiry.InquiryWeatherActivity;
 import com.alex.vmandroid.display.weather.location.LocationWeatherActivity;
@@ -37,7 +39,15 @@ public class ActivityName {
 
         mName.put(InquiryWeatherActivity.TAG, R.string.inquire_weather);
 
+        /**
+         * 分析标题栏名字
+         */
+        mName.put(AnalysisActivity.TAG, R.string.analysis);
 
+        /**
+         * 历史标题栏名字
+         */
+        mName.put(HistoryActivity.TAG, R.string.history);
     }
 
     public static int getName(String simpleName) {

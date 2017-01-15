@@ -39,5 +39,18 @@ public class URLs {
      */
     public static final String URL_GET_BASE_INFO = SERVER_ADDRESS + "Android_GetBaseInfo";
 
+    /**
+     * 获取服务器分析返回数据的地址
+     */
     public static final String URL_Analysis = SERVER_ADDRESS + "Android_Analysis";
+
+    /**
+     * 获取历史记录信息的地址
+     */
+    public static final String URL_History = SERVER_ADDRESS + "Android_History";
+
+    /**
+     * 获取广告栏的基本信息
+     */
+    public static final String URL_ADVERTISING_COLUMN = SERVER_ADDRESS + "Android_AdvertisingColumn";
 }

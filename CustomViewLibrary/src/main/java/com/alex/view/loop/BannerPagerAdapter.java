@@ -22,6 +22,7 @@ package com.alex.view.loop;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +50,23 @@ public class BannerPagerAdapter extends PagerAdapter {
      */
     public static final int FAKE_BANNER_SIZE = 10000;
 
+    private Listener mListener ;
+
     public BannerPagerAdapter(Context context, List<Integer> pictureList) {
+        Log.i("TAG", "onClick: "+pictureList.size());
         this.mContext = context;
         this.pictureList = pictureList;
+    }
+
+    public void  setListener(Listener listener){
+        mListener = listener;
+    }
+
+    public BannerPagerAdapter(Context context, List<Integer> pictureList,Listener listener) {
+        Log.i("TAG", "onClick: "+pictureList.size());
+        this.mContext = context;
+        this.pictureList = pictureList;
+        mListener = listener;
     }
 
     @Override
@@ -71,6 +86,16 @@ public class BannerPagerAdapter extends PagerAdapter {
         // 获取当前显示位置
         position %= pictureList.size();
         imageView.setImageResource(pictureList.get(position));
+        Log.i("TAG", "onClick: "+position);
+        final  int position1 = position;
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("TAG", "onClick: "+position1);
+                mListener.onItemClick(position1);
+            }
+        });
+
         container.addView(view);
         return view;
     }

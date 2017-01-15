@@ -20,15 +20,15 @@ import android.util.Log;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
-public class XAxisValueFormatter implements IAxisValueFormatter {
+public class HistoryXAxisValueFormatter implements IAxisValueFormatter {
 
-    private final String TAG = XAxisValueFormatter.class.getName();
+    private final String TAG = HistoryXAxisValueFormatter.class.getName();
 
     private int mYear;
 
     private int mMonth;
 
-    public XAxisValueFormatter(int startYear, int startMonth) {
+    public HistoryXAxisValueFormatter(int startYear, int startMonth) {
         mYear = startYear;
         mMonth = startMonth;
     }

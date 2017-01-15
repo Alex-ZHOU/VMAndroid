@@ -15,18 +15,14 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/history_bc"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
-
-    <android.support.v4.widget.Space
+    <FrameLayout
+        android:id="@+id/history_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 </LinearLayout>

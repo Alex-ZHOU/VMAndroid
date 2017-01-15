@@ -15,9 +15,32 @@
  */
 package com.alex.vmandroid.display.main.fragments.fragments;
 
+import com.alex.businesses.AdvertisingColumnBiz;
+import com.alex.vmandroid.entities.AdvertisingColumn;
+
+import java.util.List;
+
 public class LoopAdvertisementPresenter implements LoopAdvertisementContract.Presenter {
+
+    private LoopAdvertisementContract.View mView;
+
+    public LoopAdvertisementPresenter(LoopAdvertisementContract.View view) {
+        mView = view;
+        mView.setPresenter(this);
+    }
+
     @Override
     public void start() {
-        
+        new AdvertisingColumnBiz().getData(new AdvertisingColumnBiz.Listener() {
+            @Override
+            public void succeed(List<AdvertisingColumn> list) {
+
+            }
+
+            @Override
+            public void failed() {
+
+            }
+        });
     }
 }
