@@ -19,6 +19,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 
+import com.alex.utils.AppLog;
+import com.alex.utils.URLs;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -32,6 +35,31 @@ import okhttp3.Response;
  * 下载图片
  */
 public class DownloadPic  {
+
+
+    public void getById(int id,@NonNull final Listener listener){
+
+
+//        OkHttpClient client = new OkHttpClient();
+//
+//        Request request = new Request.Builder().url(url).build();
+//
+//        client.newCall(request).enqueue(new Callback() {
+//
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                InputStream is = response.body().byteStream();
+//                Bitmap bm = BitmapFactory.decodeStream(is);
+//                listener.succeed(bm);
+//            }
+//        });
+        getByUrl(URLs.URL_GET_PIC,listener);
+    }
 
     public void getByUrl(@NonNull String url,@NonNull final Listener listener){
         OkHttpClient client = new OkHttpClient();
@@ -50,6 +78,7 @@ public class DownloadPic  {
                 InputStream is = response.body().byteStream();
                 Bitmap bm = BitmapFactory.decodeStream(is);
                 listener.succeed(bm);
+                AppLog.debug("succeed");
             }
         });
     }

@@ -15,12 +15,12 @@
  */
 package com.alex.vmandroid.display.main.fragments.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,43 +28,22 @@ import android.view.ViewGroup;
 
 import com.alex.view.loop.BannerPagerAdapter;
 import com.alex.view.loop.BannerTimerTask;
-import com.alex.view.loop.IndicatorView;
-import com.alex.view.loop.Listener;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
+import com.alex.vmandroid.display.spread.advertisement.AdvertisementActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
 
 public class LoopAdvertisementFragment extends BaseFragment implements LoopAdvertisementContract.View {
 
-    private final String TAG = Base_TAG;
-
     private LoopAdvertisementContract.Presenter mPresenter;
-
 
     /**
      * 轮播图
      */
     private ViewPager mViewPager;
-//    /**
-//     * 指示器
-//     */
-//    private IndicatorView mIndicatorView;
-    /**
-     * 适配器
-     */
-    private BannerPagerAdapter mBannerPagerAdapter;
-    /**
-     * 图片资源
-     */
-    private List<Integer> pictureList = new ArrayList<>();
-    /**
-     * 当前轮播图位置
-     */
-    private int mBannerPosition;
     /**
      * 自动轮播计时器
      */
@@ -81,15 +60,16 @@ public class LoopAdvertisementFragment extends BaseFragment implements LoopAdver
     /**
      * 轮播图Handler
      */
-    Handler bannerHandler = new Handler(new Handler.Callback() {
+    private Handler bannerHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             // 当用户点击时,不进行轮播
             if (!mIsUserTouched) {
                 // 获取当前的位置
-                mBannerPosition = mViewPager.getCurrentItem();
+                int mBannerPosition = mViewPager.getCurrentItem();
                 // 更换轮播图
-                mBannerPosition = (mBannerPosition + 1) % mBannerPagerAdapter.FAKE_BANNER_SIZE;
+                mBannerPosition = (mBannerPosition + 1) % BannerPagerAdapter.FAKE_BANNER_SIZE;
+                mViewPager.getOffscreenPageLimit();
                 mViewPager.setCurrentItem(mBannerPosition);
             }
             return true;
@@ -113,100 +93,61 @@ public class LoopAdvertisementFragment extends BaseFragment implements LoopAdver
 
         View view = inflater.inflate(R.layout.fragment_main_discover_loop_advertisement, container, false);
 
-        pictureList.add(R.drawable.pic_one);
-        pictureList.add(R.drawable.pic_two);
-        pictureList.add(R.drawable.pic_three);
-        pictureList.add(R.drawable.pic_one);
-        pictureList.add(R.drawable.pic_two);
-        pictureList.add(R.drawable.pic_three);
-
         mViewPager = (ViewPager) view.findViewById(R.id.vp_banner);
-        //mIndicatorView = (IndicatorView) view.findViewById(R.id.idv_banner);
-        mBannerPagerAdapter = new BannerPagerAdapter(getActivity(), pictureList);
-//        mBannerPagerAdapter.setListener(new Listener() {
-//            @Override
-//            public void onItemClick(int i) {
-//                Log.i(TAG, "onItemClick: " + i);
-//            }
-//        });
+
+        return view;
+    }
+
+    @Override
+    public void setViewPagerData(List<Integer> pictureList) {
+        LoopAdvertisementAdapter mBannerPagerAdapter = new LoopAdvertisementAdapter(getActivity(), pictureList);
+
         mViewPager.setAdapter(mBannerPagerAdapter);
-        //mIndicatorView.setViewPager(pictureList.size(), mViewPager);
-        // 设置默认起始位置,使开始可以向左边滑动
-        //mViewPager.setCurrentItem(pictureList.size() * 100);
-        mViewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i(TAG, "onClick: " + mViewPager.getCurrentItem());
-            }
-        });
 
         mViewPager.setOnTouchListener(new View.OnTouchListener() {
-            int flage = 0 ;
+            int flage = 0;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        flage = 0 ;
-                        break ;
+                        flage = 0;
+                        mIsUserTouched = true;
+                        break;
                     case MotionEvent.ACTION_MOVE:
-                        flage = 1 ;
-                        break ;
-                    case  MotionEvent.ACTION_UP :
+                        mIsUserTouched = true;
+                        flage = 1;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        mIsUserTouched = false;
                         if (flage == 0) {
                             int item = mViewPager.getCurrentItem();
-
-                            Log.i(TAG, "onTouch: "+item);
+                            mPresenter.onViewPagerItemClick(item);
                         }
-                        break ;
-
-
+                        break;
                 }
                 return false;
             }
         });
 
-
-
-//        mIndicatorView.setOnPageChangeListener(new IndicatorView.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position1) {
-//                position = position1;
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
-
-
-//        mViewPager.setOnTouchListener(new View.OnTouchListener() {
-//
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                int action = event.getAction();
-//                if (action == MotionEvent.ACTION_DOWN
-//                        || action == MotionEvent.ACTION_MOVE) {
-//                    mIsUserTouched = true;
-//                } else if (action == MotionEvent.ACTION_UP) {
-//                    mIsUserTouched = false;
-//                }
-//                Log.i(TAG, "onTouch: " + position);
-//                return false;
-//            }
-//        });
         startBannerTimer();
-
-
-        return view;
     }
 
-    private int position = 0;
+    /**
+     * 显示广告界面
+     *
+     * @param title           标题信息
+     * @param advertisementId 广告对应id号
+     */
+    @Override
+    public void showAdvertisementActivity(String title, int advertisementId) {
+        Intent intent = new Intent(getActivity(), AdvertisementActivity.class);
+
+        intent.putExtra(LoopAdvertisementContract.ADVERTISEMENT_TITLE, title);
+        intent.putExtra(LoopAdvertisementContract.ADVERTISEMENT_ID, advertisementId);
+
+        startActivity(intent);
+    }
 
     /**
      * 开始轮播

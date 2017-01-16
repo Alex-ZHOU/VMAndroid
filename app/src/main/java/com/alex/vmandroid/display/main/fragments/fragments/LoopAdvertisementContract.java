@@ -17,13 +17,28 @@ package com.alex.vmandroid.display.main.fragments.fragments;
 
 import com.alex.vmandroid.base.BaseContract;
 
+import java.util.List;
+
 public class LoopAdvertisementContract {
 
-    interface Presenter extends BaseContract.BasePresenter {
+    public static final String ADVERTISEMENT_TITLE = "ADVERTISEMENT_TITLE";
 
+    public static final String ADVERTISEMENT_ID = "ADVERTISEMENT_ID";
+
+    interface Presenter extends BaseContract.BasePresenter {
+        void onViewPagerItemClick(int id);
     }
 
     interface View extends BaseContract.BaseView<LoopAdvertisementContract.Presenter> {
+        void setViewPagerData(List<Integer> pictureList);
+
+        /**
+         * 显示广告界面
+         *
+         * @param title 标题信息
+         * @param advertisementId 广告对应id号
+         */
+        void showAdvertisementActivity(String title,int advertisementId);
 
     }
 }

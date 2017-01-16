@@ -27,6 +27,11 @@ public class AdvertisingColumn{
 	 */
 	private int ImageId;
 
+    /**
+     * 广告标题
+     */
+	private String Title;
+
 	public int getAdvertisement_Id() {
 		return Advertisement_Id;
 	}
@@ -42,4 +47,12 @@ public class AdvertisingColumn{
 	public void setImageId(int imageId) {
 		ImageId = imageId;
 	}
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
 }

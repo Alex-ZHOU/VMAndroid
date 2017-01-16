@@ -103,6 +103,9 @@
         <activity
             android:name=".display.voice.tape.SoundRecordingActivity"/>
 
+        <activity
+            android:name=".display.spread.advertisement.AdvertisementActivity"/>
+
         <service
             android:name="com.amap.api.location.APSService">
         </service>

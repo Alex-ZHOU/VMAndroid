@@ -13,8 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.view.loop;
+package com.alex.vmandroid.display.spread.advertisement;
 
-public interface Listener{
-    void onItemClick(int i);
+import com.alex.vmandroid.base.BaseContract;
+
+public class AdvertisementContract {
+
+    interface Presenter extends BaseContract.BasePresenter{
+
+    }
+
+    interface View extends BaseContract.BaseView<Presenter>{
+
+    }
+
 }

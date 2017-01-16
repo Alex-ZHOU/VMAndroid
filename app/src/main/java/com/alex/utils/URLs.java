@@ -53,4 +53,9 @@ public class URLs {
      * 获取广告栏的基本信息
      */
     public static final String URL_ADVERTISING_COLUMN = SERVER_ADDRESS + "Android_AdvertisingColumn";
+
+    /**
+     * 获取图片的地址
+     */
+    public static final String URL_GET_PIC = SERVER_ADDRESS + "Android_GetPic";
 }
