@@ -39,7 +39,7 @@ public class AdvertisementActivity extends BaseActivity {
         mTitle = intent.getStringExtra(LoopAdvertisementContract.ADVERTISEMENT_TITLE);
 
         AdvertisementFragment fragment = AdvertisementFragment.newInstance(advertisementId);
-        new AdvertisementPresenter(fragment);
+        new AdvertisementPresenter(fragment,this);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.advertisement_frame_layout, fragment);

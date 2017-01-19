@@ -105,20 +105,20 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
         new GetBaseInfoBiz().get(new GetBaseInfoBiz.Listener() {
             @Override
             public void succeed(final BaseInfo baseInfo) {
-                UserInfo.putString(mContext,"Nickname",baseInfo.getNickname());
-                UserInfo.putUserName(mContext,baseInfo.getUsername());
-                UserInfo.putInt(mContext,"AverageDb",baseInfo.getAverageDb());
-                UserInfo.putInt(mContext,"MaxDb",baseInfo.getMaxDb());
-                UserInfo.putInt(mContext,"MinDb",baseInfo.getMinDb());
-                UserInfo.putInt(mContext,"RecordTimes",baseInfo.getRecordTimes());
-                UserInfo.putInt(mContext,"RecordMinter",(int)baseInfo.getRecordMinter());
+                UserInfo.putString(mContext, "Nickname", baseInfo.getNickname());
+                UserInfo.putUserName(mContext, baseInfo.getUsername());
+                UserInfo.putInt(mContext, "AverageDb", baseInfo.getAverageDb());
+                UserInfo.putInt(mContext, "MaxDb", baseInfo.getMaxDb());
+                UserInfo.putInt(mContext, "MinDb", baseInfo.getMinDb());
+                UserInfo.putInt(mContext, "RecordTimes", baseInfo.getRecordTimes());
+                UserInfo.putInt(mContext, "RecordMinter", (int) baseInfo.getRecordMinter());
                 handle.post(new Runnable() {
                     @Override
                     public void run() {
-                        mRecordView.setRecordMinter(String.valueOf((int)baseInfo.getRecordMinter()));
+                        mRecordView.setRecordMinter(String.valueOf((int) baseInfo.getRecordMinter()));
                         mRecordView.setRecordTimes(String.valueOf(baseInfo.getRecordTimes()));
                         mRecordView.setAverageDb(String.valueOf(baseInfo.getAverageDb()));
-                        mRecordView.setMaxMin(baseInfo.getMaxDb()+"/"+baseInfo.getMinDb());
+                        mRecordView.setMaxMin(baseInfo.getMaxDb() + "/" + baseInfo.getMinDb());
                     }
                 });
 
@@ -199,31 +199,61 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
                 }
                 break;
             //endregion
-
+            //region : DiscoverFragment 界面的点击事件
             case MainContract.DISCOVER_TAG:
+                switch (id) {
+                    case R.id.main_discover_bar_ll:
+                        break;
+                    case R.id.main_discover_ktv_ll:
+                        break;
+                    case R.id.main_discover_restaurant_ll:
+                        break;
+                    case R.id.main_discover_other_ll:
+                        break;
+                }
                 break;
+            //endregion
+            //region : MeFragment 界面的点击事件
             case MainContract.ME_TAG:
+                switch (id) {
+                    case R.id.main_me_history_ll:
+                        mMeView.showHistoryActivity();
+                        break;
+                    case R.id.main_me_analysis_ll:
+                        mMeView.showAnalysisActivity();
+                        break;
+                    case R.id.main_me_map_setting_ll:
+                        mMeView.showMapSettingActivity();
+                        break;
+                    case R.id.main_me_offline_map_ll:
+                        mMeView.showOfflineMapActivity();
+                        break;
+                    case R.id.main_me_gadget_ll:
+                        mMeView.showGadgetActivity();
+                        break;
+                }
                 break;
+            //endregion
         }
 
         switch (id) {
-            //region : MeFragment 界面的点击事件
-            case R.id.main_me_history_ll:
-                mMeView.showHistoryActivity();
-                break;
-            case R.id.main_me_analysis_ll:
-                mMeView.showAnalysisActivity();
-                break;
-            case R.id.main_me_map_setting_ll:
-                mMeView.showMapSettingActivity();
-                break;
-            case R.id.main_me_offline_map_ll:
-                mMeView.showOfflineMapActivity();
-                break;
-            case R.id.main_me_gadget_ll:
-                mMeView.showGadgetActivity();
-                break;
-            //endregion
+//            //region : MeFragment 界面的点击事件
+//            case R.id.main_me_history_ll:
+//                mMeView.showHistoryActivity();
+//                break;
+//            case R.id.main_me_analysis_ll:
+//                mMeView.showAnalysisActivity();
+//                break;
+//            case R.id.main_me_map_setting_ll:
+//                mMeView.showMapSettingActivity();
+//                break;
+//            case R.id.main_me_offline_map_ll:
+//                mMeView.showOfflineMapActivity();
+//                break;
+//            case R.id.main_me_gadget_ll:
+//                mMeView.showGadgetActivity();
+//                break;
+//            //endregion
             case R.id.main_login_immediate_experience_btn:
                 mUnLoginView.showMainFragment();
                 break;
@@ -262,7 +292,7 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
 
             @Override
             public void onNext(Integer str) {
-                switch (str){
+                switch (str) {
                     case LoginBiz.PASSWORD_WRONG:
                         mLoginView.showToast(mContext.getResources().getString(R.string.login_password_wrong));
                         break;
@@ -333,7 +363,7 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
         handle.post(new Runnable() {
             @Override
             public void run() {
-                mRecordView.updateRealTimeNoise((int)value);
+                mRecordView.updateRealTimeNoise((int) value);
             }
         });
 

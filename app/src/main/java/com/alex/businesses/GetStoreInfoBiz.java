@@ -17,34 +17,32 @@ package com.alex.businesses;
 
 import com.alex.utils.EncapsulateParseJson;
 import com.alex.utils.URLs;
-import com.alex.vmandroid.entities.AdvertisingColumn;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
+import com.alex.vmandroid.entities.StoreInfo;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
-/**
- * 获取主页界面广告栏的信息
- */
-public class AdvertisingColumnBiz {
+public class GetStoreInfoBiz {
 
-    public void getData(final Listener listener) {
+    public void get(int advertisementId, final Listener listener){
 
         OkHttpClient client = new OkHttpClient();
+        RequestBody requestBodyPost = new FormBody.Builder()
+                .add("AdvertisementId", String.valueOf(advertisementId))
+                .build();
+        Request requestPost = new Request.Builder()
+                .url(URLs.URL_GET_STORE_INFO)
+                .post(requestBodyPost)
+                .build();
 
-        Request request = new Request.Builder().url(URLs.URL_ADVERTISING_COLUMN).build();
-
-        client.newCall(request).enqueue(new Callback() {
-
+        client.newCall(requestPost).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 listener.failed();
@@ -52,32 +50,19 @@ public class AdvertisingColumnBiz {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
+                // 获取返回的json数据
                 final String json = response.body().string();
-
-                List<AdvertisingColumn> list  = jsonToArrayList(json,AdvertisingColumn.class);
-
-                listener.succeed(list);
+                StoreInfo baseInfo = EncapsulateParseJson.parse(StoreInfo.class, json);
+                listener.succeed(baseInfo);
             }
         });
 
     }
 
-    private static <T> ArrayList<T> jsonToArrayList(String json, Class<T> clazz) {
-        Type type = new TypeToken<ArrayList<JsonObject>>() {
-        }.getType();
-        ArrayList<JsonObject> jsonObjects = EncapsulateParseJson.getGson().fromJson(json, type);
-
-        ArrayList<T> arrayList = new ArrayList<>();
-        for (JsonObject jsonObject : jsonObjects) {
-            arrayList.add(EncapsulateParseJson.getGson().fromJson(jsonObject, clazz));
-        }
-        return arrayList;
-    }
-
-    public interface Listener {
-        void succeed(List<AdvertisingColumn> list);
+    public interface Listener{
+        void succeed(StoreInfo baseInfo);
 
         void failed();
     }
+
 }

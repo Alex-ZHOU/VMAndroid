@@ -68,4 +68,10 @@
     <string name="unknown_error">发生未知错误</string>
     <string name="upload_failed">上传失败</string>
     <string name="upload_succeed">上传成功</string>
+    <string name="bar">酒吧</string>
+    <string name="ktv">KTV</string>
+    <string name="restaurant">餐饮</string>
+    <string name="other">其他</string>
+    <string name="summary">简介</string>
+    <string name="summary_colon">简介:</string>
 </resources>

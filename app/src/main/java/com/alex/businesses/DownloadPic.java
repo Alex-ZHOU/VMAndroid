@@ -27,8 +27,10 @@ import java.io.InputStream;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -36,31 +38,42 @@ import okhttp3.Response;
  */
 public class DownloadPic  {
 
+    /**
+     * 通过图片id下载图片
+     * @param imageId 图片id号
+     * @param listener 监听
+     */
+    public void getById(int imageId,@NonNull final Listener listener){
 
-    public void getById(int id,@NonNull final Listener listener){
+        OkHttpClient client = new OkHttpClient();
 
+        RequestBody body =  new FormBody.Builder()
+                .add("ImageId", String.valueOf(imageId))
+                .build();
+        Request request = new Request.Builder().url(URLs.URL_GET_PIC).post(body).build();
 
-//        OkHttpClient client = new OkHttpClient();
-//
-//        Request request = new Request.Builder().url(url).build();
-//
-//        client.newCall(request).enqueue(new Callback() {
-//
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                InputStream is = response.body().byteStream();
-//                Bitmap bm = BitmapFactory.decodeStream(is);
-//                listener.succeed(bm);
-//            }
-//        });
-        getByUrl(URLs.URL_GET_PIC,listener);
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                InputStream is = response.body().byteStream();
+                Bitmap bm = BitmapFactory.decodeStream(is);
+                listener.succeed(bm);
+            }
+        });
+
     }
 
+    /**
+     * 通过图片地址获取图片
+     * @param url 图片地址
+     * @param listener 监听
+     */
     public void getByUrl(@NonNull String url,@NonNull final Listener listener){
         OkHttpClient client = new OkHttpClient();
 

@@ -47,7 +47,125 @@
     <FrameLayout
         android:id="@+id/main_loop_advertisement_frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="200dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginBottom="@dimen/main_item_margin_top"
+        android:layout_marginTop="@dimen/main_item_margin_top"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/main_discover_bar_ll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/bar"
+                android:src="@drawable/bar"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:gravity="center_horizontal"
+                android:text="@string/bar"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/main_discover_ktv_ll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/ktv"
+                android:src="@drawable/ktv"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:gravity="center_horizontal"
+                android:text="@string/ktv"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_discover_restaurant_ll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/restaurant"
+                android:src="@drawable/restaurant"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:gravity="center_horizontal"
+                android:text="@string/restaurant"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_discover_other_ll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/other"
+                android:src="@drawable/more"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:gravity="center_horizontal"
+                android:text="@string/other"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

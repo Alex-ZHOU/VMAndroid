@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
@@ -31,7 +32,7 @@ import com.alex.vmandroid.display.main.MainContract;
 import com.alex.vmandroid.display.main.fragments.fragments.LoopAdvertisementFragment;
 import com.alex.vmandroid.display.main.fragments.fragments.LoopAdvertisementPresenter;
 
-public class DiscoverFragment extends BaseFragment implements MainContract.DiscoverView {
+public class DiscoverFragment extends BaseFragment implements MainContract.DiscoverView, View.OnClickListener {
     public final String TAG = Base_TAG;
 
     private MainContract.MainPresenter mPresenter;
@@ -58,6 +59,8 @@ public class DiscoverFragment extends BaseFragment implements MainContract.Disco
         Log.i(TAG, "onCreateView: DiscoverFragment");
 
 
+        View view = inflater.inflate(R.layout.fragment_main_discover, container, false);
+
         LoopAdvertisementFragment fragment = new LoopAdvertisementFragment();
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -65,9 +68,21 @@ public class DiscoverFragment extends BaseFragment implements MainContract.Disco
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.main_loop_advertisement_frame_layout, fragment);
         transaction.commit();
-        
 
-        return inflater.inflate(R.layout.fragment_main_discover, container, false);
+
+        LinearLayout mBarLinearLayout = (LinearLayout) view.findViewById(R.id.main_discover_bar_ll);
+        mBarLinearLayout.setOnClickListener(this);
+
+        LinearLayout mKTVLinearLayout = (LinearLayout) view.findViewById(R.id.main_discover_ktv_ll);
+        mKTVLinearLayout.setOnClickListener(this);
+
+        LinearLayout mRestaurantLinearLayout = (LinearLayout) view.findViewById(R.id.main_discover_restaurant_ll);
+        mRestaurantLinearLayout.setOnClickListener(this);
+
+        LinearLayout mOtherLinearLayout = (LinearLayout) view.findViewById(R.id.main_discover_other_ll);
+        mOtherLinearLayout.setOnClickListener(this);
+
+        return view;
     }
 
     @Override
@@ -83,5 +98,10 @@ public class DiscoverFragment extends BaseFragment implements MainContract.Disco
     @Override
     public void setPresenter(MainContract.MainPresenter mainPresenter) {
         mPresenter = mainPresenter;
+    }
+
+    @Override
+    public void onClick(View view) {
+        mPresenter.onClick(view.getId(), MainContract.DISCOVER_TAG);
     }
 }

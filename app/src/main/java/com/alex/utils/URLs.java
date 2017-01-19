@@ -58,4 +58,9 @@ public class URLs {
      * 获取图片的地址
      */
     public static final String URL_GET_PIC = SERVER_ADDRESS + "Android_GetPic";
+
+    /**
+     * 通过广告id获取店铺的基本信息地址
+     */
+    public static final String URL_GET_STORE_INFO = SERVER_ADDRESS + "Android_StroeInfo";
 }

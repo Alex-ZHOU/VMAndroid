@@ -68,4 +68,10 @@
     <string name="unknown_error">UNKNOWN ERROR</string>
     <string name="upload_succeed">UPLOAD SUCCEED</string>
     <string name="upload_failed">UPLOAD FAILED</string>
+    <string name="bar">Bar</string>
+    <string name="ktv">KTV</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="other">Other</string>
+    <string name="summary">Summary</string>
+    <string name="summary_colon">Summary:</string>
 </resources>
