@@ -138,8 +138,6 @@ public class RecordDBService extends Service implements AMapLocationListener {
             recordDB.setTimekeeper(mTimeMeter.getTime());
             mRecordDBList.add(recordDB);
         }
-
-
     });
 
 

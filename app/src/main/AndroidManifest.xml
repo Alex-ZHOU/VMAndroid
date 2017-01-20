@@ -105,6 +105,11 @@
 
         <activity
             android:name=".display.spread.advertisement.AdvertisementActivity"/>
+        <activity
+            android:name=".display.spread.store.StoreRecordDbListActivity"/>
+        <activity
+            android:name=".display.voice.store.StoreDbRecordActivity"/>
+
 
         <service
             android:name="com.amap.api.location.APSService">

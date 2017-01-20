@@ -63,4 +63,9 @@ public class URLs {
      * 通过广告id获取店铺的基本信息地址
      */
     public static final String URL_GET_STORE_INFO = SERVER_ADDRESS + "Android_StroeInfo";
+
+    /**
+     * 获取商家声音记录的地址
+     */
+    public static final String URL_GET_STORE_RECORD_DB_LIST = SERVER_ADDRESS + "Android_StoreRecordDbList";
 }

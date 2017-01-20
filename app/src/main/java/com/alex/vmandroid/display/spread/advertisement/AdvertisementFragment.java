@@ -15,10 +15,12 @@
  */
 package com.alex.vmandroid.display.spread.advertisement;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,9 @@ import android.widget.TextView;
 import com.alex.utils.EllipsizeTextView;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
+import com.alex.vmandroid.display.spread.store.StoreRecordDbListActivity;
+import com.alex.vmandroid.entities.Login;
+import com.alex.vmandroid.entities.StoreInfo;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
@@ -201,6 +206,17 @@ public class AdvertisementFragment extends BaseFragment implements View.OnClickL
     @Override
     public void setAddressTextViewText(@NonNull String str) {
         mAddressTextView.setText(str);
+    }
+
+    /**
+     * 显示记录列表
+     */
+    @Override
+    public void showStoreRecordDbListActivity(StoreInfo storeInfo) {
+        Intent intent = new Intent(getActivity(), StoreRecordDbListActivity.class);
+        intent.putExtra("StoreId", mAdvertisementId);
+        intent.putExtra("StoreTitle", storeInfo.getTitle());
+        startActivity(intent);
     }
 
     @Override

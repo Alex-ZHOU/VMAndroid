@@ -117,6 +117,7 @@ public class AdvertisementPresenter implements AdvertisementContract.Presenter, 
     public void onClick(int id) {
         switch (id) {
             case R.id.advertisement_frame_layout_voice_status_rl:
+                mView.showStoreRecordDbListActivity(mStoreInfo);
                 break;
             default:
                 break;

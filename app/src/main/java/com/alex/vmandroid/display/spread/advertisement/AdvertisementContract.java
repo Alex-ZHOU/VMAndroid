@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
 import com.alex.vmandroid.base.BaseContract;
+import com.alex.vmandroid.entities.StoreInfo;
 
 public class AdvertisementContract {
 
@@ -83,6 +84,11 @@ public class AdvertisementContract {
          * @param str 内容
          */
         void setAddressTextViewText(@NonNull String str);
+
+        /**
+         * 显示记录列表
+         */
+        void showStoreRecordDbListActivity(StoreInfo storeInfo);
     }
 
 }
