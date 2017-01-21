@@ -40,7 +40,7 @@ public class UploadStoreDbRecordBiz {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
 
         Request requestPost = new Request.Builder()
-                .url(URLs.URL_RECORD_DB)
+                .url(URLs.URL_STORE_DB_RECORD)
                 .post(requestBody)
                 .build();
 
@@ -54,7 +54,7 @@ public class UploadStoreDbRecordBiz {
             public void onResponse(Call call, Response response) throws IOException {
                 // 获取返回的json数据
                 final String json = response.body().string();
-
+                response.close();
                 UploadStoreDbRecordBiz.Return back = EncapsulateParseJson.parse(UploadStoreDbRecordBiz.Return.class, json);
 
                 if (back != null) {
@@ -64,7 +64,6 @@ public class UploadStoreDbRecordBiz {
                         listener.failure();
                     }
                 }
-
 
             }
         });

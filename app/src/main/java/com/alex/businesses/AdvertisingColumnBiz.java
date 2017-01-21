@@ -54,6 +54,7 @@ public class AdvertisingColumnBiz {
             public void onResponse(Call call, Response response) throws IOException {
 
                 final String json = response.body().string();
+                response.close();
 
                 List<AdvertisingColumn> list  = jsonToArrayList(json,AdvertisingColumn.class);
 

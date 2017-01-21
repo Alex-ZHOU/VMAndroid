@@ -52,6 +52,7 @@ public class GetStoreInfoBiz {
             public void onResponse(Call call, Response response) throws IOException {
                 // 获取返回的json数据
                 final String json = response.body().string();
+                response.close();
                 StoreInfo baseInfo = EncapsulateParseJson.parse(StoreInfo.class, json);
                 listener.succeed(baseInfo);
             }

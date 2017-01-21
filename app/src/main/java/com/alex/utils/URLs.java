@@ -68,4 +68,12 @@ public class URLs {
      * 获取商家声音记录的地址
      */
     public static final String URL_GET_STORE_RECORD_DB_LIST = SERVER_ADDRESS + "Android_StoreRecordDbList";
+
+    /**
+     * 商家记录上传
+     */
+    public static final String URL_STORE_DB_RECORD = SERVER_ADDRESS + "Android_StoreDbRecord";
+
+
+
 }

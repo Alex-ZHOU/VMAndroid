@@ -119,17 +119,22 @@ public class StoreDbRecordPresenter implements StoreDbRecordContract.Presenter, 
         }
     });
 
-    private TimeMeter mTimeMeter = new TimeMeter(new TimeMeter.CallBack() {
-        @Override
-        public void getTime(String time) {
-            AppLog.info(TAG, "The time is " + time + ".");
-        }
-    });
+    private TimeMeter mTimeMeter ;
 
     public StoreDbRecordPresenter(StoreDbRecordContract.View fragment, int storeId, String storeTitle) {
         mView = fragment;
         mStoreId = storeId;
         mView.setPresenter(this);
+
+    }
+
+    @Override
+    public void start() {
+        if (ServiceCheck.isServiceWork(mView.getViewContext(), RecordDBService.RecordDBServiceName)) {
+            mView.showToast("记录服务已经启动，请先关闭已经启动的记录");
+        }
+        mStoreDbRecord = new StoreDbRecord();
+
         //region 定位配置
         mLocationClient = new AMapLocationClient(mView.getViewContext());
         //初始化定位参数
@@ -143,14 +148,6 @@ public class StoreDbRecordPresenter implements StoreDbRecordContract.Presenter, 
         //设置定位参数
         mLocationClient.setLocationOption(locationOption);
         //endregion
-    }
-
-    @Override
-    public void start() {
-        if (ServiceCheck.isServiceWork(mView.getViewContext(), RecordDBService.RecordDBServiceName)) {
-            mView.showToast("记录服务已经启动，请先关闭已经启动的记录");
-        }
-        mStoreDbRecord = new StoreDbRecord();
     }
 
     /**
@@ -172,6 +169,13 @@ public class StoreDbRecordPresenter implements StoreDbRecordContract.Presenter, 
                         mView.setButtonText(R.string.stop);
                         //启动噪声检测
                         mRecordDBTool.start();
+
+                        mTimeMeter  = new TimeMeter(new TimeMeter.CallBack() {
+                            @Override
+                            public void getTime(String time) {
+                                AppLog.info(TAG, "The time is " + time + ".");
+                            }
+                        });
                         //启动计时
                         mTimeMeter.start();
                         //启动定位
@@ -198,6 +202,7 @@ public class StoreDbRecordPresenter implements StoreDbRecordContract.Presenter, 
     }
 
     private void uploadData() {
+        AppLog.info(TAG,"uploadData");
         mView.showProgressDialog();
         mStoreDbRecord.setDbData(mDataList);
         mStoreDbRecord.setUserId(UserInfo.getUsrId(mView.getViewContext()));
@@ -209,7 +214,9 @@ public class StoreDbRecordPresenter implements StoreDbRecordContract.Presenter, 
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
+                        AppLog.info(TAG,"上传成功");
                         mView.closeProgressDialog();
+                        mView.showToast("上传成功，审核通过将会展示出来");
                     }
                 });
             }
@@ -219,8 +226,9 @@ public class StoreDbRecordPresenter implements StoreDbRecordContract.Presenter, 
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
+                        AppLog.info(TAG,"上传失败");
                         mView.closeProgressDialog();
-                        mView.showToast("上传成功，审核通过将会展示出来");
+                        mView.showToast("上传失败");
                     }
                 });
             }

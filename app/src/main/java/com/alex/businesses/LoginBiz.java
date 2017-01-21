@@ -81,6 +81,7 @@ public class LoginBiz {
             public void onResponse(Call call, Response response) throws IOException {
                 // 获取返回的json数据
                 final String string = response.body().string();
+                response.close();
                 Log.i(TAG, "onResponse: " + string);
 
                 Login login = EncapsulateParseJson.parse(Login.class, string);

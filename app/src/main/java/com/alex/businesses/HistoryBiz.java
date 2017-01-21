@@ -61,6 +61,7 @@ public class HistoryBiz {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String json = response.body().string();
+                response.close();
                 AppLog.debug(json);
 
                 List<History> list  = jsonToArrayList(json,History.class);

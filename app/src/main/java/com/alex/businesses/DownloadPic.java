@@ -62,6 +62,7 @@ public class DownloadPic  {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 InputStream is = response.body().byteStream();
+                response.close();
                 Bitmap bm = BitmapFactory.decodeStream(is);
                 listener.succeed(bm);
             }

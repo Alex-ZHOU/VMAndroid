@@ -184,7 +184,7 @@ public class StoreDbRecordFragment extends BaseFragment implements View.OnClickL
      */
     @Override
     public Context getViewContext() {
-        return getContext();
+        return getActivity();
     }
 
     /**

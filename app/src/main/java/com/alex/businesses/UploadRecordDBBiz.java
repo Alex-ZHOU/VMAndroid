@@ -67,7 +67,7 @@ public class UploadRecordDBBiz {
             public void onResponse(Call call, Response response) throws IOException {
                 // 获取返回的json数据
                 final String json = response.body().string();
-
+                response.close();
                 Return back = EncapsulateParseJson.parse(Return.class, json);
 
                 if (back != null) {

@@ -58,6 +58,7 @@ public class StoreRecordDbListBiz {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String json = response.body().string();
+                response.close();
                 AppLog.debug(json);
 
                 List<StoreRecordDb> list = jsonToArrayList(json, StoreRecordDb.class);
