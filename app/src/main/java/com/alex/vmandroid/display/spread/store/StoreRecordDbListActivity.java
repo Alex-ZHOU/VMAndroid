@@ -36,7 +36,7 @@ public class StoreRecordDbListActivity extends BaseActivity {
         String storeTitle = intent.getStringExtra("StoreTitle");
 
         StoreRecordDbListFragment fragment = StoreRecordDbListFragment.newInstance();
-        new StoreRecordDbListPresenter(fragment, storeId,storeTitle);
+        new StoreRecordDbListPresenter(fragment, storeId, storeTitle, getApplicationContext());
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.store_record_list_frame_layout, fragment);

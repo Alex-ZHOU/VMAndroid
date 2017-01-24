@@ -16,6 +16,7 @@
 
 package com.alex.vmandroid.display.main.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -31,6 +32,7 @@ import com.alex.vmandroid.base.BaseFragment;
 import com.alex.vmandroid.display.main.MainContract;
 import com.alex.vmandroid.display.main.fragments.fragments.LoopAdvertisementFragment;
 import com.alex.vmandroid.display.main.fragments.fragments.LoopAdvertisementPresenter;
+import com.alex.vmandroid.display.spread.list.StoreListActivity;
 
 public class DiscoverFragment extends BaseFragment implements MainContract.DiscoverView, View.OnClickListener {
     public final String TAG = Base_TAG;
@@ -103,5 +105,17 @@ public class DiscoverFragment extends BaseFragment implements MainContract.Disco
     @Override
     public void onClick(View view) {
         mPresenter.onClick(view.getId(), MainContract.DISCOVER_TAG);
+    }
+
+    /**
+     * 跳转到显示商店列表的Activity
+     *
+     * @param type 跳转的类型
+     */
+    @Override
+    public void showStoreListActivity(String type) {
+        Intent intent = new Intent(getActivity(), StoreListActivity.class);
+        intent.putExtra("Type", type);
+        startActivity(intent);
     }
 }

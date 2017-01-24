@@ -109,6 +109,8 @@
             android:name=".display.spread.store.StoreRecordDbListActivity"/>
         <activity
             android:name=".display.voice.store.StoreDbRecordActivity"/>
+        <activity
+            android:name=".display.spread.list.StoreListActivity"/>
 
 
         <service

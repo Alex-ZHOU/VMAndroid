@@ -203,12 +203,16 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
             case MainContract.DISCOVER_TAG:
                 switch (id) {
                     case R.id.main_discover_bar_ll:
+                        mDiscoverView.showStoreListActivity("bar");
                         break;
                     case R.id.main_discover_ktv_ll:
+                        mDiscoverView.showStoreListActivity("ktv");
                         break;
                     case R.id.main_discover_restaurant_ll:
+                        mDiscoverView.showStoreListActivity("restaurant");
                         break;
                     case R.id.main_discover_other_ll:
+                        mDiscoverView.showStoreListActivity("other");
                         break;
                 }
                 break;

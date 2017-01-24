@@ -121,6 +121,13 @@ public class MainContract {
 
     public interface DiscoverView extends BaseContract.BaseView<MainPresenter> {
 
+
+        /**
+         * 跳转到显示商店列表的Activity
+         *
+         * @param type 跳转的类型
+         */
+        void showStoreListActivity(String type);
     }
 
     public interface MeView extends BaseContract.BaseView<MainPresenter> {
@@ -161,6 +168,7 @@ public class MainContract {
 
         /**
          * 显示toast 提示
+         *
          * @param str 显示的提示信息
          */
         void showToast(String str);

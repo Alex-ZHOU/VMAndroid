@@ -15,10 +15,12 @@
  */
 package com.alex.businesses;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 
+import com.alex.utils.ACache;
 import com.alex.utils.AppLog;
 import com.alex.utils.URLs;
 
@@ -36,18 +38,63 @@ import okhttp3.Response;
 /**
  * 下载图片
  */
-public class DownloadPic  {
+public class DownloadPic {
+
+    private final String TAG = DownloadPic.class.getName();
+
+
+    public void getById(final int imageId, @NonNull final Listener listener, Context context) {
+
+       final   ACache mCache = ACache.get(context);
+
+        Bitmap bitmap = mCache.getAsBitmap("ImageId=" + imageId);
+
+        if (bitmap != null) {
+            AppLog.debug(TAG,"bitmap is not null");
+            listener.succeed(bitmap);
+        } else {
+            AppLog.debug(TAG,"bitmap is null");
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("ImageId", String.valueOf(imageId))
+                    .build();
+            Request request = new Request.Builder().url(URLs.URL_GET_PIC).post(body).build();
+
+            client.newCall(request).enqueue(new Callback() {
+
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    InputStream is = response.body().byteStream();
+
+                    Bitmap bm = BitmapFactory.decodeStream(is);
+                    listener.succeed(bm);
+                    AppLog.debug(TAG,"bxxxxx");
+                    mCache.put("ImageId=" + imageId,bm);
+                    AppLog.debug(TAG,"yyyyy");
+                    response.close();
+
+                }
+            });
+        }
+    }
 
     /**
      * 通过图片id下载图片
-     * @param imageId 图片id号
+     *
+     * @param imageId  图片id号
      * @param listener 监听
      */
-    public void getById(int imageId,@NonNull final Listener listener){
+    public void getById(int imageId, @NonNull final Listener listener) {
 
         OkHttpClient client = new OkHttpClient();
 
-        RequestBody body =  new FormBody.Builder()
+        RequestBody body = new FormBody.Builder()
                 .add("ImageId", String.valueOf(imageId))
                 .build();
         Request request = new Request.Builder().url(URLs.URL_GET_PIC).post(body).build();
@@ -62,9 +109,10 @@ public class DownloadPic  {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 InputStream is = response.body().byteStream();
-                response.close();
+
                 Bitmap bm = BitmapFactory.decodeStream(is);
                 listener.succeed(bm);
+                response.close();
             }
         });
 
@@ -72,10 +120,11 @@ public class DownloadPic  {
 
     /**
      * 通过图片地址获取图片
-     * @param url 图片地址
+     *
+     * @param url      图片地址
      * @param listener 监听
      */
-    public void getByUrl(@NonNull String url,@NonNull final Listener listener){
+    public void getByUrl(@NonNull String url, @NonNull final Listener listener) {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder().url(url).build();

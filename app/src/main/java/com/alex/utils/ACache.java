@@ -574,10 +574,18 @@ public class ACache {
 		mCache.clear();
 	}
 
+
+
+
+
+
 	/**
-	 * @title 缓存管理器
+	 * 缓存管理器
 	 * @author 杨福海（michael） www.yangfuhai.com
 	 * @version 1.0
+     *
+     * @author AlexZHOU (https://github.com/Alex-ZHOU)
+     * @version 1.1
 	 */
 	public class ACacheManager {
 		private final AtomicLong cacheSize;
@@ -586,7 +594,7 @@ public class ACache {
 		private final int countLimit;
 		private final Map<File, Long> lastUsageDates = Collections
 				.synchronizedMap(new HashMap<File, Long>());
-		protected File cacheDir;
+		private File cacheDir;
 
 		private ACacheManager(File cacheDir, long sizeLimit, int countLimit) {
 			this.cacheDir = cacheDir;

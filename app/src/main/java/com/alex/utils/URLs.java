@@ -74,6 +74,10 @@ public class URLs {
      */
     public static final String URL_STORE_DB_RECORD = SERVER_ADDRESS + "Android_StoreDbRecord";
 
+    /**
+     * 查询商家列表
+     */
+    public static final String URL_STORE_LIST = SERVER_ADDRESS + "Android_StoreList";
 
 
 }

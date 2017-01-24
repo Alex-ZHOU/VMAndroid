@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.vmandroid.display.spread.store;
+package com.alex.vmandroid.display.spread.list;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,45 +21,41 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 import com.alex.businesses.DownloadPic;
-import com.alex.businesses.StoreRecordDbListBiz;
+import com.alex.businesses.StoreListBiz;
 import com.alex.style.drawable.CircleImageDrawable;
-import com.alex.vmandroid.R;
-import com.alex.vmandroid.entities.StoreRecordDb;
+import com.alex.vmandroid.entities.StoreInfo;
 
 import java.util.List;
 
-public class StoreRecordDbListPresenter implements StoreRecordDbListContract.Presenter {
+public class StoreListPresenter implements StoreListContract.Presenter {
 
-    private final String mStoreTitle;
-    private int mStoreId;
+    private StoreListContract.View mView;
 
-    private StoreRecordDbListContract.View mView;
-
-    private Handler handler = new Handler();
-
-    private List<StoreRecordDb> mStoreRecordDbList;
+    private String mType;
 
     private Context mContext;
 
-    public StoreRecordDbListPresenter(StoreRecordDbListContract.View view, int storeId,String storeTitle,Context context) {
+    private Handler mHandler = new Handler();
+
+    private List<StoreInfo> mList;
+
+    public StoreListPresenter(StoreListContract.View view, String type, Context applicationContext) {
         mView = view;
         mView.setPresenter(this);
-        mStoreId = storeId;
-        mStoreTitle = storeTitle;
-        mContext = context;
+        mType = type;
+        mContext = applicationContext;
     }
 
     @Override
     public void start() {
-        new StoreRecordDbListBiz().get(mStoreId, new StoreRecordDbListBiz.Listener() {
+        new StoreListBiz().get(mType, new StoreListBiz.Listener() {
             @Override
-            public void succeed(final List<StoreRecordDb> list) {
-                mStoreRecordDbList = list;
-
-                handler.post(new Runnable() {
+            public void succeed(List<StoreInfo> list) {
+                mList = list;
+                mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mView.setListViewData(mStoreRecordDbList);
+                        mView.setListViewData(mList);
                     }
                 });
             }
@@ -82,7 +78,7 @@ public class StoreRecordDbListPresenter implements StoreRecordDbListContract.Pre
         new DownloadPic().getById(id, new DownloadPic.Listener() {
             @Override
             public void succeed(final Bitmap bm) {
-                handler.post(new Runnable() {
+                mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         iv.setImageDrawable(new CircleImageDrawable(bm));
@@ -94,7 +90,7 @@ public class StoreRecordDbListPresenter implements StoreRecordDbListContract.Pre
             public void failed() {
 
             }
-        },mContext);
+        }, mContext);
     }
 
     /**
@@ -104,18 +100,7 @@ public class StoreRecordDbListPresenter implements StoreRecordDbListContract.Pre
      */
     @Override
     public void onItemClick(int i) {
-        StoreRecordDb storeRecordDb = mStoreRecordDbList.get(i);
+        mView.showAdvertisementActivity(mList.get(i).getAdvertisementId(), mList.get(i).getTitle());
     }
 
-    /**
-     * 点击监听
-     *
-     * @param id 点击的view的id号
-     */
-    @Override
-    public void onClick(int id) {
-        if (id == R.id.store_record_db_list_fragment_iv){
-            mView.showStoreDbRecordActivity(mStoreId,mStoreTitle);
-        }
-    }
 }
