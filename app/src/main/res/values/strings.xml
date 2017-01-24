@@ -74,4 +74,6 @@
     <string name="other">Other</string>
     <string name="summary">Summary</string>
     <string name="summary_colon">Summary:</string>
+    <string name="all_offline">ALL   CITY</string>
+    <string name="download_offline">DOWN MANAGE</string>
 </resources>

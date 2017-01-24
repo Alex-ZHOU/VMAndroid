@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alex_ZHOU
+ * Copyright 2017 Alex_ZHOU
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.vmandroid.display.map;
+package com.alex.vmandroid.display.map.om;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseActivity;
 
 public class OfflineMapActivity extends BaseActivity {
+
+    public static String TAG = OfflineMapActivity.class.getName();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitvity_offline_map);
+
+        OfflineMapFragment fragment = OfflineMapFragment.newInstance();
+        new OfflineMapPresenter(fragment, this);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.offline_map_frame_layout, fragment);
+        transaction.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

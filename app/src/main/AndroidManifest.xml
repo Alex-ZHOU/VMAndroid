@@ -111,7 +111,8 @@
             android:name=".display.voice.store.StoreDbRecordActivity"/>
         <activity
             android:name=".display.spread.list.StoreListActivity"/>
-
+        <activity
+            android:name=".display.map.om.OfflineMapActivity"/>
 
         <service
             android:name="com.amap.api.location.APSService">

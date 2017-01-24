@@ -74,4 +74,6 @@
     <string name="other">其他</string>
     <string name="summary">简介</string>
     <string name="summary_colon">简介:</string>
+    <string name="all_offline">所有城市</string>
+    <string name="download_offline">下载管理</string>
 </resources>

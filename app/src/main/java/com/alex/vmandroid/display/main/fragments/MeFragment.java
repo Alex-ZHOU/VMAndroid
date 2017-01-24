@@ -35,7 +35,7 @@ import com.alex.vmandroid.base.BaseFragment;
 import com.alex.style.drawable.CircleImageDrawable;
 import com.alex.vmandroid.display.main.MainContract;
 import com.alex.vmandroid.display.map.MapSettingActivity;
-import com.alex.vmandroid.display.map.OfflineMapActivity;
+import com.alex.vmandroid.display.map.om.OfflineMapActivity;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 

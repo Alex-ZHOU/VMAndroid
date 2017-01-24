@@ -19,9 +19,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorAppMainColor</item>
+        <item name="colorPrimaryDark">@color/colorAppMainColor</item>
+        <item name="colorAccent">@color/colorAppMainColor</item>
         <item name="actionBarSize">@dimen/main_action_bar_height</item>
         <!--<item name="actionBarStyle">@style/myActionBarStyle</item>-->
     </style>
@@ -31,8 +31,8 @@
     <style name="VMTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorAppMainColor</item>
+        <item name="colorAccent">@color/colorAppMainColor</item>
 
     </style>
 
@@ -57,13 +57,16 @@
     </style>
 
     <style name="myActionBarStyle" parent="android:Widget.ActionBar">
-        <item name="android:background">#D01839</item>
+        <item name="android:background">@style/Titleground</item>
         <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>
     </style>
 
     <style name="AcBar_titleStyle">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="Titleground">
+        <item name="android:background">@color/colorAppMainColor</item>
     </style>
 
     <!-- Show a view when the app start. -->
