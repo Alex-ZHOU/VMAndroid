@@ -20,12 +20,17 @@ import com.alex.vmandroid.display.exhibition.analysis.AnalysisActivity;
 import com.alex.vmandroid.display.exhibition.history.HistoryActivity;
 import com.alex.vmandroid.display.gadget.GadgetActivity;
 import com.alex.vmandroid.display.map.om.OfflineMapActivity;
+import com.alex.vmandroid.display.setting.SettingActivity;
+import com.alex.vmandroid.display.setting._change_nickname.ChangeNicknameActivity;
 import com.alex.vmandroid.display.weather.inquiry.InquiryWeatherActivity;
 import com.alex.vmandroid.display.weather.location.LocationWeatherActivity;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 设置Activity标题栏显示的名字
+ */
 public class ActivityName {
 
     private static Map<String, Integer> mName;
@@ -34,10 +39,13 @@ public class ActivityName {
     private static void init() {
         mName = new HashMap<>();
 
+        // 小工具导航界面
         mName.put(GadgetActivity.TAG, R.string.gadget);
 
+        // 当地天气显示
         mName.put(LocationWeatherActivity.TAG, R.string.location_weather);
 
+        // 天气查询显示
         mName.put(InquiryWeatherActivity.TAG, R.string.inquire_weather);
 
         // 分析标题栏名字
@@ -48,6 +56,12 @@ public class ActivityName {
 
         // 离线地图标题栏名字
         mName.put(OfflineMapActivity.TAG, R.string.offline_map);
+
+        // 设置界面的标题栏名字
+        mName.put(SettingActivity.TAG, R.string.setting);
+
+        // 修改昵称标题栏
+        mName.put(ChangeNicknameActivity.TAG, R.string.change_nickname);
     }
 
     public static int getName(String simpleName) {

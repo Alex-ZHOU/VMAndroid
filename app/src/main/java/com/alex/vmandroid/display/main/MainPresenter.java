@@ -17,11 +17,15 @@
 package com.alex.vmandroid.display.main;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.alex.businesses.DownloadPic;
 import com.alex.businesses.GetBaseInfoBiz;
 import com.alex.businesses.LoginBiz;
+import com.alex.style.drawable.CircleImageDrawable;
 import com.alex.utils.AppLog;
 import com.alex.utils.ServiceCheck;
 import com.alex.vmandroid.display.voice.AudioRecordDemo;
@@ -112,6 +116,7 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
                 UserInfo.putInt(mContext, "MinDb", baseInfo.getMinDb());
                 UserInfo.putInt(mContext, "RecordTimes", baseInfo.getRecordTimes());
                 UserInfo.putInt(mContext, "RecordMinter", (int) baseInfo.getRecordMinter());
+                UserInfo.putInt(mContext, "HeadProtrait", (int) baseInfo.getHeadProtrait());
                 handle.post(new Runnable() {
                     @Override
                     public void run() {
@@ -163,6 +168,34 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
         Log.d(TAG, "initMeView");
         mMeView = meView;
         mMeView.setPresenter(this);
+    }
+
+    /**
+     * 设置头像
+     *
+     * @param iv 显示头像的ImageView
+     */
+    @Override
+    public void setHeadPortrait(final ImageView iv) {
+        new DownloadPic().getById(UserInfo.getInt(mContext, "HeadProtrait"), new DownloadPic.Listener() {
+            @Override
+            public void succeed(final Bitmap bm) {
+                handle.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        iv.setImageDrawable(new CircleImageDrawable(bm));
+                    }
+                });
+            }
+
+            @Override
+            public void failed() {
+
+            }
+        }, mContext);
+
+        String str = UserInfo.getString(mContext, "Nickname");
+        mMeView.setUserNickName(str);
     }
 
     @Override
@@ -220,6 +253,9 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
             //region : MeFragment 界面的点击事件
             case MainContract.ME_TAG:
                 switch (id) {
+                    case R.id.main_me_title_bar_setting_iv:
+                        mMeView.showSettingActivity();
+                        break;
                     case R.id.main_me_history_ll:
                         mMeView.showHistoryActivity();
                         break;
@@ -235,29 +271,16 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
                     case R.id.main_me_gadget_ll:
                         mMeView.showGadgetActivity();
                         break;
+                    case R.id.main_me_exit_login_ll:
+                        UserInfo.putUserName(mContext, null);
+                        mMeView.applicationExit();
+                        break;
                 }
                 break;
             //endregion
         }
 
         switch (id) {
-//            //region : MeFragment 界面的点击事件
-//            case R.id.main_me_history_ll:
-//                mMeView.showHistoryActivity();
-//                break;
-//            case R.id.main_me_analysis_ll:
-//                mMeView.showAnalysisActivity();
-//                break;
-//            case R.id.main_me_map_setting_ll:
-//                mMeView.showMapSettingActivity();
-//                break;
-//            case R.id.main_me_offline_map_ll:
-//                mMeView.showOfflineMapActivity();
-//                break;
-//            case R.id.main_me_gadget_ll:
-//                mMeView.showGadgetActivity();
-//                break;
-//            //endregion
             case R.id.main_login_immediate_experience_btn:
                 mUnLoginView.showMainFragment();
                 break;

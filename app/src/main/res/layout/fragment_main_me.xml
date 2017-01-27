@@ -57,7 +57,7 @@
         </RelativeLayout>
 
     </LinearLayout>
-    
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -88,6 +88,7 @@
                     android:src="@drawable/ic_launcher"/>
 
                 <TextView
+                    android:id="@+id/main_me_username_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -245,6 +246,25 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/gadget"/>
+
+            </LinearLayout>
+
+
+            <!--小工具条目-->
+            <LinearLayout
+                android:id="@+id/main_me_exit_login_ll"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/main_item_margin_top"
+                android:background="@android:color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/login_exit"
+                    android:textColor="#e51c23"/>
 
             </LinearLayout>
 

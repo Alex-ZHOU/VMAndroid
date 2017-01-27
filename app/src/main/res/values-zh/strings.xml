@@ -76,4 +76,7 @@
     <string name="summary_colon">简介:</string>
     <string name="all_offline">所有城市</string>
     <string name="download_offline">下载管理</string>
+    <string name="login_exit">退出登录</string>
+    <string name="change_nickname">修改昵称</string>
+    <string name="change">更改</string>
 </resources>

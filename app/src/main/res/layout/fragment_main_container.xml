@@ -79,6 +79,10 @@
                 android:layout_centerHorizontal="true"
                 android:layout_weight="1"
                 android:paddingBottom="4dp"
+                app:defaultIcon="@drawable/me_default"
+                app:defaultTitleColor="@color/colorTitleDefault"
+                app:selectedIcon="@drawable/me_selected"
+                app:selectedTitleColor="@color/colorTitleSelect"
                 app:title="@string/me"/>
 
         </com.alex.view.tab.TabLayout>

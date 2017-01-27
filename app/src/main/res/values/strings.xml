@@ -76,4 +76,7 @@
     <string name="summary_colon">Summary:</string>
     <string name="all_offline">ALL   CITY</string>
     <string name="download_offline">DOWN MANAGE</string>
+    <string name="login_exit">Login Exit</string>
+    <string name="change_nickname">Change Nickname</string>
+    <string name="change">CHANGE</string>
 </resources>

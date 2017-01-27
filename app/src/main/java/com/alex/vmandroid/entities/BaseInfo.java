@@ -32,6 +32,8 @@ public class BaseInfo {
 
     private double RecordMinter;
 
+    private int HeadProtrait;
+
     public int getUserId() {
         return UserId;
     }
@@ -94,5 +96,14 @@ public class BaseInfo {
 
     public void setRecordMinter(double recordMinter) {
         RecordMinter = recordMinter;
+    }
+
+
+    public int getHeadProtrait() {
+        return HeadProtrait;
+    }
+
+    public void setHeadProtrait(int headProtrait) {
+        HeadProtrait = headProtrait;
     }
 }

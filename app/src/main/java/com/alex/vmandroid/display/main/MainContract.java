@@ -16,6 +16,7 @@
 package com.alex.vmandroid.display.main;
 
 import android.content.Context;
+import android.widget.ImageView;
 
 import com.alex.vmandroid.base.BaseContract;
 
@@ -43,13 +44,22 @@ public class MainContract {
 
         void initDiscoverView(DiscoverView discoverView);
 
-        void initMeView(MeView meView);
 
         void initUnLoginView(UnLoginView loginView);
 
         void initLoginView(LoginView loginView);
 
         void onClick(int id, int tag);
+
+
+        void initMeView(MeView meView);
+
+        /**
+         * 设置头像
+         *
+         * @param iv 显示头像的ImageView
+         */
+        void setHeadPortrait(final ImageView iv);
 
 
     }
@@ -133,6 +143,18 @@ public class MainContract {
     public interface MeView extends BaseContract.BaseView<MainPresenter> {
 
         /**
+         * 跳转到设置界面
+         */
+        void showSettingActivity();
+
+        /**
+         * 设置显示用户名字
+         *
+         * @param str 用户昵称
+         */
+        void setUserNickName(String str);
+
+        /**
          * 跳转到显示历史记录界面
          */
         void showHistoryActivity();
@@ -156,6 +178,12 @@ public class MainContract {
          * 跳转到小工具选择界面
          */
         void showGadgetActivity();
+
+        /**
+         * 退出应用
+         */
+        void applicationExit();
+
     }
 
     public interface UnLoginView extends BaseContract.BaseView<MainPresenter> {

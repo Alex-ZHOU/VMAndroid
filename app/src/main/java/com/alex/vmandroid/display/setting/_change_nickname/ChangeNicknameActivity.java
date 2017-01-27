@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.vmandroid.display.map.om;
+package com.alex.vmandroid.display.setting._change_nickname;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,20 +23,20 @@ import android.support.v4.app.FragmentTransaction;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseActivity;
 
-public class OfflineMapActivity extends BaseActivity {
+public class ChangeNicknameActivity extends BaseActivity {
 
-    public static final String TAG = OfflineMapActivity.class.getName();
+    public static final String TAG = ChangeNicknameActivity.class.getName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitvity_offline_map);
+        setContentView(R.layout.activity_change_nickname);
 
-        OfflineMapFragment fragment = OfflineMapFragment.newInstance();
-        new OfflineMapPresenter(fragment, this);
+        ChangeNicknameFragment fragment = ChangeNicknameFragment.newInstance();
+        new ChangeNicknamePresenter(fragment, this);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.offline_map_frame_layout, fragment);
+        transaction.replace(R.id.change_nickname_frame_layout, fragment);
         transaction.commit();
     }
 
@@ -44,4 +44,5 @@ public class OfflineMapActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
     }
+
 }

@@ -17,29 +17,25 @@
 package com.alex.vmandroid.display.main.fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.alex.utils.AppLog;
 import com.alex.vmandroid.display.exhibition.analysis.AnalysisActivity;
 import com.alex.vmandroid.display.gadget.GadgetActivity;
 import com.alex.vmandroid.display.exhibition.history.HistoryActivity;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
-import com.alex.style.drawable.CircleImageDrawable;
 import com.alex.vmandroid.display.main.MainContract;
 import com.alex.vmandroid.display.map.MapSettingActivity;
 import com.alex.vmandroid.display.map.om.OfflineMapActivity;
+import com.alex.vmandroid.display.setting.SettingActivity;
 
-import pub.devrel.easypermissions.AfterPermissionGranted;
-
-import static com.alex.utils.PermissionRequest.MICROPHONE_PERM_RECORD_AUDIO;
 
 public class MeFragment extends BaseFragment implements View.OnClickListener, MainContract.MeView {
 
@@ -53,7 +49,10 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
             R.id.main_me_analysis_ll,
             R.id.main_me_map_setting_ll,
             R.id.main_me_offline_map_ll,
-            R.id.main_me_gadget_ll};
+            R.id.main_me_gadget_ll,
+            R.id.main_me_exit_login_ll};
+
+    private TextView mTextView;
 
 
     public static MeFragment newInstance() {
@@ -75,16 +74,15 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        Log.i(TAG, "onCreateView: MeFragment");
+        AppLog.info(TAG, "onCreateView: MeFragment");
 
         View view = inflater.inflate(R.layout.fragment_main_me, container, false);
 
+        mTextView = (TextView) view.findViewById(R.id.main_me_username_tv);
+
         ImageView ht = (ImageView) view.findViewById(R.id.main_me_head_portrait_iv);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-                R.drawable.vm_android_app_icon);
-
-        ht.setImageDrawable(new CircleImageDrawable(bitmap));
+        mPresenter.setHeadPortrait(ht);
 
         for (int id : mIdGroup) {
             view.findViewById(id).setOnClickListener(this);
@@ -110,8 +108,26 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
 
     @Override
     public void setPresenter(MainContract.MainPresenter presenter) {
-        Log.i(TAG, "setPresenter");
         mPresenter = presenter;
+    }
+
+    /**
+     * 跳转到设置界面
+     */
+    @Override
+    public void showSettingActivity() {
+        Intent intent = new Intent(getActivity(), SettingActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 设置显示用户名字
+     *
+     * @param str 用户昵称
+     */
+    @Override
+    public void setUserNickName(String str) {
+        mTextView.setText(str);
     }
 
     /**
@@ -126,15 +142,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
     /**
      * 跳转到显示分析界面
      */
-    @AfterPermissionGranted(MICROPHONE_PERM_RECORD_AUDIO)
     @Override
     public void showAnalysisActivity() {
-//        if (EasyPermissions.hasPermissions(getContext(), Manifest.permission.RECORD_AUDIO)) {
-//            Log.i(TAG, "microphonePermission");
-//        } else {
-//            EasyPermissions.requestPermissions(this, "",
-//                    MICROPHONE_PERM_RECORD_AUDIO, Manifest.permission.RECORD_AUDIO);
-//        }
         Intent intent = new Intent(getActivity(), AnalysisActivity.class);
         startActivity(intent);
     }
@@ -164,5 +173,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
     public void showGadgetActivity() {
         Intent intent = new Intent(getActivity(), GadgetActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * 退出应用
+     */
+    @Override
+    public void applicationExit() {
+        getActivity().finish();
     }
 }
