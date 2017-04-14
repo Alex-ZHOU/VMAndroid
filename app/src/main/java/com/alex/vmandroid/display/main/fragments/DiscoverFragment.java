@@ -29,6 +29,8 @@ import android.widget.LinearLayout;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
+import com.alex.vmandroid.display.exhibition.share.ShareFragment;
+import com.alex.vmandroid.display.exhibition.share.SharePresenter;
 import com.alex.vmandroid.display.main.MainContract;
 import com.alex.vmandroid.display.main.fragments.fragments.LoopAdvertisementFragment;
 import com.alex.vmandroid.display.main.fragments.fragments.LoopAdvertisementPresenter;
@@ -83,6 +85,14 @@ public class DiscoverFragment extends BaseFragment implements MainContract.Disco
 
         LinearLayout mOtherLinearLayout = (LinearLayout) view.findViewById(R.id.main_discover_other_ll);
         mOtherLinearLayout.setOnClickListener(this);
+
+        // TODO 可能出错
+        ShareFragment shareFragment = new ShareFragment();
+        FragmentManager fragmentManager2 = getActivity().getSupportFragmentManager();
+        new SharePresenter(shareFragment, getActivity());
+        FragmentTransaction transaction2 = fragmentManager2.beginTransaction();
+        transaction2.replace(R.id.main_share_frame_layout, shareFragment);
+        transaction2.commit();
 
         return view;
     }
