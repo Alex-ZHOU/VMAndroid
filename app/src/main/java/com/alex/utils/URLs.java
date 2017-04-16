@@ -81,5 +81,10 @@ public class URLs {
      */
     public static final String URL_STORE_LIST = SERVER_ADDRESS + "Android_StoreList";
 
+    /**
+     * 分享出来的信息
+     */
+    public static final String URL_SHARE_RECORD = SERVER_ADDRESS + "Android_ShareRecord";
+
 
 }

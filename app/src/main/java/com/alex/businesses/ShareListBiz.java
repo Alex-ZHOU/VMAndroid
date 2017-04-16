@@ -15,30 +15,86 @@
  */
 package com.alex.businesses;
 
+import com.alex.utils.AppLog;
+import com.alex.utils.EncapsulateParseJson;
+import com.alex.utils.URLs;
 import com.alex.vmandroid.entities.ShareRecordDb;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ShareListBiz {
 
 
-    public void get(Listener listener) {
+    public void get(final Listener listener) {
 
-        List<ShareRecordDb> list = new ArrayList<>();
+//        List<ShareRecordDb> list = new ArrayList<>();
+//
+//        // TODO 真实逻辑等待修改
+//        for (int i = 0; i < 5; i++) {
+//            ShareRecordDb share = new ShareRecordDb();
+//            share.setStoreName("酒店1");
+//
+//            share.setUserHeadPortraitImageId(1);
+//            share.setTime("2017-1-1");
+//
+//            list.add(share);
+//        }
+//        listener.succeed(list);
 
-        // TODO 真实逻辑等待修改
-        for (int i = 0; i < 5; i++) {
-            ShareRecordDb share = new ShareRecordDb();
-            share.setStoreName("酒店1");
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(URLs.URL_SHARE_RECORD).build();
 
-            share.setUserHeadPortraitImageId(1);
-            share.setTime("2017-1-1");
 
-            list.add(share);
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                listener.failed();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String json = response.body().string();
+                response.close();
+                AppLog.debug(json);
+                List<ShareRecordDb> list  = jsonToArrayList(json,ShareRecordDb.class);
+                listener.succeed(list);
+            }
+        });
+
+    }
+
+    /**
+     *
+     * Author Young
+     *
+     * @param json json的值
+     * @param clazz 类
+     * @param <T> 类
+     * @return 数组列
+     */
+    private static <T> ArrayList<T> jsonToArrayList(String json, Class<T> clazz)
+    {
+        Type type = new TypeToken<ArrayList<JsonObject>>()
+        {}.getType();
+        ArrayList<JsonObject> jsonObjects = EncapsulateParseJson.getGson().fromJson(json, type);
+
+        ArrayList<T> arrayList = new ArrayList<>();
+        for (JsonObject jsonObject : jsonObjects)
+        {
+            arrayList.add(EncapsulateParseJson.getGson().fromJson(jsonObject, clazz));
         }
-        listener.succeed(list);
-
+        return arrayList;
     }
 
     public interface Listener {
