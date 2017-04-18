@@ -23,7 +23,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/app_start"/>
     </item>
     <!-- 右上角的图标元素 -->
     <!--<item>-->

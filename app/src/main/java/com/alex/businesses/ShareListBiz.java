@@ -38,20 +38,6 @@ public class ShareListBiz {
 
     public void get(final Listener listener) {
 
-//        List<ShareRecordDb> list = new ArrayList<>();
-//
-//        // TODO 真实逻辑等待修改
-//        for (int i = 0; i < 5; i++) {
-//            ShareRecordDb share = new ShareRecordDb();
-//            share.setStoreName("酒店1");
-//
-//            share.setUserHeadPortraitImageId(1);
-//            share.setTime("2017-1-1");
-//
-//            list.add(share);
-//        }
-//        listener.succeed(list);
-
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(URLs.URL_SHARE_RECORD).build();
 
