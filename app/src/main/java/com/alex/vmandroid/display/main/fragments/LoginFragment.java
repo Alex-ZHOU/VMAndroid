@@ -112,6 +112,7 @@ public class LoginFragment extends BaseFragment implements MainContract.LoginVie
     @Override
     public void showMainFragment() {
         Log.i(TAG, "showMainFragment");
+        getFragmentManager().popBackStack();
         MainFragment fragment = MainFragment.newInstance();
         mPresenter.initMainView(fragment);
         FragmentNavigator.moveTo(getFragmentManager(), fragment, R.id.main_frame_layout, false);

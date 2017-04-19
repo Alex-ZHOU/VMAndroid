@@ -15,47 +15,62 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include
         layout="@layout/fragment_button_back"
         android:layout_width="@dimen/main_action_bar_height"
         android:layout_height="@dimen/main_action_bar_height"/>
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/account"/>
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_margin"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/main_login_account_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:labelFor="@+id/main_login_account_et"/>
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/app_start"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/password"/>
+        <TextView
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/account"/>
 
-    <EditText
-        android:id="@+id/main_login_password_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:labelFor="@+id/main_login_password_et"/>
+        <EditText
+            android:id="@+id/main_login_account_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:labelFor="@+id/main_login_account_et"/>
 
-    <Button
-        android:id="@+id/main_login_login_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background_color"
-        android:text="@string/login"
-        android:textColor="@color/button_text_color"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password"/>
 
+        <EditText
+            android:id="@+id/main_login_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberPassword"
+            android:labelFor="@+id/main_login_password_et"/>
+
+        <Button
+            android:id="@+id/main_login_login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background_color"
+            android:text="@string/login"
+            android:layout_gravity="center"
+            android:textColor="@color/button_text_color"/>
+    </LinearLayout>
 </LinearLayout>
