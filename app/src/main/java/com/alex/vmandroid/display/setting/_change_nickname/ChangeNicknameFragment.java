@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.alex.vmandroid.R;
@@ -88,5 +89,23 @@ public class ChangeNicknameFragment extends BaseFragment implements View.OnClick
         } else {
             return null;
         }
+    }
+
+    /**
+     * 显示提醒
+     *
+     * @param str 文本
+     */
+    @Override
+    public void showToast(String str) {
+        Toast.makeText(getActivity(),str,Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 结束当前页面
+     */
+    @Override
+    public void finish() {
+        getActivity().finish();
     }
 }

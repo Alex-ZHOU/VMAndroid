@@ -51,5 +51,10 @@ public class SettingContract {
          */
         void setNicknameTextView(@NonNull String str);
 
+        /**
+         * 跳转到修改昵称界面
+         */
+        void showChangNicknameActivity();
+
     }
 }

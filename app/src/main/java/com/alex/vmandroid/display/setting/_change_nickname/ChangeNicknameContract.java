@@ -45,5 +45,16 @@ public class ChangeNicknameContract {
          * @return 昵称
          */
         String getEditTextString();
+
+        /**
+         * 显示提醒
+         * @param str 文本
+         */
+        void showToast(String str);
+
+        /**
+         * 结束当前页面
+         */
+        void finish();
     }
 }

@@ -69,6 +69,7 @@ public class SettingPresenter implements Presenter {
             case R.id.setting_head_portrait_rl:
                 break;
             case R.id.setting_change_nickname_rl:
+                mView.showChangNicknameActivity();
                 break;
         }
     }

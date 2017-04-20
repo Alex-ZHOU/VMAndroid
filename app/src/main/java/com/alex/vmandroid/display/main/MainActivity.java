@@ -58,9 +58,14 @@ public class MainActivity extends BaseActivity implements UnLoginFragment.CallBa
 
             FragmentNavigator.moveTo(fragmentManager, fragment, R.id.main_frame_layout, true);
         } else {
-
             showMainFragment();
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
     }
 
     @Override

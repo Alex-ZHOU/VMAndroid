@@ -113,9 +113,12 @@
             android:name=".display.spread.list.StoreListActivity"/>
         <activity
             android:name=".display.map.om.OfflineMapActivity"/>
+
         <activity
             android:name=".display.setting.SettingActivity"/>
-        
+        <activity
+            android:name=".display.setting._change_nickname.ChangeNicknameActivity"/>
+
         <service
             android:name="com.amap.api.location.APSService">
         </service>

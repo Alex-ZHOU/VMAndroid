@@ -15,6 +15,7 @@
  */
 package com.alex.vmandroid.display.setting;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
+import com.alex.vmandroid.display.setting._change_nickname.ChangeNicknameActivity;
 
 public class SettingFragment extends BaseFragment implements SettingContract.View, View.OnClickListener {
     private SettingContract.Presenter mPresenter;
@@ -95,5 +97,14 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     @Override
     public void setNicknameTextView(@NonNull String str) {
         mNicknameTextView.setText(str);
+    }
+
+    /**
+     * 跳转到修改昵称界面
+     */
+    @Override
+    public void showChangNicknameActivity() {
+        Intent intent = new Intent(getActivity(), ChangeNicknameActivity.class);
+        getContext().startActivity(intent);
     }
 }

@@ -91,4 +91,9 @@ public class URLs {
      */
     public static final String URL_SIGN_UP = SERVER_ADDRESS + "Android_SignUp";
 
+    /**
+     * 修改昵称
+     */
+    public static final String URL_CHANG_NICKNAME = SERVER_ADDRESS + "Android_ChangNickname";
+
 }

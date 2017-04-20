@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alex.utils.AppLog;
+import com.alex.vmandroid.databases.UserInfo;
 import com.alex.vmandroid.display.exhibition.analysis.AnalysisActivity;
 import com.alex.vmandroid.display.gadget.GadgetActivity;
 import com.alex.vmandroid.display.exhibition.history.HistoryActivity;
@@ -52,7 +53,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
             R.id.main_me_gadget_ll,
             R.id.main_me_exit_login_ll};
 
-    private TextView mTextView;
+    private TextView mTextView = null;
 
 
     public static MeFragment newInstance() {
@@ -63,6 +64,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
     public void onResume() {
         super.onResume();
         mPresenter.start();
+        if (mTextView!=null){
+            mTextView.setText(UserInfo.getString(getContext(), "Nickname"));
+        }
     }
 
     @Override
