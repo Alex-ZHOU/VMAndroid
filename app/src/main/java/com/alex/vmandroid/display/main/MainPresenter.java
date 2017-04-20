@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import com.alex.businesses.DownloadPic;
 import com.alex.businesses.GetBaseInfoBiz;
 import com.alex.businesses.LoginBiz;
+import com.alex.businesses.SignUpBiz;
 import com.alex.style.drawable.CircleImageDrawable;
 import com.alex.utils.AppLog;
 import com.alex.utils.ServiceCheck;
@@ -62,6 +63,8 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
     private MainContract.MeView mMeView;
 
     private MainContract.UnLoginView mUnLoginView;
+
+    private MainContract.SignUpView mSignUpView;
 
     private MainContract.LoginView mLoginView;
 
@@ -161,6 +164,13 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
         Log.d(TAG, "initDiscoverView");
         mDiscoverView = discoverView;
         mDiscoverView.setPresenter(this);
+    }
+
+    @Override
+    public void initSignUpView(MainContract.SignUpView signUpView) {
+        Log.d(TAG, "initSignUpView");
+        mSignUpView = signUpView;
+        mSignUpView.setPresenter(this);
     }
 
     @Override
@@ -287,12 +297,57 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
             case R.id.main_unlogin_login_btn:
                 mUnLoginView.showLoginFragment();
                 break;
-
-
+            case R.id.main_sign_up_btn:
+                this.signUp();
+                break;
             case R.id.main_login_login_btn:
                 this.login();
                 break;
         }
+    }
+
+    private void signUp() {
+
+        final String username = mSignUpView.getUsername();
+
+        final String password = mSignUpView.getPassword();
+
+        final String passwordAgain = mSignUpView.getPasswordAgain();
+
+        if (password.equals(passwordAgain)){
+
+            new SignUpBiz().signUP(username, password, new SignUpBiz.Listener() {
+                @Override
+                public void succeed(Login.User user) {
+                    UserInfo.putUsrId(mContext, user.getUserId());
+                    UserInfo.putUserName(mContext, user.getUserName());
+                    handle.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mSignUpView.showToast(mContext.getResources().getString(R.string.sign_up_succeed));
+                            mSignUpView.showMainFragment();
+                        }
+                    });
+                }
+
+                @Override
+                public void failed(int i) {
+                    handle.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mSignUpView.showToast(mContext.getResources().getString(R.string.account_exit));
+                        }
+                    });
+                }
+            });
+
+
+        }else{
+            mSignUpView.showToast(mContext.getResources().getString(R.string.different_password));
+            mSignUpView.clearPassword();
+        }
+
+
     }
 
     private void login() {

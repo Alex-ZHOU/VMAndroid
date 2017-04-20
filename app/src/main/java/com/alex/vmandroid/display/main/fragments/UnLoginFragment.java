@@ -78,7 +78,13 @@ public class UnLoginFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     public void showMainFragment() {
-        mCallBack.showMainFragment();
+        //mCallBack.showMainFragment();
+
+        SignUpFragment fragment = SignUpFragment.newInstance();
+
+        mPresenter.initSignUpView(fragment);
+
+        FragmentNavigator.moveTo(getFragmentManager(), fragment, R.id.main_frame_layout, true);
     }
 
     @Override

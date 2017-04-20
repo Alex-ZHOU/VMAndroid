@@ -44,6 +44,7 @@ public class MainContract {
 
         void initDiscoverView(DiscoverView discoverView);
 
+        void initSignUpView(SignUpView signUpView);
 
         void initUnLoginView(UnLoginView loginView);
 
@@ -219,6 +220,51 @@ public class MainContract {
          * @return 用户密码
          */
         String getPassword();
+    }
+
+    public interface SignUpView extends BaseContract.BaseView<MainPresenter> {
+        /**
+         * 显示toast 提示
+         *
+         * @param str 显示的提示信息
+         */
+        void showToast(String str);
+
+        /**
+         * 登陆成功，跳转到主页界面
+         */
+        void showMainFragment();
+
+        /**
+         * 获取用户名
+         *
+         * @return 用户名
+         */
+        String getUsername();
+
+        /**
+         * 获取用户密码
+         *
+         * @return 用户密码
+         */
+        String getPassword();
+
+        /**
+         * 密码确认
+         *
+         * @return 用户密码
+         */
+        String getPasswordAgain();
+
+        /**
+         * 清空密码
+         */
+        void clearPassword();
+
+        /**
+         * 清空账号
+         */
+        void clearAccount();
     }
 
 

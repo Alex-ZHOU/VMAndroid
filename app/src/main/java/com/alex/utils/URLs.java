@@ -86,5 +86,9 @@ public class URLs {
      */
     public static final String URL_SHARE_RECORD = SERVER_ADDRESS + "Android_ShareRecord";
 
+    /**
+     * 注册
+     */
+    public static final String URL_SIGN_UP = SERVER_ADDRESS + "Android_SignUp";
 
 }

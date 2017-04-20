@@ -23,6 +23,7 @@ import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseActivity;
 import com.alex.vmandroid.databases.UserInfo;
 
+import com.alex.vmandroid.display.main.fragments.SignUpFragment;
 import com.alex.vmandroid.display.main.fragments.UnLoginFragment;
 import com.alex.vmandroid.display.main.fragments.MainFragment;
 
@@ -56,8 +57,8 @@ public class MainActivity extends BaseActivity implements UnLoginFragment.CallBa
             mMainPresenter.initUnLoginView(fragment);
 
             FragmentNavigator.moveTo(fragmentManager, fragment, R.id.main_frame_layout, true);
-
         } else {
+
             showMainFragment();
         }
     }

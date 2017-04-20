@@ -79,4 +79,9 @@
     <string name="login_exit">Login Exit</string>
     <string name="change_nickname">Change Nickname</string>
     <string name="change">CHANGE</string>
+    <string name="sign_up">Sign up</string>
+    <string name="password_again">Password Again</string>
+    <string name="different_password">Different Password</string>
+    <string name="sign_up_succeed">Sign Up Succeed</string>
+    <string name="account_exit">Account Exit</string>
 </resources>

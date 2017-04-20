@@ -79,4 +79,9 @@
     <string name="login_exit">退出登录</string>
     <string name="change_nickname">修改昵称</string>
     <string name="change">更改</string>
+    <string name="sign_up">注册</string>
+    <string name="password_again">再次输入密码</string>
+    <string name="different_password">密码不同</string>
+    <string name="sign_up_succeed">注册成功</string>
+    <string name="account_exit">账号已经存在</string>
 </resources>
