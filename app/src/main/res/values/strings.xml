@@ -84,4 +84,6 @@
     <string name="different_password">Different Password</string>
     <string name="sign_up_succeed">Sign Up Succeed</string>
     <string name="account_exit">Account Exit</string>
+    <string name="feedback">Feedback</string>
+    <string name="time">Time</string>
 </resources>

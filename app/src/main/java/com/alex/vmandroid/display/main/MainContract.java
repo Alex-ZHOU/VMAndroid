@@ -181,6 +181,11 @@ public class MainContract {
         void showGadgetActivity();
 
         /**
+         * 跳转到反馈界面
+         */
+        void showFeedbackActivity();
+
+        /**
          * 退出应用
          */
         void applicationExit();

@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.alex.utils.AppLog;
 import com.alex.vmandroid.databases.UserInfo;
 import com.alex.vmandroid.display.exhibition.analysis.AnalysisActivity;
+import com.alex.vmandroid.display.feedback.FeedbackActivity;
 import com.alex.vmandroid.display.gadget.GadgetActivity;
 import com.alex.vmandroid.display.exhibition.history.HistoryActivity;
 import com.alex.vmandroid.R;
@@ -51,6 +52,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
             R.id.main_me_map_setting_ll,
             R.id.main_me_offline_map_ll,
             R.id.main_me_gadget_ll,
+            R.id.main_me_feedback_ll,
             R.id.main_me_exit_login_ll};
 
     private TextView mTextView = null;
@@ -176,6 +178,15 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
     @Override
     public void showGadgetActivity() {
         Intent intent = new Intent(getActivity(), GadgetActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 跳转到反馈界面
+     */
+    @Override
+    public void showFeedbackActivity() {
+        Intent intent = new Intent(getActivity(), FeedbackActivity.class);
         startActivity(intent);
     }
 

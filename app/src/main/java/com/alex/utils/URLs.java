@@ -96,4 +96,6 @@ public class URLs {
      */
     public static final String URL_CHANG_NICKNAME = SERVER_ADDRESS + "Android_ChangNickname";
 
+
+    public static final String URL_FEEDBACK = SERVER_ADDRESS + "Android_Feedback";
 }

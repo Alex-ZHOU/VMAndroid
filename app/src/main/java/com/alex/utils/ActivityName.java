@@ -18,6 +18,7 @@ package com.alex.utils;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.display.exhibition.analysis.AnalysisActivity;
 import com.alex.vmandroid.display.exhibition.history.HistoryActivity;
+import com.alex.vmandroid.display.feedback.FeedbackActivity;
 import com.alex.vmandroid.display.gadget.GadgetActivity;
 import com.alex.vmandroid.display.map.om.OfflineMapActivity;
 import com.alex.vmandroid.display.setting.SettingActivity;
@@ -62,6 +63,9 @@ public class ActivityName {
 
         // 修改昵称标题栏
         mName.put(ChangeNicknameActivity.TAG, R.string.change_nickname);
+
+        // 反馈标题栏
+        mName.put(FeedbackActivity.TAG,R.string.feedback);
     }
 
     public static int getName(String simpleName) {

@@ -84,4 +84,6 @@
     <string name="different_password">密码不同</string>
     <string name="sign_up_succeed">注册成功</string>
     <string name="account_exit">账号已经存在</string>
+    <string name="feedback">反馈</string>
+    <string name="time">时间</string>
 </resources>

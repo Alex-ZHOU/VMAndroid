@@ -281,6 +281,9 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
                     case R.id.main_me_gadget_ll:
                         mMeView.showGadgetActivity();
                         break;
+                    case R.id.main_me_feedback_ll:
+                        mMeView.showFeedbackActivity();
+                        break;
                     case R.id.main_me_exit_login_ll:
                         UserInfo.putUserName(mContext, null);
                         mMeView.applicationExit();

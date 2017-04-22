@@ -113,6 +113,8 @@
             android:name=".display.spread.list.StoreListActivity"/>
         <activity
             android:name=".display.map.om.OfflineMapActivity"/>
+        <activity
+            android:name=".display.feedback.FeedbackActivity"/>
 
         <activity
             android:name=".display.setting.SettingActivity"/>

@@ -250,7 +250,33 @@
             </LinearLayout>
 
 
-            <!--小工具条目-->
+            <!--反馈条目-->
+            <LinearLayout
+                android:id="@+id/main_me_feedback_ll"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/main_item_margin_top"
+                android:background="@android:color/white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:contentDescription="@string/feedback"
+                    android:src="@drawable/feedback"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/feedback"/>
+
+            </LinearLayout>
+
+            <!--退出登录-->
             <LinearLayout
                 android:id="@+id/main_me_exit_login_ll"
                 android:layout_width="match_parent"
