@@ -16,17 +16,20 @@
 package com.alex.vmandroid.display.exhibition.history;
 
 import com.alex.vmandroid.base.BaseContract;
+import com.alex.vmandroid.entities.History;
 
 import java.util.List;
 
 public class HistoryContract {
 
     interface Presenter extends BaseContract.BasePresenter{
-
+        void onItemClickListener(int i);
     }
 
     interface View extends BaseContract.BaseView<Presenter>{
         void setListViewData(List<HistoryContract.HistoryString> list);
+
+        void showHistoricalDetailsActivity(History history);
     }
 
     public static class HistoryString{

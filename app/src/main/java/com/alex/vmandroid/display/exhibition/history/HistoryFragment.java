@@ -15,26 +15,28 @@
  */
 package com.alex.vmandroid.display.exhibition.history;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.alex.powerfullistview.adapter.PowerfulAdapter;
 import com.alex.powerfullistview.holder.ViewHolder;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
+import com.alex.vmandroid.display.exhibition.history.details.HistoricalDetailsActivity;
+import com.alex.vmandroid.entities.History;
 
 import java.util.List;
 
 
-public class HistoryFragment extends BaseFragment implements HistoryContract.View {
+public class HistoryFragment extends BaseFragment implements HistoryContract.View,AdapterView.OnItemClickListener {
 
     private HistoryContract.Presenter mPresenter;
-
-    //private BarChart mBarChart;
 
     private ListView mListView;
 
@@ -54,25 +56,8 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
-//        mBarChart = (BarChart) view.findViewById(R.id.history_fragment_bc);
-//        mBarChart.setDrawBarShadow(false);
-//        mBarChart.setDrawValueAboveBar(true);
-//        mBarChart.getDescription().setEnabled(false);
-//        mBarChart.setDrawGridBackground(false);
-//        // 左右y轴都不显示
-//        mBarChart.getAxisLeft().setEnabled(false);
-//        mBarChart.getAxisRight().setEnabled(false);
-//        Legend l = mBarChart.getLegend();
-//        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-//        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-//        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-//        l.setDrawInside(false);
-//        l.setForm(Legend.LegendForm.SQUARE);
-//        l.setFormSize(9f);
-//        l.setTextSize(11f);
-//        l.setXEntrySpace(4f);
-
         mListView = (ListView) view.findViewById(R.id.history_fragment_lv);
+        mListView.setOnItemClickListener(this);
 
         return view;
     }
@@ -94,9 +79,25 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void showHistoricalDetailsActivity(History history) {
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("HistoryData", history);
+
+        Intent intent = new Intent(getActivity(), HistoricalDetailsActivity.class);
+        intent.putExtras(bundle);
+        getActivity().startActivity(intent);
+    }
+
 
     @Override
     public void setPresenter(HistoryContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        mPresenter.onItemClickListener(i);
     }
 }

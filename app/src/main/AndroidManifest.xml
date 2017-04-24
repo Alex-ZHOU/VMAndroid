@@ -94,6 +94,8 @@
 
         <activity
             android:name=".display.exhibition.history.HistoryActivity"/>
+        <activity
+            android:name=".display.exhibition.history.details.HistoricalDetailsActivity"/>
 
 
         <activity

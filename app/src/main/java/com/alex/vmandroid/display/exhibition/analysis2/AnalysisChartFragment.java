@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.vmandroid.display.exhibition.analysis;
+package com.alex.vmandroid.display.exhibition.analysis2;
 
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -36,56 +35,39 @@ import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 
-
 import java.util.ArrayList;
 
-public class AnalysisFragment extends BaseFragment implements AnalysisContract.View {
+public class AnalysisChartFragment extends BaseFragment implements AnalysisChartContract.View{
 
-    private AnalysisContract.Presenter mPresenter;
+    private AnalysisChartContract.Presenter mPresenter;
 
-    private ProgressDialog mProgressDialog;
-
-    private RadarChart mRadarChart;
-
-    private TextView mRecordMinterTextView;
-
-    private TextView mRecordTimesTextView;
-
-    private TextView mAverageDbTextView;
-
-    private TextView mMaxMinTextView;
+    private RadarChart mRadarChart = null;
 
     private TextView[] mTimesTextViewArray;
 
-    public static AnalysisFragment newInstance() {
-        return new AnalysisFragment();
+    public static AnalysisChartFragment newInstance() {
+        return new AnalysisChartFragment();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_analysis, container, false);
-
-        mRecordMinterTextView = (TextView) view.findViewById(R.id.analysis_fragment_minutes_tv);
-
-        mRecordTimesTextView = (TextView) view.findViewById(R.id.analysis_fragment_record_times_tv);
-
-        mAverageDbTextView = (TextView) view.findViewById(R.id.analysis_fragment_average_tv);
-
-        mMaxMinTextView = (TextView) view.findViewById(R.id.analysis_fragment_max_min_tv);
+        View view = inflater.inflate(R.layout.fragment_analysis_chart, container, false);
 
         mRadarChart = (RadarChart) view.findViewById(R.id.analysis_fragment_rc);
-
         //mRadarChart.setBackgroundColor(Color.rgb(60, 65, 82));
-
         mRadarChart.getDescription().setEnabled(false);
-
         mRadarChart.setWebLineWidth(1f);
         mRadarChart.setWebColor(Color.LTGRAY);
         mRadarChart.setWebLineWidthInner(1f);
         mRadarChart.setWebColorInner(Color.LTGRAY);
         mRadarChart.setWebAlpha(100);
-
         mRadarChart.animateXY(
                 1400, 1400,
                 Easing.EasingOption.EaseInOutQuad,
@@ -114,27 +96,8 @@ public class AnalysisFragment extends BaseFragment implements AnalysisContract.V
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.start();
-    }
-
-
-    @Override
-    public void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(getActivity());
-            mProgressDialog.setMessage(getResources().getString(R.string.loading));
-            mProgressDialog.setCanceledOnTouchOutside(false);
-        }
-        mProgressDialog.show();
-    }
-
-    @Override
-    public void closeProgressDialog() {
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
-        }
+    public void setPresenter(AnalysisChartContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 
     @Override
@@ -167,7 +130,6 @@ public class AnalysisFragment extends BaseFragment implements AnalysisContract.V
     @Override
     public void setData(float[] data) {
 
-
         ArrayList<RadarEntry> entries1 = new ArrayList<>();
 
         for (float aData : data) {
@@ -193,46 +155,6 @@ public class AnalysisFragment extends BaseFragment implements AnalysisContract.V
     }
 
     /**
-     * 设置记录的总分钟数
-     *
-     * @param str 分钟数
-     */
-    @Override
-    public void setRecordMinter(String str) {
-        mRecordMinterTextView.setText(str);
-    }
-
-    /**
-     * 设置记录的次数
-     *
-     * @param str 记录的次数
-     */
-    @Override
-    public void setRecordTimes(String str) {
-        mRecordTimesTextView.setText(str);
-    }
-
-    /**
-     * 设置平均数
-     *
-     * @param str 平均数
-     */
-    @Override
-    public void setAverageDb(String str) {
-        mAverageDbTextView.setText(str);
-    }
-
-    /**
-     * 设置最大最小值
-     *
-     * @param str 最大最小值
-     */
-    @Override
-    public void setMaxMin(String str) {
-        mMaxMinTextView.setText(str);
-    }
-
-    /**
      * 设置次数数组的内容
      *
      * @param str   设置的内容
@@ -248,11 +170,4 @@ public class AnalysisFragment extends BaseFragment implements AnalysisContract.V
         }
 
     }
-
-    @Override
-    public void setPresenter(AnalysisContract.Presenter presenter) {
-        mPresenter = presenter;
-    }
-
-
 }

@@ -58,30 +58,36 @@ public class FeedbackPresenter implements FeedbackContract.Presenter {
     public void onClick(int id) {
         switch (id) {
             case R.id.feedback_btn:
-                new FeedbackBiz().upload(mView.getFeedbackEditTextString(), mTime, UserInfo.getUsrId(mContext),
-                        new FeedbackBiz.Listener() {
-                            @Override
-                            public void succeed() {
-                                mHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mView.showToast(mContext.getString(R.string.upload_succeed));
-                                        mView.callFinish();
-                                    }
-                                });
-                            }
 
-                            @Override
-                            public void failed(final String str) {
-                                mHandler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mView.showToast(str);
-                                    }
-                                });
-                            }
-                        });
+                String description = mView.getFeedbackEditTextString();
 
+                if (description == null) {
+                    mView.showToast("描述信息为空");
+                } else {
+                    new FeedbackBiz().upload(description, mTime, UserInfo.getUsrId(mContext),
+                            new FeedbackBiz.Listener() {
+                                @Override
+                                public void succeed() {
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mView.showToast(mContext.getString(R.string.upload_succeed));
+                                            mView.callFinish();
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void failed(final String str) {
+                                    mHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mView.showToast(str);
+                                        }
+                                    });
+                                }
+                            });
+                }
                 break;
         }
     }

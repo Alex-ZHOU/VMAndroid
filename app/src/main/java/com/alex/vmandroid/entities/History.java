@@ -16,10 +16,11 @@
 
 package com.alex.vmandroid.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class History {
+public class History implements Serializable {
     private int userId;
 
     private int RecordId;
@@ -97,7 +98,7 @@ public class History {
         return new Data();
     }
 
-    public class Data {
+    public class Data implements Serializable{
 
         /**
          * 音量

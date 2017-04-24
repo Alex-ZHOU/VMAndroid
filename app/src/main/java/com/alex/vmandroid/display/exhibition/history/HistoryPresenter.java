@@ -59,8 +59,10 @@ public class HistoryPresenter implements HistoryContract.Presenter {
         });
     }
 
-    private void setListViewData(List<History> historyList) {
+    List<History> mHistoryList;
 
+    private void setListViewData(List<History> historyList) {
+        mHistoryList = historyList;
         List<HistoryContract.HistoryString> list = new ArrayList<>();
 
 
@@ -70,9 +72,9 @@ public class HistoryPresenter implements HistoryContract.Presenter {
             HistoryContract.HistoryString hchs = new HistoryContract.HistoryString();
             hchs.setTimes(String.valueOf(history.getTimes()));
 
-            hchs.setLine2(history.getYear()+"-"+history.getMonth()+"-"+history.getDay());
+            hchs.setLine2(history.getYear() + "-" + history.getMonth() + "-" + history.getDay());
 
-            hchs.setLine1(history.getRecordList().get(history.getRecordList().size()-1).getTime());
+            hchs.setLine1(history.getRecordList().get(history.getRecordList().size() - 1).getTime());
 
             list.add(hchs);
         }
@@ -81,4 +83,8 @@ public class HistoryPresenter implements HistoryContract.Presenter {
 
     }
 
+    @Override
+    public void onItemClickListener(int i) {
+        mView.showHistoricalDetailsActivity(mHistoryList.get(i));
+    }
 }
