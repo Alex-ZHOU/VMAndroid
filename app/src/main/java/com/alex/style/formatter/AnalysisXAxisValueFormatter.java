@@ -42,6 +42,11 @@ public class AnalysisXAxisValueFormatter implements IAxisValueFormatter {
 
     public static final String _120_UP_TIMES = "120+";
 
+    /**
+     * Show the null point to make sure the analysis chart had three point.
+     */
+    public static final String _NULL_AXIS = "NULL SPOT";
+
     public void addXAxisText(String str) {
         mList.add(str);
     }

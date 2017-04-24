@@ -23,32 +23,51 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseActivity;
-import com.alex.vmandroid.display.exhibition.analysis2.AnalysisChartFragment;
-import com.alex.vmandroid.display.exhibition.analysis2.AnalysisChartPresenter;
-import com.alex.vmandroid.display.exhibition.history.HistoryFragment;
-import com.alex.vmandroid.display.exhibition.history.HistoryPresenter;
+import com.alex.vmandroid.display.exhibition.chart.AnalysisChartFragment;
+import com.alex.vmandroid.display.exhibition.chart.AnalysisChartPresenter;
 import com.alex.vmandroid.entities.History;
 
-public class HistoricalDetailsActivity extends BaseActivity{
+public class HistoricalDetailsActivity extends BaseActivity {
 
     public static final String TAG = HistoricalDetailsActivity.class.getName();
+
+    private History mHistory = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historical_details);
 
-
         Intent intent = getIntent();
-        History mMission = (History) intent.getSerializableExtra("HistoryData");
+        mHistory = (History) intent.getSerializableExtra("HistoryData");
+
+        showHistoricalDetailsFragment();
+
+        showChartFragment();
+    }
+
+    private void showHistoricalDetailsFragment() {
+        if (mHistory != null) {
+            HistoricalDetailsFragment fragment = HistoricalDetailsFragment.newInstance();
+            new HistoricalDetailsPresenter(fragment, getApplicationContext(), mHistory);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.historical_details_frame_layout, fragment);
+            transaction.commit();
+        }
 
 
-        AnalysisChartFragment fragment = AnalysisChartFragment.newInstance();
-        new AnalysisChartPresenter(fragment,getApplicationContext(),mMission);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.historical_details_frame_layout, fragment);
-        transaction.commit();
+    }
+
+    private void showChartFragment() {
+        if (mHistory != null) {
+            AnalysisChartFragment fragment = AnalysisChartFragment.newInstance();
+            new AnalysisChartPresenter(fragment, getApplicationContext(), mHistory);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.historical_details_chart_frame_layout, fragment);
+            transaction.commit();
+        }
     }
 
     @Override

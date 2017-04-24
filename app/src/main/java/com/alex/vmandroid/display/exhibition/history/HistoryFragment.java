@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alex.powerfullistview.adapter.PowerfulAdapter;
 import com.alex.powerfullistview.holder.ViewHolder;
@@ -34,7 +35,7 @@ import com.alex.vmandroid.entities.History;
 import java.util.List;
 
 
-public class HistoryFragment extends BaseFragment implements HistoryContract.View,AdapterView.OnItemClickListener {
+public class HistoryFragment extends BaseFragment implements HistoryContract.View, AdapterView.OnItemClickListener {
 
     private HistoryContract.Presenter mPresenter;
 
@@ -63,14 +64,14 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
     }
 
     @Override
-    public void setListViewData(List<HistoryContract.HistoryString> list){
+    public void setListViewData(List<HistoryContract.HistoryString> list) {
 
-        PowerfulAdapter adapter= new PowerfulAdapter<HistoryContract.HistoryString>(getActivity(), list, R.layout.item_history) {
+        PowerfulAdapter adapter = new PowerfulAdapter<HistoryContract.HistoryString>(getActivity(), list, R.layout.item_history) {
             @Override
             public void convert(ViewHolder var1, HistoryContract.HistoryString var2) {
-                var1.setText_TextView(R.id.item_history_times,var2.getTimes());
-                var1.setText_TextView(R.id.item_history_line1,var2.getLine1());
-                var1.setText_TextView(R.id.item_history_line2,var2.getLine2());
+                var1.setText_TextView(R.id.item_history_times, var2.getTimes());
+                var1.setText_TextView(R.id.item_history_line1, var2.getLine1());
+                var1.setText_TextView(R.id.item_history_line2, var2.getLine2());
             }
         };
 
@@ -88,6 +89,16 @@ public class HistoryFragment extends BaseFragment implements HistoryContract.Vie
         Intent intent = new Intent(getActivity(), HistoricalDetailsActivity.class);
         intent.putExtras(bundle);
         getActivity().startActivity(intent);
+    }
+
+    /**
+     * 显示提示信息
+     *
+     * @param str 信息
+     */
+    @Override
+    public void showToast(String str) {
+        Toast.makeText(getActivity(), str, Toast.LENGTH_LONG).show();
     }
 
 

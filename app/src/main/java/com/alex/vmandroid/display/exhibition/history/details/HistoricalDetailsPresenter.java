@@ -15,5 +15,61 @@
  */
 package com.alex.vmandroid.display.exhibition.history.details;
 
-public class HistoricalDetailsPresenter {
+import android.content.Context;
+
+import com.alex.utils.AverageAlgorithm;
+import com.alex.vmandroid.entities.History;
+
+import java.util.List;
+
+public class HistoricalDetailsPresenter implements HistoricalDetailsContract.Presenter {
+
+    private HistoricalDetailsContract.View mView;
+
+    private Context mContext;
+
+    private History mHistory;
+
+    private int mMax = Integer.MIN_VALUE;
+
+    private int mMin = Integer.MAX_VALUE;
+
+
+    public HistoricalDetailsPresenter(HistoricalDetailsContract.View view,
+                                      Context context, History history) {
+        mView = view;
+        mView.setPresenter(this);
+        mContext = context;
+        mHistory = history;
+    }
+
+    @Override
+    public void start() {
+        List<History.Data> dataList = mHistory.getRecordList();
+        int a[] = new int[dataList.size()];
+
+        for (int i = 0; i < dataList.size(); i++) {
+            History.Data data = dataList.get(i);
+
+            int db = data.getDb();
+
+            if (db > mMax) {
+                mMax = db;
+            }
+
+            if (db < mMin) {
+                mMin = db;
+            }
+
+            a[i] = db;
+        }
+
+        int average = (int) new AverageAlgorithm().getAverage(a);
+
+        mView.setAverageTextView(String.valueOf(average));
+        mView.setMaxTextView(String.valueOf(mMax));
+        mView.setMinTextView(String.valueOf(mMin));
+        mView.setTimekeeperTextView(String.valueOf(mHistory.getRecordList().get(dataList.size() - 1).getTimekeeper()));
+        mView.setRecordTimeTextView(mHistory.getRecordList().get(mHistory.getRecordList().size() - 1).getTime());
+    }
 }

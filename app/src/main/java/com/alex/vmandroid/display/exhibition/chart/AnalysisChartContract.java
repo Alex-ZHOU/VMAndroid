@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alex.vmandroid.display.exhibition.analysis2;
+package com.alex.vmandroid.display.exhibition.chart;
 
 import com.alex.style.formatter.AnalysisXAxisValueFormatter;
 import com.alex.vmandroid.base.BaseContract;

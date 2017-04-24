@@ -86,4 +86,7 @@
     <string name="account_exit">账号已经存在</string>
     <string name="feedback">反馈</string>
     <string name="time">时间</string>
+    <string name="historical_details">历史详情</string>
+    <string name="record_time_colon">记录时间:</string>
+    <string name="min_db">最小分贝</string>
 </resources>

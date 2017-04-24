@@ -33,6 +33,8 @@ public class HistoryPresenter implements HistoryContract.Presenter {
 
     private Handler handler = new Handler();
 
+    private List<History> mHistoryList;
+
     public HistoryPresenter(HistoryContract.View view, Context context) {
         mContext = context;
         mView = view;
@@ -59,27 +61,30 @@ public class HistoryPresenter implements HistoryContract.Presenter {
         });
     }
 
-    List<History> mHistoryList;
 
     private void setListViewData(List<History> historyList) {
-        mHistoryList = historyList;
-        List<HistoryContract.HistoryString> list = new ArrayList<>();
+        if (historyList.size() > 0) {
+            mHistoryList = historyList;
+            List<HistoryContract.HistoryString> list = new ArrayList<>();
 
 
-        for (int i = 0; i < historyList.size(); i++) {
+            for (int i = 0; i < historyList.size(); i++) {
 
-            History history = historyList.get(i);
-            HistoryContract.HistoryString hchs = new HistoryContract.HistoryString();
-            hchs.setTimes(String.valueOf(history.getTimes()));
+                History history = historyList.get(i);
+                HistoryContract.HistoryString hchs = new HistoryContract.HistoryString();
+                hchs.setTimes(String.valueOf(history.getTimes()));
 
-            hchs.setLine2(history.getYear() + "-" + history.getMonth() + "-" + history.getDay());
+                hchs.setLine2(history.getYear() + "-" + history.getMonth() + "-" + history.getDay());
 
-            hchs.setLine1(history.getRecordList().get(history.getRecordList().size() - 1).getTime());
+                hchs.setLine1(history.getRecordList().get(history.getRecordList().size() - 1).getTime());
 
-            list.add(hchs);
+                list.add(hchs);
+            }
+
+            mView.setListViewData(list);
+        } else {
+            mView.showToast("查询无历史记录");
         }
-
-        mView.setListViewData(list);
 
     }
 

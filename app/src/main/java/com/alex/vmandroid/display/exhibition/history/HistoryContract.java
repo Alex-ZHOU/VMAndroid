@@ -22,17 +22,24 @@ import java.util.List;
 
 public class HistoryContract {
 
-    interface Presenter extends BaseContract.BasePresenter{
+    interface Presenter extends BaseContract.BasePresenter {
         void onItemClickListener(int i);
     }
 
-    interface View extends BaseContract.BaseView<Presenter>{
+    interface View extends BaseContract.BaseView<Presenter> {
         void setListViewData(List<HistoryContract.HistoryString> list);
 
         void showHistoricalDetailsActivity(History history);
+
+        /**
+         * 显示提示信息
+         *
+         * @param str 信息
+         */
+        void showToast(String str);
     }
 
-    public static class HistoryString{
+    public static class HistoryString {
 
         private String times;
 

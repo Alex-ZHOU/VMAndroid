@@ -15,7 +15,6 @@
  */
 package com.alex.businesses;
 
-import com.alex.utils.AppLog;
 import com.alex.utils.EncapsulateParseJson;
 import com.alex.utils.URLs;
 import com.alex.vmandroid.entities.History;
@@ -34,7 +33,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
 
 
 public class HistoryBiz {
@@ -62,12 +60,11 @@ public class HistoryBiz {
             public void onResponse(Call call, Response response) throws IOException {
                 final String json = response.body().string();
                 response.close();
-                AppLog.debug(json);
 
-                List<History> list  = jsonToArrayList(json,History.class);
+                //AppLog.debug(json);
 
-                AppLog.debug(list.size() + "");
-                AppLog.debug(list.get(1).getDay() + "  ");
+                List<History> list = jsonToArrayList(json, History.class);
+
                 listener.succeed(list);
             }
         });
@@ -75,23 +72,20 @@ public class HistoryBiz {
     }
 
     /**
-     *
      * Author Young
      *
-     * @param json json的值
+     * @param json  json的值
      * @param clazz 类
-     * @param <T> 类
+     * @param <T>   类
      * @return 数组列
      */
-    private static <T> ArrayList<T> jsonToArrayList(String json, Class<T> clazz)
-    {
-        Type type = new TypeToken<ArrayList<JsonObject>>()
-        {}.getType();
+    private static <T> ArrayList<T> jsonToArrayList(String json, Class<T> clazz) {
+        Type type = new TypeToken<ArrayList<JsonObject>>() {
+        }.getType();
         ArrayList<JsonObject> jsonObjects = EncapsulateParseJson.getGson().fromJson(json, type);
 
         ArrayList<T> arrayList = new ArrayList<>();
-        for (JsonObject jsonObject : jsonObjects)
-        {
+        for (JsonObject jsonObject : jsonObjects) {
             arrayList.add(EncapsulateParseJson.getGson().fromJson(jsonObject, clazz));
         }
         return arrayList;

@@ -86,4 +86,7 @@
     <string name="account_exit">Account Exit</string>
     <string name="feedback">Feedback</string>
     <string name="time">Time</string>
+    <string name="historical_details">Historical Details</string>
+    <string name="record_time_colon">Record Time:</string>
+    <string name="min_db">Min_DB</string>
 </resources>

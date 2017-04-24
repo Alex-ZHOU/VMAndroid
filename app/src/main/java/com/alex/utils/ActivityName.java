@@ -18,6 +18,7 @@ package com.alex.utils;
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.display.exhibition.analysis.AnalysisActivity;
 import com.alex.vmandroid.display.exhibition.history.HistoryActivity;
+import com.alex.vmandroid.display.exhibition.history.details.HistoricalDetailsActivity;
 import com.alex.vmandroid.display.feedback.FeedbackActivity;
 import com.alex.vmandroid.display.gadget.GadgetActivity;
 import com.alex.vmandroid.display.map.om.OfflineMapActivity;
@@ -66,6 +67,9 @@ public class ActivityName {
 
         // 反馈标题栏
         mName.put(FeedbackActivity.TAG,R.string.feedback);
+
+        // 历史记录详情
+        mName.put(HistoricalDetailsActivity.TAG,R.string.historical_details);
     }
 
     public static int getName(String simpleName) {
