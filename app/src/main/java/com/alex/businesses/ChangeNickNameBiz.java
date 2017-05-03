@@ -57,12 +57,13 @@ public class ChangeNickNameBiz {
                 final String string = response.body().string();
                 response.close();
 
-                Return returnJson = EncapsulateParseJson.parse(Return.class,string);
-
-                if (returnJson.isSucceed()){
-                    listener.succeed();
-                }else{
-                    listener.failed(returnJson.getStr());
+                Return returnJson = EncapsulateParseJson.parse(Return.class, string);
+                if (returnJson != null) {
+                    if (returnJson.isSucceed()) {
+                        listener.succeed();
+                    } else {
+                        listener.failed(returnJson.getStr());
+                    }
                 }
             }
         });

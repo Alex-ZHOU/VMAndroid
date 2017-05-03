@@ -281,6 +281,11 @@ public class RecordDBFragment extends BaseFragment implements View.OnClickListen
         Toast.makeText(getActivity(), i, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void finish() {
+        getActivity().finish();
+    }
+
     /**
      * 获取上下文内容
      *

@@ -58,7 +58,16 @@ public class AnalysisBiz {
                 final String json = response.body().string();
                 response.close();
                 Analysis analysis = EncapsulateParseJson.parse(Analysis.class, json);
-                listener.succeed(analysis);
+                if (analysis!=null){
+                    if (analysis.getTimes()==0){
+                        listener.failed();
+                    }else{
+                        listener.succeed(analysis);
+                    }
+
+                }else{
+                    listener.failed();
+                }
             }
         });
     }

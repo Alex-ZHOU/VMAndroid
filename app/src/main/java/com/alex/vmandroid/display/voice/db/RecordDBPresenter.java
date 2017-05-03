@@ -118,8 +118,6 @@ public class RecordDBPresenter implements RecordDBContract.Presenter {
     }
 
 
-
-
     /**
      * 是否上传成功
      *
@@ -130,6 +128,7 @@ public class RecordDBPresenter implements RecordDBContract.Presenter {
         mView.closeProgressDialog();
         if (b) {
             mView.showToast(R.string.upload_succeed);
+            //mView.finish();
         } else {
             mView.showToast(R.string.upload_failed);
         }

@@ -101,6 +101,8 @@
         <activity
             android:name=".display.gadget.GadgetActivity"/>
         <activity
+            android:name=".display.image.ImageChoiceActivity"/>
+        <activity
             android:name=".display.weather.inquiry.InquiryWeatherActivity"/>
         <activity
             android:name=".display.voice.tape.SoundRecordingActivity"/>

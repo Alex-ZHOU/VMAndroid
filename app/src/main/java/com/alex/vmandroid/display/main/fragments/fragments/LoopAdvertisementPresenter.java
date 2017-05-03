@@ -48,7 +48,8 @@ public class LoopAdvertisementPresenter implements LoopAdvertisementContract.Pre
                 final List<Integer> pictureList = new ArrayList<>();
 
                 for (int i = 0; i < list.size(); i++) {
-                    pictureList.add(list.get(i).getImageId());
+                    pictureList.add(list.get(i).getImage_Id());
+                    AppLog.debug("list.get(i).getImageId()"+list.get(i).getImage_Id());
                 }
                 mHandler.post(new Runnable() {
                     @Override

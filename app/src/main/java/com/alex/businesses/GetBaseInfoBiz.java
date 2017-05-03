@@ -54,7 +54,9 @@ public class GetBaseInfoBiz {
                 final String json = response.body().string();
                 response.close();
                 BaseInfo baseInfo = EncapsulateParseJson.parse(BaseInfo.class, json);
-                listener.succeed(baseInfo);
+                if (baseInfo!=null){
+                    listener.succeed(baseInfo);
+                }
             }
         });
     }

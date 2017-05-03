@@ -64,8 +64,10 @@ public class HistoryBiz {
                 //AppLog.debug(json);
 
                 List<History> list = jsonToArrayList(json, History.class);
+                if (list!=null){
+                    listener.succeed(list);
+                }
 
-                listener.succeed(list);
             }
         });
 

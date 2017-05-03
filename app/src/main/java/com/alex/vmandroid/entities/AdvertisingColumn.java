@@ -25,7 +25,7 @@ public class AdvertisingColumn{
 	/**
 	 * 广告对应图片的Id号
 	 */
-	private int ImageId;
+	private int Image_Id;
 
     /**
      * 广告标题
@@ -40,12 +40,12 @@ public class AdvertisingColumn{
 		Advertisement_Id = advertisement_Id;
 	}
 
-	public int getImageId() {
-		return ImageId;
+	public int getImage_Id() {
+		return Image_Id;
 	}
 
-	public void setImageId(int imageId) {
-		ImageId = imageId;
+	public void setImage_Id(int imageId) {
+		Image_Id = imageId;
 	}
 
     public String getTitle() {

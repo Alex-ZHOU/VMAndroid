@@ -56,9 +56,23 @@ public class AdvertisingColumnBiz {
                 final String json = response.body().string();
                 response.close();
 
-                List<AdvertisingColumn> list  = jsonToArrayList(json,AdvertisingColumn.class);
+                try {
+                    List<AdvertisingColumn> list = jsonToArrayList(json, AdvertisingColumn.class);
+                    if (list != null && list.size()>0) {
+                        listener.succeed(list);
+                    }else{
+                        listener.failed();
+                    }
+                }catch (Exception e){
+                    listener.failed();
+                }
+//                List<AdvertisingColumn> list = jsonToArrayList(json, AdvertisingColumn.class);
+//                if (list != null && list.size()>0) {
+//                    listener.succeed(list);
+//                }else{
+//                    listener.failed();
+//                }
 
-                listener.succeed(list);
             }
         });
 

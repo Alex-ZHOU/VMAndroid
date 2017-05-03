@@ -65,11 +65,12 @@ public class FeedbackBiz {
                 final String json = response.body().string();
                 response.close();
                 Return back = EncapsulateParseJson.parse(Return.class, json);
-
-                if (back.isSucceed()) {
-                    listener.succeed();
-                } else {
-                    listener.failed(back.getStr());
+                if (back != null) {
+                    if (back.isSucceed()) {
+                        listener.succeed();
+                    } else {
+                        listener.failed(back.getStr());
+                    }
                 }
             }
         });

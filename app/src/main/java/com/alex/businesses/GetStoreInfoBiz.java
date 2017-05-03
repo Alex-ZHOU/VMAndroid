@@ -54,7 +54,10 @@ public class GetStoreInfoBiz {
                 final String json = response.body().string();
                 response.close();
                 StoreInfo baseInfo = EncapsulateParseJson.parse(StoreInfo.class, json);
-                listener.succeed(baseInfo);
+                if (baseInfo!=null){
+                    listener.succeed(baseInfo);
+                }
+
             }
         });
 

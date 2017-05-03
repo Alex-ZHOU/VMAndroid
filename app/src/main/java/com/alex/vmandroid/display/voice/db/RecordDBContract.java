@@ -61,6 +61,7 @@ public class RecordDBContract {
 
         /**
          * 是否上传成功
+         *
          * @param b 成功为true
          */
         void isUploadSucceed(boolean b);
@@ -125,5 +126,7 @@ public class RecordDBContract {
         void closeProgressDialog();
 
         void showToast(int i);
+
+        void finish();
     }
 }

@@ -53,8 +53,18 @@ public class ShareListBiz {
                 final String json = response.body().string();
                 response.close();
                 AppLog.debug(json);
-                List<ShareRecordDb> list  = jsonToArrayList(json,ShareRecordDb.class);
-                listener.succeed(list);
+
+                try {
+                    List<ShareRecordDb> list  = jsonToArrayList(json,ShareRecordDb.class);
+                    if (list!=null){
+                        listener.succeed(list);
+                    }
+                }
+                catch (Exception e){
+                    listener.failed();
+                }
+
+
             }
         });
 

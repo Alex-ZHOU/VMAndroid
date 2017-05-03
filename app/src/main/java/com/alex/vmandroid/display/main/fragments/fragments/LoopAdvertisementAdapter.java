@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.alex.businesses.DownloadPic;
+import com.alex.utils.AppLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,8 @@ public class LoopAdvertisementAdapter extends PagerAdapter {
     /**
      * 图像列表
      */
-    private List<Integer> pictureList = new ArrayList<>();
+//    private List<Integer> pictureList = new ArrayList<>();
+    private List<Integer> pictureList;
 
     public LoopAdvertisementAdapter(Context context, List<Integer> pictureList) {
         mContext = context;
@@ -63,13 +65,16 @@ public class LoopAdvertisementAdapter extends PagerAdapter {
         position %= pictureList.size();
 
         //imageView.setImageResource(pictureList.get(position));
-
+        final  int p = position;
         new DownloadPic().getById(pictureList.get(position), new DownloadPic.Listener() {
             @Override
             public void succeed(final Bitmap bm) {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
+
+                        AppLog.debug("positiont",pictureList.get(p).toString()+" "+pictureList.size()+"+"+p);
+
                         imageView.setImageBitmap(bm);
                     }
                 });

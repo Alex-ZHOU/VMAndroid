@@ -63,7 +63,10 @@ public class StoreRecordDbListBiz {
 
                 List<StoreRecordDb> list = jsonToArrayList(json, StoreRecordDb.class);
 
-                listener.succeed(list);
+                if (list!=null){
+                    listener.succeed(list);
+                }
+
             }
         });
     }
