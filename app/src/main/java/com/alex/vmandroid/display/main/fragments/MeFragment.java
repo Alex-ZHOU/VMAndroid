@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alex.utils.AppLog;
 import com.alex.vmandroid.databases.UserInfo;
@@ -66,7 +67,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
     public void onResume() {
         super.onResume();
         mPresenter.start();
-        if (mTextView!=null){
+        if (mTextView != null) {
             mTextView.setText(UserInfo.getString(getContext(), "Nickname"));
         }
     }
@@ -115,6 +116,16 @@ public class MeFragment extends BaseFragment implements View.OnClickListener, Ma
     @Override
     public void setPresenter(MainContract.MainPresenter presenter) {
         mPresenter = presenter;
+    }
+
+    /**
+     * 显示Toast
+     *
+     * @param str 显示内容
+     */
+    @Override
+    public void showToast(String str) {
+        Toast.makeText(getActivity(), str, Toast.LENGTH_LONG).show();
     }
 
     /**

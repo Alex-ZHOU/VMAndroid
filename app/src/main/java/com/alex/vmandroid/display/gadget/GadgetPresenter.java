@@ -30,10 +30,10 @@ public class GadgetPresenter implements GadgetContract.Presenter {
 
         mList = new ArrayList<>();
         mList.add("天气查询");
-        mList.add("天气查询1");
-        mList.add("天气查询2");
-        mList.add("天气查询3");
-        mList.add("天气查询4");
+//        mList.add("天气查询1");
+//        mList.add("天气查询2");
+//        mList.add("天气查询3");
+//        mList.add("天气查询4");
     }
 
     @Override

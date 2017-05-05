@@ -56,5 +56,12 @@ public class SettingContract {
          */
         void showChangNicknameActivity();
 
+        /**
+         * 显示Toast
+         *
+         * @param str 显示内容
+         */
+        void showToast(String str);
+
     }
 }

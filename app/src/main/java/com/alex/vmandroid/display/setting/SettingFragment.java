@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alex.vmandroid.R;
 import com.alex.vmandroid.base.BaseFragment;
@@ -106,5 +107,15 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     public void showChangNicknameActivity() {
         Intent intent = new Intent(getActivity(), ChangeNicknameActivity.class);
         getContext().startActivity(intent);
+    }
+
+    /**
+     * 显示Toast
+     *
+     * @param str 显示内容
+     */
+    @Override
+    public void showToast(String str) {
+        Toast.makeText(getActivity(), str, Toast.LENGTH_LONG).show();
     }
 }

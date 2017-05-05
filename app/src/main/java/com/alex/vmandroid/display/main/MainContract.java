@@ -144,6 +144,13 @@ public class MainContract {
     public interface MeView extends BaseContract.BaseView<MainPresenter> {
 
         /**
+         * 显示Toast
+         *
+         * @param str 显示内容
+         */
+        void showToast(String str);
+
+        /**
          * 跳转到设置界面
          */
         void showSettingActivity();

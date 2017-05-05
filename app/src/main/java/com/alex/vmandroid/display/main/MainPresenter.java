@@ -273,7 +273,9 @@ public class MainPresenter implements MainContract.MainPresenter, AudioRecordDem
                         mMeView.showAnalysisActivity();
                         break;
                     case R.id.main_me_map_setting_ll:
-                        mMeView.showMapSettingActivity();
+                        // TODO 设置地图
+                        // mMeView.showMapSettingActivity();
+                        mMeView.showToast("设置功能正在开发中...");
                         break;
                     case R.id.main_me_offline_map_ll:
                         mMeView.showOfflineMapActivity();

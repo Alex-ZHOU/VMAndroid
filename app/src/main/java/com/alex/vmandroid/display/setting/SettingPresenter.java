@@ -67,6 +67,7 @@ public class SettingPresenter implements Presenter {
     public void onClick(int id) {
         switch (id) {
             case R.id.setting_head_portrait_rl:
+                mView.showToast("设置头像功能正在开发中...");
                 break;
             case R.id.setting_change_nickname_rl:
                 mView.showChangNicknameActivity();
