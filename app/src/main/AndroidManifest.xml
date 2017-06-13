@@ -13,11 +13,9 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.alex.vmandroid">
-
 
     <!--
       ~ 麦克风申请权限
@@ -26,20 +24,18 @@
     -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
-
-    <!--允许程序打开网络套接字-->
+    <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!--允许程序设置内置sd卡的写权限-->
+    <!-- 允许程序设置内置sd卡的写权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <!--允许程序获取网络状态-->
+    <!-- 允许程序获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!--允许程序访问WiFi网络信息-->
+    <!-- 允许程序访问WiFi网络信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <!--允许程序读写手机状态和身份-->
+    <!-- 允许程序读写手机状态和身份 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 
     <application
@@ -50,7 +46,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--高德地图-->
+        <!-- 高德地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="${TENCENT_MAP_KEY}"/>
@@ -64,9 +60,7 @@
             android:enabled="true"
             android:process="system"/>
 
-        <!--
-          ~ 接收RecordDBService发出广播
-        -->
+        <!--           ~ 接收RecordDBService发出广播 -->
         <receiver
             android:name=".receivers.RecordDBReceiver"
             android:enabled="true"
@@ -81,54 +75,28 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".display.voice.db.RecordDBActivity"/>
-
+        <activity android:name=".display.voice.db.RecordDBActivity"/>
         <activity
             android:name=".display.weather.location.LocationWeatherActivity"
             android:theme="@style/AppTheme"/>
+        <activity android:name=".display.exhibition.analysis.AnalysisActivity"/>
+        <activity android:name=".display.exhibition.history.HistoryActivity"/>
+        <activity android:name=".display.exhibition.history.details.HistoricalDetailsActivity"/>
+        <activity android:name=".display.gadget.GadgetActivity"/>
+        <activity android:name=".display.image.ImageChoiceActivity"/>
+        <activity android:name=".display.weather.inquiry.InquiryWeatherActivity"/>
+        <activity android:name=".display.voice.tape.SoundRecordingActivity"/>
+        <activity android:name=".display.spread.advertisement.AdvertisementActivity"/>
+        <activity android:name=".display.spread.store.StoreRecordDbListActivity"/>
+        <activity android:name=".display.voice.store.StoreDbRecordActivity"/>
+        <activity android:name=".display.spread.list.StoreListActivity"/>
+        <activity android:name=".display.map.om.OfflineMapActivity"/>
+        <activity android:name=".display.feedback.FeedbackActivity"/>
+        <activity android:name=".display.setting.SettingActivity"/>
+        <activity android:name=".display.setting._change_nickname.ChangeNicknameActivity"/>
 
-        <activity
-            android:name=".display.exhibition.analysis.AnalysisActivity"/>
-
-        <activity
-            android:name=".display.exhibition.history.HistoryActivity"/>
-        <activity
-            android:name=".display.exhibition.history.details.HistoricalDetailsActivity"/>
-
-
-        <activity
-            android:name=".display.gadget.GadgetActivity"/>
-        <activity
-            android:name=".display.image.ImageChoiceActivity"/>
-        <activity
-            android:name=".display.weather.inquiry.InquiryWeatherActivity"/>
-        <activity
-            android:name=".display.voice.tape.SoundRecordingActivity"/>
-
-        <activity
-            android:name=".display.spread.advertisement.AdvertisementActivity"/>
-        <activity
-            android:name=".display.spread.store.StoreRecordDbListActivity"/>
-        <activity
-            android:name=".display.voice.store.StoreDbRecordActivity"/>
-        <activity
-            android:name=".display.spread.list.StoreListActivity"/>
-        <activity
-            android:name=".display.map.om.OfflineMapActivity"/>
-        <activity
-            android:name=".display.feedback.FeedbackActivity"/>
-
-        <activity
-            android:name=".display.setting.SettingActivity"/>
-        <activity
-            android:name=".display.setting._change_nickname.ChangeNicknameActivity"/>
-
-        <service
-            android:name="com.amap.api.location.APSService">
+        <service android:name="com.amap.api.location.APSService">
         </service>
-
     </application>
 
 </manifest>

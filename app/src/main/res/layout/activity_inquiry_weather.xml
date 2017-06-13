@@ -19,10 +19,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/activity_margin"
+
+    android:background="#548ED4"
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_margin="@dimen/activity_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -58,6 +60,7 @@
     </LinearLayout>
 
     <FrameLayout
+        android:layout_margin="@dimen/activity_margin"
         android:id="@+id/inquiry_weather_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

@@ -23,6 +23,9 @@ public class URLs {
     // 宿舍路由固定地址
     private static final String DORMITORY_SERVER = "http://192.168.1.109:8080/VMServer/";
 
+    // 毕业答辩联想热点地址
+    private static final String LENOVO_SERVER = "http://192.168.43.163:8080/VMServer/";
+
     // Using address.
     private static final String SERVER_ADDRESS = DORMITORY_SERVER;
 

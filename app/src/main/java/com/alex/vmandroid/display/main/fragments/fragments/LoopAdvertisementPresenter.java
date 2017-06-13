@@ -21,6 +21,8 @@ import com.alex.businesses.AdvertisingColumnBiz;
 import com.alex.utils.AppLog;
 import com.alex.vmandroid.entities.AdvertisingColumn;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class LoopAdvertisementPresenter implements LoopAdvertisementContract.Pre
 
     private Handler mHandler = new Handler();
 
-    private List<AdvertisingColumn> mAdvertisingColumnList;
+    private List<? extends AdvertisingColumn> mAdvertisingColumnList;
 
     public LoopAdvertisementPresenter(LoopAdvertisementContract.View view) {
         mView = view;
@@ -43,7 +45,7 @@ public class LoopAdvertisementPresenter implements LoopAdvertisementContract.Pre
     public void start() {
         new AdvertisingColumnBiz().getData(new AdvertisingColumnBiz.Listener() {
             @Override
-            public void succeed(List<AdvertisingColumn> list) {
+            public void succeed(@NotNull List<? extends AdvertisingColumn> list) {
                 mAdvertisingColumnList = list;
                 final List<Integer> pictureList = new ArrayList<>();
 
@@ -58,6 +60,23 @@ public class LoopAdvertisementPresenter implements LoopAdvertisementContract.Pre
                     }
                 });
             }
+
+//            @Override
+//            public void succeed(List<AdvertisingColumn> list) {
+//                mAdvertisingColumnList = list;
+//                final List<Integer> pictureList = new ArrayList<>();
+//
+//                for (int i = 0; i < list.size(); i++) {
+//                    pictureList.add(list.get(i).getImage_Id());
+//                    AppLog.debug("list.get(i).getImageId()"+list.get(i).getImage_Id());
+//                }
+//                mHandler.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mView.setViewPagerData(pictureList);
+//                    }
+//                });
+//            }
 
             @Override
             public void failed() {
